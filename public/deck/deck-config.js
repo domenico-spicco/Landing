@@ -61,6 +61,11 @@
     switch (field) {
       case 'company_name':
         return cfg.company_name || (el && el.getAttribute('data-fallback')) || 'il vostro brand';
+      case 'calc_button_label': {
+        var named = cfg.company_name && cfg.company_name !== 'il vostro brand';
+        var who = named ? ('a ' + cfg.company_name) : 'alla vostra azienda';
+        return 'Quanto costa ' + who + '? → Apri il calcolatore';
+      }
       case 'pilot_spots':
         return String(cfg.pilot_spots);
       case 'pilot_spots_text':
