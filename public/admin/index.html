@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spicco · Pannello link</title>
+<style>
+  :root{
+    --accent:#F5924A; --accent-strong:#B85C10; --ink:#1A1411; --bg:#FFFFFF;
+    --bg-warm:#FBF7F1; --petrol:#265860; --petrol-deep:#1E4A50; --line:#E7E2D8;
+    --muted:#7B756C; --verde:#2F5D4A;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg-warm);color:var(--ink)}
+  a{color:var(--accent-strong)}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 22px 80px}
+  header.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:8px}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:22px}
+  .brand .mark{color:var(--accent);font-size:26px}
+  .muted{color:var(--muted)}
+  .card{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:22px;margin-top:20px}
+  h2{font-size:18px;margin:0 0 16px}
+  label{display:block;font-weight:600;font-size:13px;margin-bottom:6px}
+  input[type=text],input[type=number],textarea,select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:9px;font:inherit;background:var(--bg);color:var(--ink)}
+  textarea{min-height:64px;resize:vertical}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+  .field{margin-bottom:16px}
+  .radios{display:flex;gap:10px;flex-wrap:wrap}
+  .radios label{display:inline-flex;align-items:center;gap:7px;font-weight:500;margin:0;padding:9px 14px;border:1px solid var(--line);border-radius:9px;cursor:pointer;background:var(--bg)}
+  .radios input{accent-color:var(--accent-strong)}
+  button{font:inherit;font-weight:700;cursor:pointer;border:none;border-radius:10px;padding:12px 20px}
+  .btn-primary{background:var(--accent-strong);color:#fff}
+  .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--ink);font-weight:600;padding:8px 14px}
+  .btn-sm{padding:7px 12px;font-size:13px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+  code{background:var(--bg-warm);padding:2px 6px;border-radius:5px;font-size:13px}
+  .pill{display:inline-block;font-size:12px;padding:2px 9px;border-radius:999px;background:var(--bg-warm);border:1px solid var(--line);margin:0 4px 4px 0}
+  .opens{font-weight:800;font-size:16px}
+  .twin{color:var(--verde);font-weight:700}
+  .gen-links{margin-top:16px;padding:16px;border:1px dashed var(--accent);border-radius:12px;background:var(--bg-warm)}
+  .link-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:6px 0}
+  .link-row code{flex:1;min-width:200px}
+  .hidden{display:none}
+  .login{max-width:380px;margin:12vh auto 0}
+  .msg{padding:10px 14px;border-radius:9px;margin:12px 0;font-size:14px}
+  .msg.err{background:#FBEFEA;color:#B23A2E;border:1px solid #F0D3C7}
+  .msg.ok{background:#EAF0EA;color:var(--verde);border:1px solid #CFE0CB}
+  .banner{background:#F7EAD3;border:1px solid #E7D6B8;color:#8A5A1E;padding:12px 16px;border-radius:10px;font-size:14px;margin-bottom:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><span class="mark">✳</span> Spicco · Pannello link</div>
+    <div id="sessionBox"></div>
+  </header>
+
+  <div id="configBanner" class="banner hidden">
+    ⚠️ Supabase non è ancora configurato in <code>public/config.js</code>. Compila
+    SUPABASE_URL e SUPABASE_ANON_KEY per usare il pannello. Vedi <code>SETUP.md</code>.
+  </div>
+
+  <!-- LOGIN -->
+  <div id="loginView" class="card login hidden">
+    <h2>Accedi</h2>
+    <div class="field"><label>Email</label><input type="text" id="loginEmail" autocomplete="username"></div>
+    <div class="field"><label>Password</label><input type="text" id="loginPassword" autocomplete="current-password" style="-webkit-text-security:disc;text-security:disc"></div>
+    <div id="loginMsg"></div>
+    <button class="btn-primary" id="loginBtn" style="width:100%">Accedi</button>
+    <p class="muted" style="font-size:13px;margin-top:14px">Gli account vengono creati a mano dalla dashboard Supabase. Nessuna registrazione pubblica.</p>
+  </div>
+
+  <!-- APP -->
+  <div id="appView" class="hidden">
+    <div class="card">
+      <h2 id="formTitle">Genera un nuovo link</h2>
+      <div id="formMsg"></div>
+      <div class="field"><label>Nome azienda</label><input type="text" id="f_company" placeholder="Es. Conad"></div>
+      <div class="grid">
+        <div class="field"><label>Logo (upload, opzionale)</label><input type="file" id="f_logo" accept="image/*"></div>
+        <div class="field"><label>Posti pilota rimasti</label><input type="number" id="f_pilot" value="2" min="0" max="3"></div>
+      </div>
+      <div class="grid">
+        <div class="field"><label>Screenshot 1 (opzionale)</label><input type="file" id="f_shot1" accept="image/*"></div>
+        <div class="field"><label>Screenshot 2 (opzionale)</label><input type="file" id="f_shot2" accept="image/*"></div>
+      </div>
+      <div class="grid">
+        <div class="field"><label>Volume</label><div class="radios" id="f_volume">
+          <label><input type="radio" name="volume" value="tanti" checked> tanti</label>
+          <label><input type="radio" name="volume" value="pochi"> pochi</label>
+        </div></div>
+        <div class="field"><label>Ruolo destinatario</label><div class="radios" id="f_role">
+          <label><input type="radio" name="role" value="ta" checked> TA / HR</label>
+          <label><input type="radio" name="role" value="marketing"> Marketing</label>
+        </div></div>
+      </div>
+      <div class="grid">
+        <div class="field"><label>Mercato</label><div class="radios" id="f_market">
+          <label><input type="radio" name="market" value="b2c" checked> B2C</label>
+          <label><input type="radio" name="market" value="b2b"> B2B</label>
+        </div></div>
+        <div class="field"><label>Pack</label><select id="f_pack">
+          <option value="aurello">aurello</option>
+          <option value="adriatec">adriatec</option>
+        </select></div>
+      </div>
+      <div class="field"><label>Note (libere)</label><textarea id="f_note" placeholder="Contesto, referente, ecc."></textarea></div>
+      <p class="muted" style="font-size:13px;margin:-4px 0 14px">Con ruolo <b>Marketing</b> viene creato in automatico anche il link gemello per il team TA/HR.</p>
+      <div style="display:flex;gap:10px">
+        <button class="btn-primary" id="genBtn">Genera link</button>
+        <button class="btn-ghost hidden" id="cancelEditBtn">Annulla modifica</button>
+      </div>
+      <div id="genLinks" class="gen-links hidden"></div>
+    </div>
+
+    <div class="card">
+      <h2>Link creati</h2>
+      <div id="tableWrap"><p class="muted">Caricamento…</p></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../config.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
