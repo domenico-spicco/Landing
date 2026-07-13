@@ -78,6 +78,12 @@
         return cfg.screenshot_2_url || null;
       case 'twin_slug':
         return cfg.twin_slug || null;
+      case 'demo_href': {
+        var name = cfg.company_name || 'il vostro brand';
+        return 'mailto:domenico@spicco.ai?subject=' + encodeURIComponent('Demo Spicco per ' + name);
+      }
+      case 'twin_link':
+        return 'https://spicco.ai/deck/' + (cfg.twin_slug || '') + '?via=marketing';
       default:
         return cfg[field] != null ? String(cfg[field]) : null;
     }
@@ -124,7 +130,36 @@
     Array.prototype.slice.call(root.querySelectorAll('[data-tpl-text]')).forEach(function (elx) {
       elx.textContent = tpl(elx.getAttribute('data-tpl-text'), cfg);
     });
+    // href/copy calcolati da un field (con encoding corretto)
+    Array.prototype.slice.call(root.querySelectorAll('[data-href-field]')).forEach(function (elx) {
+      var v = fieldValue(elx.getAttribute('data-href-field'), cfg, elx);
+      if (v != null) elx.setAttribute('href', v);
+    });
+    Array.prototype.slice.call(root.querySelectorAll('[data-copy-field]')).forEach(function (elx) {
+      var v = fieldValue(elx.getAttribute('data-copy-field'), cfg, elx);
+      if (v != null) elx.setAttribute('data-copy', v);
+    });
+    // speaker-notes per pack (presenter view)
+    Array.prototype.slice.call(root.querySelectorAll('[data-notes-adriatec]')).forEach(function (elx) {
+      if (cfg.pack === 'adriatec') elx.setAttribute('data-speaker-notes', elx.getAttribute('data-notes-adriatec'));
+    });
   }
+
+  // copia negli appunti (bottone "Copia il link per il team HR")
+  window.__spiccoCopy = function (btn) {
+    var text = btn.getAttribute('data-copy') || '';
+    var done = function () {
+      var old = btn.getAttribute('data-label-original') || btn.textContent;
+      if (!btn.getAttribute('data-label-original')) btn.setAttribute('data-label-original', old);
+      btn.textContent = 'Link copiato ✓';
+      setTimeout(function () { btn.textContent = btn.getAttribute('data-label-original'); }, 2000);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { window.prompt('Copia il link:', text); });
+    } else {
+      window.prompt('Copia il link:', text);
+    }
+  };
 
   // ---- boot gating -------------------------------------------------------
   function bootWhenReady() {
