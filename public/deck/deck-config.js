@@ -33,11 +33,40 @@
   var IF_KEYS = ['volume', 'role', 'market', 'pack'];
 
   // ---- config resolution -------------------------------------------------
-  // Step 3 sostituira' resolveConfig con la fetch da Supabase basata sullo slug.
-  // Per ora: default + override via query string (?volume=pochi&role=marketing...).
-  function resolveConfig() {
-    var cfg = {};
-    for (var k in DEFAULT_CONFIG) cfg[k] = DEFAULT_CONFIG[k];
+  // 1) default; 2) se c'e' uno slug e Supabase e' configurato, fetch da DB e
+  // registrazione della view; 3) override via query string (utile in test).
+  // Qualsiasi errore -> resta il default (fallback richiesto dallo spec).
+  function slugFromLocation() {
+    // Path atteso: /deck/{slug}. Con index.html o path vuoto -> nessuno slug.
+    try {
+      var parts = window.location.pathname.split('/').filter(Boolean);
+      var i = parts.indexOf('deck');
+      if (i >= 0 && parts[i + 1] && parts[i + 1].toLowerCase() !== 'index.html') return decodeURIComponent(parts[i + 1]);
+    } catch (e) {}
+    try {
+      var q = new URLSearchParams(window.location.search);
+      if (q.get('slug')) return q.get('slug');
+    } catch (e) {}
+    return null;
+  }
+
+  function mapRowToConfig(row) {
+    return {
+      slug: row.slug,
+      company_name: row.company_name || DEFAULT_CONFIG.company_name,
+      logo_url: row.logo_url || null,
+      screenshot_1_url: row.screenshot_1_url || null,
+      screenshot_2_url: row.screenshot_2_url || null,
+      volume: row.volume_branch || DEFAULT_CONFIG.volume,
+      role: row.role || DEFAULT_CONFIG.role,
+      market: row.market || DEFAULT_CONFIG.market,
+      pack: row.pack || DEFAULT_CONFIG.pack,
+      pilot_spots: (row.pilot_spots == null ? DEFAULT_CONFIG.pilot_spots : row.pilot_spots),
+      twin_slug: row.twin_slug || null
+    };
+  }
+
+  function applyQueryOverrides(cfg) {
     try {
       var q = new URLSearchParams(window.location.search);
       IF_KEYS.forEach(function (k) { if (q.has(k)) cfg[k] = q.get(k); });
@@ -45,8 +74,42 @@
         if (q.has(k)) cfg[k] = q.get(k);
       });
       if (q.has('pilot_spots')) cfg.pilot_spots = parseInt(q.get('pilot_spots'), 10);
-    } catch (e) { /* ignore */ }
-    return Promise.resolve(cfg);
+    } catch (e) {}
+    return cfg;
+  }
+
+  function recordView(client, slug) {
+    try {
+      var via = null;
+      try { via = new URLSearchParams(window.location.search).get('via'); } catch (e) {}
+      client.from('deck_views').insert({
+        slug: slug,
+        referrer: via || document.referrer || null,
+        user_agent: navigator.userAgent || null
+      }).then(function () {}, function () {}); // best-effort, non blocca
+    } catch (e) {}
+  }
+
+  function resolveConfig() {
+    var cfg = {};
+    for (var k in DEFAULT_CONFIG) cfg[k] = DEFAULT_CONFIG[k];
+
+    var slug = slugFromLocation();
+    var client = (window.SPICCO_CONFIG && window.SPICCO_CONFIG.client) ? window.SPICCO_CONFIG.client() : null;
+
+    if (slug && client) {
+      return client.from('deck_links').select('*').eq('slug', slug).maybeSingle()
+        .then(function (res) {
+          if (res && res.data) {
+            cfg = mapRowToConfig(res.data);
+            recordView(client, slug);
+          }
+          return applyQueryOverrides(cfg);
+        })
+        .catch(function () { return applyQueryOverrides(cfg); });
+    }
+    // niente Supabase / niente slug: default + override query (demo/test)
+    return Promise.resolve(applyQueryOverrides(cfg));
   }
 
   // ---- field values ------------------------------------------------------
