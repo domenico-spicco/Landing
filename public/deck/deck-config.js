@@ -102,9 +102,14 @@
     Array.prototype.slice.call(root.querySelectorAll('[data-field]')).forEach(function (elx) {
       var f = elx.getAttribute('data-field');
       var v = fieldValue(f, cfg, elx);
-      if (v == null) return; // niente valore -> lascia il contenuto/attuale (fallback)
-      if (elx.tagName === 'IMG') { elx.setAttribute('src', v); }
-      else { elx.textContent = v; }
+      if (elx.tagName === 'IMG') {
+        if (v != null) { elx.setAttribute('src', v); elx.style.display = ''; }
+        else if (elx.hasAttribute('data-hide-if-empty')) { elx.style.display = 'none'; }
+        // altrimenti: nessun valore -> lascia il src attuale (fallback screenshot)
+        return;
+      }
+      if (v == null) return; // niente valore -> lascia il contenuto attuale
+      elx.textContent = v;
     });
 
     // 3) href/attr con template ({company_name}, {twin_slug}, ...)
