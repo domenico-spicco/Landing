@@ -49,6 +49,38 @@ rimosso ovunque). Il pack adriatec mantiene azienda/ruolo propri
 (Adriatec · Junior Operations Manager, "Marta Bianchi"); il pack aurello resta
 "Marta Rossi". La slide 9 e le slide 11-13 sono quindi coerenti.
 
+## 2-bis. Anteprime "Come funziona" e "Come si fa" ora seguono il pack  [RISOLTO]
+
+Le due slide di anteprima ("Cosa facciamo / Quattro momenti" e "Come si crea
+una posizione") mostravano contenuti fissi aurello (Store Manager · Milano,
+Brand Aurello, aurello.it, Verde Aurello / Oro caldo, criteri di Vera da
+retail) anche quando il pack selezionato era adriatec. Ora sono pack-dependent
+(`data-if-pack`), coerenti con le slide 11-13:
+
+- pack **aurello**: Store Manager · Milano, Aurello · Talent Team, CV_Marta_Rossi,
+  Brand Aurello, aurello.it, Verde Aurello / Oro caldo, tono "caloroso,
+  artigianale", criteri "team / weekend / distanza".
+- pack **adriatec**: Junior Operations Manager · Bologna, Adriatec · Talent Team,
+  CV_Marta_Bianchi, Brand Adriatec, adriatec.it, Blu Adriatec / Grigio acciaio,
+  tono "professionale, concreto", criteri "fornitori-produzione / gestionali-ERP
+  / tempi-scorte".
+
+Nota: lo spec non forniva copy adriatec per queste due anteprime; il testo
+adriatec e' stato adattato in modo coerente col contesto adriatec gia' fissato
+(industria, fornitori, ERP, produzione). Se vuoi wording diverso, dimmelo.
+
+## 2-ter. Personalizzazione nel file scaricato dal generatore  [RISOLTO]
+
+Nel file .html autonomo scaricato dal generatore, il runtime del deck e'
+inlinato e converte la sorgente in stage *prima* che il nostro loader riesca a
+staccarla: la config (azienda, pack, ecc.) veniva quindi ignorata e il file
+mostrava sempre l'aurello di default. E' un bug che non si notava finche' si
+usava il pack aurello di default. Ora `deck-config.js` ha un percorso di
+fallback: se la sorgente e' gia' stata convertita, applica la config al DOM
+gia' renderizzato (rimozione blocchi non pertinenti + riempimento campi),
+ripetendo per qualche istante per resistere a un rendering tardivo. Verificato:
+azienda iniettata, pack applicato, nessun residuo dell'altro pack.
+
 ## 3. Numeri di slide negli occhielli ("03 ·", "05 ·", "11 ·"…)
 
 Come da spec ("se i numeri sono hardcoded nei titoli tipo '04 ·', lasciarli come

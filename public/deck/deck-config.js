@@ -215,6 +215,17 @@
     });
   }
 
+  // Gli handler inline (onclick=) rompono il rendering React del runtime DC
+  // (errore #231). Usiamo la delega di eventi a livello di document: nativa,
+  // non passa da React.
+  document.addEventListener('click', function (e) {
+    var t = e.target && e.target.closest ? e.target.closest('[data-action]') : null;
+    if (!t) return;
+    var a = t.getAttribute('data-action');
+    if (a === 'open-calc') { if (window.__spiccoOpenCalc) window.__spiccoOpenCalc(); }
+    else if (a === 'copy-twin') { if (window.__spiccoCopy) window.__spiccoCopy(t); }
+  });
+
   // copia negli appunti (bottone "Copia il link per il team HR")
   window.__spiccoCopy = function (btn) {
     var text = btn.getAttribute('data-copy') || '';
@@ -241,9 +252,29 @@
     })();
   }
 
+  // Percorso "bundle autonomo": nel file .html scaricato dal generatore, il
+  // runtime DC e' inlinato e converte <x-dc> in <deck-stage> PRIMA che questo
+  // script giri, quindi non facciamo in tempo a staccare <x-dc>. In quel caso
+  // applichiamo la config al DOM gia' renderizzato (rimozione blocchi data-if-*
+  // non pertinenti, riempimento data-field), ripetendo per qualche istante nel
+  // caso il runtime renderizzi/riconcili in ritardo.
+  function startLive() {
+    resolveConfig().then(applyLiveRepeated).catch(function () { applyLiveRepeated(DEFAULT_CONFIG); });
+  }
+  function applyLiveRepeated(cfg) {
+    window.__spiccoConfig = cfg || null;
+    window.__spiccoConfigApplied = true;
+    var deadline = 4000, step = 120, elapsed = 0;
+    (function tick() {
+      try { applyConfig(document.body, cfg); } catch (e) { console.error('[spicco] applyConfig(live) error', e); }
+      elapsed += step;
+      if (elapsed < deadline) setTimeout(tick, step);
+    })();
+  }
+
   function start() {
     var xdc = document.querySelector('x-dc');
-    if (!xdc) { return; } // niente da fare
+    if (!xdc) { startLive(); return; } // bundle/gia' bootato: applica al DOM vivo
     var placeholder = document.createComment('x-dc-config-gate');
     xdc.parentNode.replaceChild(placeholder, xdc);
 
