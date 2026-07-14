@@ -81,6 +81,22 @@ gia' renderizzato (rimozione blocchi non pertinenti + riempimento campi),
 ripetendo per qualche istante per resistere a un rendering tardivo. Verificato:
 azienda iniettata, pack applicato, nessun residuo dell'altro pack.
 
+## 2-quater. "Serve JavaScript" e resa su mobile
+
+Il deck scaricato e' un file autonomo che si **ricostruisce nel browser**
+(font, runtime, animazioni sono impacchettati e riassemblati all'apertura): ha
+quindi bisogno di JavaScript. Aperto in un contesto dove il JS e' disattivato
+- tipicamente le **anteprime** di WhatsApp/Telegram, delle mail, o dei gestori
+file su telefono (iOS "Anteprima rapida", preview di Drive) - non mostra il
+contenuto. E' un limite del formato "file unico", non un bug: basta aprirlo con
+Safari o Chrome. Ora il messaggio no-JS e' una schermata intera in italiano che
+lo spiega ("Apri il deck in un browser").
+
+Sul mobile con JS attivo il deck si vede, ma essendo una presentazione a
+formato fisso 16:9 risulta piccolo in verticale: meglio in orizzontale o da
+desktop. Renderlo davvero responsive richiederebbe rifare l'impaginazione del
+deck (fuori scope: non tocchiamo la logica/animazioni del deck).
+
 ## 3. Numeri di slide negli occhielli ("03 ·", "05 ·", "11 ·"…)
 
 Come da spec ("se i numeri sono hardcoded nei titoli tipo '04 ·', lasciarli come

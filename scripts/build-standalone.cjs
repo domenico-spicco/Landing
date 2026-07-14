@@ -46,6 +46,28 @@ let out = orig.replace(tmplRe, function (_m, a, _b, c) { return a + templateJson
 // ---- 4. Inietta lo slot della config fissa subito dopo <body> ----
 out = out.replace(/<body>/i, '<body>\n<script>window.SPICCO_FIXED_CONFIG = null;</script>');
 
+// ---- 4-bis. Messaggio "serve JavaScript" chiaro e in italiano ----------
+// Il file autonomo si ricostruisce nel browser: aperto in un contesto senza JS
+// (anteprime di chat / mail / gestori file su mobile) mostrava un piccolo testo
+// inglese poco comprensibile. Lo sostituiamo con una schermata intera chiara.
+var NOSCRIPT_IT = [
+  '<noscript>',
+  '<style>#__bundler_loading{display:none}#__bundler_thumbnail{display:none}</style>',
+  '<div style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#1E4A50;color:#fff;font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',sans-serif;padding:28px;text-align:center;z-index:100000">',
+  '<div style="max-width:440px">',
+  '<div style="font-size:44px;color:#F5924A;line-height:1;margin-bottom:16px">&#10035;</div>',
+  '<div style="font-size:20px;font-weight:700;margin-bottom:10px">Apri il deck in un browser</div>',
+  '<div style="font-size:15px;line-height:1.55;color:#B7D2D5">Questo file si apre con Safari o Chrome, sul telefono o sul computer. Le anteprime di chat, mail o gestori file non lo mostrano perche&#769; ha bisogno di JavaScript per ricostruirsi. Per una resa migliore, aprilo in orizzontale o da desktop.</div>',
+  '</div>',
+  '</div>',
+  '</noscript>'
+].join('');
+if (/<noscript>[\s\S]*?<\/noscript>/.test(out)) {
+  out = out.replace(/<noscript>[\s\S]*?<\/noscript>/, function () { return NOSCRIPT_IT; });
+} else {
+  console.warn('ATTENZIONE: blocco <noscript> non trovato, messaggio IT non iniettato');
+}
+
 // ---- 5. Scrivi ----
 const OUT = path.join(ROOT, 'public/genera/deck-standalone.html');
 fs.mkdirSync(path.dirname(OUT), { recursive: true });
