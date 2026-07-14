@@ -5,7 +5,17 @@ spec assume un deck leggermente diverso da quello fornito. Lo spec dice di
 fermarsi e chiedere in caso di ambiguità: elenco qui le scelte fatte, così puoi
 confermarle o correggerle.
 
-## 1. Slide 7 (Oggi) — screenshot e nome "Marta"
+## 1. Slide 7 (Oggi) — screenshot e nome "Marta"  [RISOLTO]
+
+> AGGIORNAMENTO: i due screenshot ora si agganciano ai mockup "momento 1" e
+> "momento 2" della slide 7. Sono opzionali (fallback ai mockup attuali) e si
+> adattano da soli al riquadro (object-fit: cover, allineati in alto) senza
+> deformazioni ne' overflow, qualsiasi dimensione abbia l'immagine caricata.
+> Il generatore ha due campi upload dedicati. Il nome "Marta" e' unificato
+> (vedi punto 2).
+
+Storico del punto:
+
 
 Lo spec mappa la slide 7 così: «screenshot_1, screenshot_2 con fallback alle
 immagini attuali; nome persona segue il pack (Marta/Luca)».

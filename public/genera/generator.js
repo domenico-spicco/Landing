@@ -27,7 +27,11 @@
   }
 
   function buildConfig() {
-    return Promise.all([readFileAsDataURL($('f_logo').files[0])]).then(function (res) {
+    return Promise.all([
+      readFileAsDataURL($('f_logo').files[0]),
+      readFileAsDataURL(($('f_shot1') || {}).files ? $('f_shot1').files[0] : null),
+      readFileAsDataURL(($('f_shot2') || {}).files ? $('f_shot2').files[0] : null)
+    ]).then(function (res) {
       var pilot = parseInt($('f_pilot').value, 10); if (isNaN(pilot)) pilot = 2;
       var cfg = {
         company_name: $('f_company').value.trim() || 'il vostro brand',
@@ -36,7 +40,9 @@
         market: radioVal('market'),
         pack: $('f_pack').value,
         pilot_spots: pilot,
-        logo_url: res[0] || null
+        logo_url: res[0] || null,
+        screenshot_1_url: res[1] || null,
+        screenshot_2_url: res[2] || null
       };
       return cfg;
     });
