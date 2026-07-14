@@ -29,21 +29,15 @@ da qualche parte (es. sostituendo uno/due dei mockup CSS della slide 7 con
 un'immagine del prospect, oppure sulla slide 11 "La pagina")? Dimmi dove e
 aggancio i `data-field="screenshot_1/2"`.
 
-## 2. Slide 9 (Come funziona) — anteprima con "Marta"
+## 2. Nome candidato — RISOLTO: sempre "Marta"
 
-Lo spec definisce il contenuto pack solo per le slide 11-12-13 (La pagina, Vera,
-Il feedback). Ma anche la slide 9 "Come funziona" contiene un'anteprima
-compatta della chat Vera e del feedback, con "Marta" / "Store Manager · Milano"
-/ "CV_Marta_Rossi.pdf" e frasi specifiche del retail.
+In origine il pack adriatec usava "Luca" (come da spec), mentre l'anteprima
+della slide 9 restava su "Marta": una piccola incoerenza.
 
-Non essendoci nello spec un testo adriatec per questa anteprima, **l'ho lasciata
-come esempio aurello (Marta) per entrambi i pack**: riscriverla avrebbe
-richiesto inventare copy non fornito. Ne risulta una piccola incoerenza (nel
-deck adriatec la slide 9 mostra ancora Marta, poi le 11-13 mostrano Luca).
-
-➡️ **Da decidere con te**: se vuoi l'anteprima coerente col pack, mandami il
-testo adriatec breve per le due colonne (chat Vera + feedback) della slide 9 e
-lo aggiungo come variante pack.
+Su richiesta, il nome del candidato è ora **"Marta" in tutto il deck** (Luca
+rimosso ovunque). Il pack adriatec mantiene azienda/ruolo propri
+(Adriatec · Junior Operations Manager, "Marta Bianchi"); il pack aurello resta
+"Marta Rossi". La slide 9 e le slide 11-13 sono quindi coerenti.
 
 ## 3. Numeri di slide negli occhielli ("03 ·", "05 ·", "11 ·"…)
 
