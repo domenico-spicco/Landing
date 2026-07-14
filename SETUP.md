@@ -1,7 +1,43 @@
 # SETUP — Spicco Deck Dinamico
 
-Guida per mettere online il deck dinamico. Richiede **un progetto Supabase
-dedicato** (NON il Supabase di produzione Spicco) e un progetto Vercel nuovo.
+Ci sono **due modi** di usare questo progetto:
+
+- **A) Generatore pubblico (consigliato, nessun account).** Una pagina web
+  pubblica (`/genera`) dove chiunque abbia il link inserisce i dati del prospect
+  e **scarica un file HTML autonomo** del deck personalizzato. Il file si apre
+  con doppio click, anche offline, e si può inviare o caricare dove vuoi.
+  Nessun login, nessun Supabase, niente da configurare.
+- **B) Link online personalizzati (opzionale).** Pannello con login
+  (`/admin` + Supabase) che genera link tipo `spicco.ai/deck/{slug}` con
+  tracciamento aperture e link gemello. Richiede Supabase.
+
+Se ti serve solo scaricare il deck, ti basta la **parte A**. La parte B è
+documentata più sotto per chi vuole i link online.
+
+---
+
+## A. Generatore pubblico (download) — nessun account
+
+1. Deploya `public/` su Vercel (vedi sezione Vercel sotto). Nessun altro setup.
+2. Vai su `.../genera` (es. `spicco.ai/genera`). Chiunque abbia il link può usarlo.
+3. Compila azienda, volume, destinatario, mercato, pack, posti pilota, logo
+   (opzionale) → **Genera e scarica il deck** (o *Anteprima*).
+4. Ottieni `deck-{azienda}.html`: file autonomo con config già dentro, font e
+   runtime inclusi. Funziona standalone.
+
+### Rigenerare il template dopo modifiche al deck
+Il generatore usa `public/genera/deck-standalone.html` come base. Se modifichi
+il deck (`public/deck/index.html`, `deck-config.js`, `calc/calc.js`),
+ricostruiscilo:
+```bash
+node scripts/build-standalone.cjs <path-del-bundle-originale.html>
+```
+(usa il file HTML "standalone" originale fornito come sorgente degli asset).
+Committa il `deck-standalone.html` aggiornato: su Vercel viene servito statico.
+
+---
+
+## B. Link online personalizzati (opzionale, con Supabase)
 
 ## 0. Struttura
 

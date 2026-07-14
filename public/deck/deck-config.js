@@ -94,6 +94,13 @@
     var cfg = {};
     for (var k in DEFAULT_CONFIG) cfg[k] = DEFAULT_CONFIG[k];
 
+    // Priorità massima: config "fissa" incorporata (file deck scaricato dal
+    // generatore). Nessuna chiamata di rete, nessuno slug.
+    if (window.SPICCO_FIXED_CONFIG && typeof window.SPICCO_FIXED_CONFIG === 'object') {
+      for (var fk in window.SPICCO_FIXED_CONFIG) cfg[fk] = window.SPICCO_FIXED_CONFIG[fk];
+      return Promise.resolve(cfg);
+    }
+
     var slug = slugFromLocation();
     var client = (window.SPICCO_CONFIG && window.SPICCO_CONFIG.client) ? window.SPICCO_CONFIG.client() : null;
 

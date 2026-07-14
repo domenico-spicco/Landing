@@ -1,0 +1,90 @@
+/* ============================================================
+   Spicco — Generatore pubblico (senza login)
+   Compila la config dal form, la inietta nel template standalone
+   (deck-standalone.html) e scarica il deck personalizzato autonomo.
+   Nessun Supabase, nessun account.
+   ============================================================ */
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var MARKER = 'window.SPICCO_FIXED_CONFIG = null;';
+  var templateCache = null;
+
+  function msg(text, kind) { $('msg').innerHTML = text ? '<div class="msg ' + (kind || 'ok') + '">' + text + '</div>' : ''; }
+  function radioVal(name) { var el = document.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : null; }
+  function slugify(s) {
+    return (s || 'deck').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'deck';
+  }
+  function readFileAsDataURL(file) {
+    return new Promise(function (resolve, reject) {
+      if (!file) return resolve(null);
+      var r = new FileReader();
+      r.onload = function () { resolve(r.result); };
+      r.onerror = reject;
+      r.readAsDataURL(file);
+    });
+  }
+
+  function buildConfig() {
+    return Promise.all([readFileAsDataURL($('f_logo').files[0])]).then(function (res) {
+      var pilot = parseInt($('f_pilot').value, 10); if (isNaN(pilot)) pilot = 2;
+      var cfg = {
+        company_name: $('f_company').value.trim() || 'il vostro brand',
+        volume: radioVal('volume'),
+        role: radioVal('role'),
+        market: radioVal('market'),
+        pack: $('f_pack').value,
+        pilot_spots: pilot,
+        logo_url: res[0] || null
+      };
+      return cfg;
+    });
+  }
+
+  function getTemplate() {
+    if (templateCache) return Promise.resolve(templateCache);
+    return fetch('deck-standalone.html', { cache: 'no-store' }).then(function (r) {
+      if (!r.ok) throw new Error('template non trovato (' + r.status + ')');
+      return r.text();
+    }).then(function (t) {
+      if (t.indexOf(MARKER) === -1) throw new Error('slot config non trovato nel template');
+      templateCache = t; return t;
+    });
+  }
+
+  function personalize(template, cfg) {
+    var inject = 'window.SPICCO_FIXED_CONFIG = ' + JSON.stringify(cfg) + ';';
+    // funzione di replace: evita l'interpretazione di $ nella stringa config
+    return template.replace(MARKER, function () { return inject; });
+  }
+
+  function withDeck(action) {
+    msg('Preparo il deck…', 'ok');
+    Promise.all([buildConfig(), getTemplate()]).then(function (r) {
+      var html = personalize(r[1], r[0]);
+      action(html, r[0]);
+      msg('', 'ok');
+    }).catch(function (e) { msg('Errore: ' + (e.message || e), 'err'); });
+  }
+
+  $('downloadBtn').onclick = function () {
+    withDeck(function (html, cfg) {
+      var blob = new Blob([html], { type: 'text/html' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url; a.download = 'deck-' + slugify(cfg.company_name) + '.html';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+    });
+  };
+
+  $('previewBtn').onclick = function () {
+    withDeck(function (html) {
+      var blob = new Blob([html], { type: 'text/html' });
+      var url = URL.createObjectURL(blob);
+      window.open(url, '_blank');
+      setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
+    });
+  };
+})();

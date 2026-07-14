@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spicco · Genera il tuo deck</title>
+<style>
+  :root{
+    --accent:#F5924A; --accent-strong:#B85C10; --ink:#1A1411; --bg:#FFFFFF;
+    --bg-warm:#FBF7F1; --petrol:#265860; --petrol-deep:#1E4A50; --line:#E7E2D8;
+    --muted:#7B756C; --verde:#2F5D4A;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--petrol-deep);color:var(--ink)}
+  .hero{background:var(--petrol-deep);color:#fff;padding:44px 22px 22px;text-align:center}
+  .hero .mark{color:var(--accent);font-size:34px;line-height:1}
+  .hero h1{margin:14px 0 6px;font-size:30px;letter-spacing:-.02em}
+  .hero p{margin:0;color:#B7D2D5;font-size:16px}
+  .wrap{max-width:760px;margin:0 auto;padding:0 22px 80px}
+  .card{background:var(--bg);border-radius:18px;padding:26px;margin-top:22px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+  label{display:block;font-weight:600;font-size:13px;margin-bottom:6px}
+  input[type=text],input[type=number],select{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:9px;font:inherit;background:var(--bg);color:var(--ink)}
+  .field{margin-bottom:18px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .radios{display:flex;gap:10px;flex-wrap:wrap}
+  .radios label{display:inline-flex;align-items:center;gap:7px;font-weight:500;margin:0;padding:10px 15px;border:1px solid var(--line);border-radius:9px;cursor:pointer}
+  .radios input{accent-color:var(--accent-strong)}
+  .hint{font-size:12.5px;color:var(--muted);margin-top:6px}
+  button{font:inherit;font-weight:700;cursor:pointer;border:none;border-radius:11px;padding:14px 22px}
+  .btn-primary{background:var(--accent-strong);color:#fff}
+  .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--ink);font-weight:600}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+  .msg{padding:11px 14px;border-radius:9px;margin:14px 0;font-size:14px}
+  .msg.err{background:#FBEFEA;color:#B23A2E;border:1px solid #F0D3C7}
+  .msg.ok{background:#EAF0EA;color:var(--verde);border:1px solid #CFE0CB}
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="mark">✳</div>
+    <h1>Genera il deck personalizzato</h1>
+    <p>Inserisci i dati del prospect e scarica il deck pronto da presentare.</p>
+  </div>
+  <div class="wrap">
+    <div class="card">
+      <div id="msg"></div>
+      <div class="field"><label>Nome azienda</label><input type="text" id="f_company" placeholder="Es. Conad"><div class="hint">Compare in cover e nei testi personalizzati.</div></div>
+
+      <div class="grid">
+        <div class="field"><label>Logo (opzionale)</label><input type="file" id="f_logo" accept="image/*"><div class="hint">Piccolo, compare in cover.</div></div>
+        <div class="field"><label>Posti pilota rimasti</label><input type="number" id="f_pilot" value="2" min="0" max="3"></div>
+      </div>
+
+      <div class="grid">
+        <div class="field"><label>Volume candidature</label><div class="radios">
+          <label><input type="radio" name="volume" value="tanti" checked> Tanti</label>
+          <label><input type="radio" name="volume" value="pochi"> Pochi</label>
+        </div><div class="hint">"Pochi" rimuove la slide "Il carico".</div></div>
+        <div class="field"><label>Destinatario</label><div class="radios">
+          <label><input type="radio" name="role" value="ta" checked> TA / HR</label>
+          <label><input type="radio" name="role" value="marketing"> Marketing</label>
+        </div></div>
+      </div>
+
+      <div class="grid">
+        <div class="field"><label>Mercato</label><div class="radios">
+          <label><input type="radio" name="market" value="b2c" checked> B2C</label>
+          <label><input type="radio" name="market" value="b2b"> B2B</label>
+        </div></div>
+        <div class="field"><label>Pack (esempio brand)</label><select id="f_pack">
+          <option value="aurello">aurello (retail · Store Manager)</option>
+          <option value="adriatec">adriatec (industria · Operations)</option>
+        </select></div>
+      </div>
+
+      <div class="actions">
+        <button class="btn-primary" id="downloadBtn">Genera e scarica il deck</button>
+        <button class="btn-ghost" id="previewBtn">Anteprima in una nuova scheda</button>
+      </div>
+      <div class="hint" style="margin-top:14px">Il file scaricato è autonomo: si apre con doppio click, anche offline, e si può inviare o caricare dove vuoi.</div>
+    </div>
+  </div>
+
+  <script src="generator.js"></script>
+</body>
+</html>

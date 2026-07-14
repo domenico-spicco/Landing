@@ -12,11 +12,18 @@ Storage + Auth). Deploy previsto su Vercel come progetto separato.
 
 ```
 /public
-  /deck/index.html        il deck (evoluzione del file HTML standalone fornito)
-  /deck/assets/           font (woff2) e runtime JS estratti dal bundle originale
-  /admin/index.html       pannello generazione link (Step 5)
-  /calc/                  calcolatore ROI (Step 6)
+  /deck/index.html         il deck (evoluzione del file HTML standalone fornito)
+  /deck/assets/            font (woff2) e runtime JS estratti dal bundle originale
+  /genera/index.html       generatore pubblico: form -> scarica il deck autonomo
+  /genera/deck-standalone.html  template bundle offline (rigenerato da script)
+  /admin/index.html        pannello link online (opzionale, Supabase + login)
+  /calc/                   calcolatore ROI (Step 6)
+/scripts/build-standalone.cjs  rigenera il template standalone del generatore
 ```
+
+Due modi d'uso (vedi `SETUP.md`): **A)** generatore pubblico `/genera` che
+scarica un file HTML autonomo del deck (nessun account); **B)** link online
+personalizzati via `/admin` + Supabase (opzionale).
 
 ## Il deck: da bundle a file editabile
 
