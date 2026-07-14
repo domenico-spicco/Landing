@@ -72,28 +72,28 @@
   function modalHtml() {
     return '' +
     '<div data-calc-backdrop style="position:fixed;inset:0;z-index:120;display:flex;align-items:flex-start;justify-content:center;padding:32px 20px;background:rgba(20,16,12,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);overflow:auto">' +
-      '<div data-calc-dialog style="width:100%;max-width:720px;background:#1E4A50;border-radius:22px;box-shadow:0 40px 100px rgba(20,12,6,.5);overflow:hidden;position:relative">' +
-        '<div style="padding:30px 34px 24px;border-bottom:1px solid rgba(255,255,255,.14);position:relative">' +
-          '<div style="display:flex;align-items:center;gap:10px;color:#F5924A;font:600 13px/1 \'Hanken Grotesk\';letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px">' +
+      '<div data-calc-dialog style="width:100%;max-width:720px;background:#FFFFFF;border-radius:22px;box-shadow:0 40px 100px rgba(18,40,44,.28);overflow:hidden;position:relative">' +
+        '<div style="padding:30px 34px 24px;border-bottom:1px solid #DBDDD5;position:relative">' +
+          '<div style="display:flex;align-items:center;gap:10px;color:#C96442;font:600 13px/1 \'Hanken Grotesk\';letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px">' +
             '<span style="width:14px;height:14px;display:inline-block"><svg viewBox="0 0 100 100" style="width:100%;height:100%;display:block"><g stroke="currentColor" stroke-width="13" stroke-linecap="round"><line x1="50" y1="11" x2="50" y2="89"></line><line x1="16.5" y1="30.5" x2="83.5" y2="69.5"></line><line x1="16.5" y1="69.5" x2="83.5" y2="30.5"></line></g></svg></span>' +
             '<span>Calcolatore ROI</span></div>' +
-          '<h3 style="margin:0 0 8px;font:800 clamp(24px,3.4vw,34px)/1.1 \'Hanken Grotesk\';letter-spacing:-.02em;color:#FFFFFF;max-width:520px">Quanto fatturato stai mettendo a rischio?</h3>' +
-          '<p style="margin:0;font:400 16px/1.45 \'Hanken Grotesk\';color:#B7D2D5;max-width:520px">Valori suggeriti per settore. Modifica tutto sui tuoi numeri.</p>' +
-          '<button data-calc-close aria-label="Chiudi" style="position:absolute;top:22px;right:22px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.14);background:#265860;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#B7D2D5" data-hover-style="background:#2F5A61">' +
+          '<h3 style="margin:0 0 8px;font:800 clamp(24px,3.4vw,34px)/1.1 \'Hanken Grotesk\';letter-spacing:-.02em;color:#123338;max-width:520px">Quanto fatturato stai mettendo a rischio?</h3>' +
+          '<p style="margin:0;font:400 16px/1.45 \'Hanken Grotesk\';color:rgba(18,51,56,.68);max-width:520px">Valori suggeriti per settore. Modifica tutto sui tuoi numeri.</p>' +
+          '<button data-calc-close aria-label="Chiudi" style="position:absolute;top:22px;right:22px;width:44px;height:44px;border-radius:50%;border:1px solid #DBDDD5;background:#FBF7F1;cursor:pointer;display:flex;align-items:center;justify-content:center;color:rgba(18,51,56,.68)" data-hover-style="background:#E3E5DD">' +
             '<svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg></button>' +
         '</div>' +
         '<div style="padding:26px 34px 4px;display:flex;flex-direction:column;gap:22px">' +
-          '<div><label style="display:block;font:600 15px/1.3 \'Hanken Grotesk\';color:#FFFFFF;margin-bottom:8px">Candidature ricevute all\'anno</label>' +
-            '<input type="number" min="0" id="in-applications" value="30000" oninput="onApplications(this)" style="width:100%;background:#12333A;border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:13px 15px;font:600 17px/1 \'Hanken Grotesk\';color:#FFFFFF;outline:none" data-focus-style="border-color:#F5924A;box-shadow:0 0 0 3px rgba(245,146,74,.18)"></div>' +
-          '<div><label style="display:block;font:600 15px/1.3 \'Hanken Grotesk\';color:#FFFFFF;margin-bottom:8px">Quanti dei tuoi candidati sono anche clienti?</label>' +
-            '<div style="display:flex;align-items:center;gap:10px"><input type="number" min="0" max="100" id="in-pctclients" value="18" oninput="onPctClients(this)" style="flex:1;background:#12333A;border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:13px 15px;font:600 17px/1 \'Hanken Grotesk\';color:#FFFFFF;outline:none" data-focus-style="border-color:#F5924A;box-shadow:0 0 0 3px rgba(245,146,74,.18)"><span style="font:600 17px/1 \'Hanken Grotesk\';color:#8FB0B4">%</span></div>' +
-            '<div style="margin-top:7px;font:400 13.5px/1.4 \'Hanken Grotesk\';color:#8FB0B4">Non lo sai con precisione? Usa la tua quota di mercato: è la stima più conservativa.</div></div>' +
-          '<div><div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px"><label style="font:600 15px/1.3 \'Hanken Grotesk\';color:#FFFFFF">Di questi, quanti ne perdi dopo una cattiva esperienza?</label>' +
-            '<span style="font:700 17px/1 \'Hanken Grotesk\';color:#F5924A"><span id="out-pctswitchlabel">6%</span></span></div>' +
-            '<input type="range" min="0" max="20" step="1" id="in-pctswitch" value="6" oninput="onPctSwitch(this)" style="width:100%;accent-color:#F5924A;cursor:pointer">' +
-            '<div style="margin-top:7px;font:400 13.5px/1.4 \'Hanken Grotesk\';color:#8FB0B4">Virgin Media ha misurato il 6%. Consigliato: 5–8%.</div></div>' +
-          '<div><label style="display:block;font:600 15px/1.3 \'Hanken Grotesk\';color:#FFFFFF;margin-bottom:8px">Il tuo settore</label>' +
-            '<div style="position:relative"><select id="in-sector" onchange="onSector(this)" style="width:100%;appearance:none;-webkit-appearance:none;background:#12333A;border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:13px 40px 13px 15px;font:600 16px/1.2 \'Hanken Grotesk\';color:#FFFFFF;outline:none;cursor:pointer" data-focus-style="border-color:#F5924A;box-shadow:0 0 0 3px rgba(245,146,74,.18)">' +
+          '<div><label style="display:block;font:600 15px/1.3 \'Hanken Grotesk\';color:#123338;margin-bottom:8px">Candidature ricevute all\'anno</label>' +
+            '<input type="number" min="0" id="in-applications" value="30000" oninput="onApplications(this)" style="width:100%;background:#FFFFFF;border:1px solid #DBDDD5;border-radius:10px;padding:13px 15px;font:600 17px/1 \'Hanken Grotesk\';color:#123338;outline:none" data-focus-style="border-color:#C96442;box-shadow:0 0 0 3px rgba(201,100,66,.18)"></div>' +
+          '<div><label style="display:block;font:600 15px/1.3 \'Hanken Grotesk\';color:#123338;margin-bottom:8px">Quanti dei tuoi candidati sono anche clienti?</label>' +
+            '<div style="display:flex;align-items:center;gap:10px"><input type="number" min="0" max="100" id="in-pctclients" value="18" oninput="onPctClients(this)" style="flex:1;background:#FFFFFF;border:1px solid #DBDDD5;border-radius:10px;padding:13px 15px;font:600 17px/1 \'Hanken Grotesk\';color:#123338;outline:none" data-focus-style="border-color:#C96442;box-shadow:0 0 0 3px rgba(201,100,66,.18)"><span style="font:600 17px/1 \'Hanken Grotesk\';color:rgba(18,51,56,.55)">%</span></div>' +
+            '<div style="margin-top:7px;font:400 13.5px/1.4 \'Hanken Grotesk\';color:rgba(18,51,56,.55)">Non lo sai con precisione? Usa la tua quota di mercato: è la stima più conservativa.</div></div>' +
+          '<div><div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px"><label style="font:600 15px/1.3 \'Hanken Grotesk\';color:#123338">Di questi, quanti ne perdi dopo una cattiva esperienza?</label>' +
+            '<span style="font:700 17px/1 \'Hanken Grotesk\';color:#C96442"><span id="out-pctswitchlabel">6%</span></span></div>' +
+            '<input type="range" min="0" max="20" step="1" id="in-pctswitch" value="6" oninput="onPctSwitch(this)" style="width:100%;accent-color:#C96442;cursor:pointer">' +
+            '<div style="margin-top:7px;font:400 13.5px/1.4 \'Hanken Grotesk\';color:rgba(18,51,56,.55)">Virgin Media ha misurato il 6%. Consigliato: 5–8%.</div></div>' +
+          '<div><label style="display:block;font:600 15px/1.3 \'Hanken Grotesk\';color:#123338;margin-bottom:8px">Il tuo settore</label>' +
+            '<div style="position:relative"><select id="in-sector" onchange="onSector(this)" style="width:100%;appearance:none;-webkit-appearance:none;background:#FFFFFF;border:1px solid #DBDDD5;border-radius:10px;padding:13px 40px 13px 15px;font:600 16px/1.2 \'Hanken Grotesk\';color:#123338;outline:none;cursor:pointer" data-focus-style="border-color:#C96442;box-shadow:0 0 0 3px rgba(201,100,66,.18)">' +
               '<option value="telco">Telco/Mobile · €1.800</option>' +
               '<option value="banca" selected>Banca/Finanza · €1.200</option>' +
               '<option value="assicurazioni">Assicurazioni · €2.100</option>' +
@@ -103,26 +103,26 @@
               '<option value="ecommerce">E-commerce · €750</option>' +
               '<option value="automotive">Automotive · €9.000</option>' +
               '<option value="ristorazione">Ristorazione/QSR · €600</option></select>' +
-              '<span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);pointer-events:none;color:#8FB0B4"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></div></div>' +
-          '<div><label style="display:block;font:600 15px/1.3 \'Hanken Grotesk\';color:#FFFFFF;margin-bottom:8px">LTV (€)</label>' +
-            '<input type="number" min="0" id="in-ltv" value="1200" oninput="onLtv(this)" style="width:100%;background:#12333A;border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:13px 15px;font:600 17px/1 \'Hanken Grotesk\';color:#FFFFFF;outline:none" data-focus-style="border-color:#F5924A;box-shadow:0 0 0 3px rgba(245,146,74,.18)">' +
-            '<div style="margin-top:7px;font:400 13.5px/1.4 \'Hanken Grotesk\';color:#8FB0B4">Calcoliamo l\'LTV come fatturato annuo per cliente × 3. Modificalo coi tuoi numeri.</div></div>' +
+              '<span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);pointer-events:none;color:rgba(18,51,56,.55)"><svg viewBox="0 0 24 24" style="width:18px;height:18px" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span></div></div>' +
+          '<div><label style="display:block;font:600 15px/1.3 \'Hanken Grotesk\';color:#123338;margin-bottom:8px">LTV (€)</label>' +
+            '<input type="number" min="0" id="in-ltv" value="1200" oninput="onLtv(this)" style="width:100%;background:#FFFFFF;border:1px solid #DBDDD5;border-radius:10px;padding:13px 15px;font:600 17px/1 \'Hanken Grotesk\';color:#123338;outline:none" data-focus-style="border-color:#C96442;box-shadow:0 0 0 3px rgba(201,100,66,.18)">' +
+            '<div style="margin-top:7px;font:400 13.5px/1.4 \'Hanken Grotesk\';color:rgba(18,51,56,.55)">Calcoliamo l\'LTV come fatturato annuo per cliente × 3. Modificalo coi tuoi numeri.</div></div>' +
         '</div>' +
         '<div style="padding:24px 34px 34px;display:flex;flex-direction:column;gap:18px">' +
-          '<div style="background:#265860;border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:20px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">' +
-            '<div><div style="font:600 12px/1 \'Hanken Grotesk\';letter-spacing:.12em;text-transform:uppercase;color:#E67E33;margin-bottom:6px">Danno diretto / anno</div>' +
-            '<div style="font:400 13.5px/1.35 \'Hanken Grotesk\';color:#8FB0B4">≈ <span id="out-clientslost">324</span> clienti attuali persi</div></div>' +
-            '<div style="font:800 clamp(28px,4vw,38px)/1 \'Hanken Grotesk\';letter-spacing:-.02em;color:#E67E33"><span id="out-directdamage">€0</span></div></div>' +
-          '<div style="background:#265860;border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:20px 22px;display:flex;flex-direction:column;gap:8px">' +
-            '<div style="font:600 12px/1 \'Hanken Grotesk\';letter-spacing:.12em;text-transform:uppercase;color:#E67E33">Persone esposte / anno</div>' +
-            '<div style="font:800 clamp(28px,4vw,38px)/1 \'Hanken Grotesk\';letter-spacing:-.02em;color:#E67E33"><span id="out-esposte">0</span></div>' +
-            '<div style="font:400 13.5px/1.4 \'Hanken Grotesk\';color:#DCEAEB">persone potenzialmente raggiunte da un giudizio negativo sul vostro employer brand, tramite passaparola diretto</div></div>' +
-          '<div style="margin-top:-8px;font:400 12px/1.5 \'Hanken Grotesk\';color:#8FB0B4">Stima basata su: quota di candidati che vive un\'esperienza negativa (55-60%, fonte CareerArc/QuestionPro), quota che ne parla nella propria rete personale (69%, fonte LinkedIn Business), reach medio del passaparola diretto (9 persone, fonte TARP/White House Office of Consumer Affairs, studio customer experience applicato per analogia). Il calcolo esclude la condivisione pubblica online (social, review site), che amplierebbe ulteriormente l\'esposizione reale — è quindi una stima conservativa per difetto.</div>' +
-          '<div style="background:#F5924A;border-radius:16px;padding:24px 26px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 16px 40px rgba(245,146,74,.28)">' +
-            '<div style="font:700 16px/1.3 \'Hanken Grotesk\';color:#0F2C30;max-width:260px">Impatto potenziale totale / anno</div>' +
-            '<div style="font:800 clamp(32px,5vw,50px)/1 \'Hanken Grotesk\';letter-spacing:-.03em;color:#0F2C30"><span id="out-total">€0</span></div></div>' +
-          '<div style="margin-top:-8px;font:400 13.5px/1.4 \'Hanken Grotesk\';color:#8FB0B4">Il diretto conta solo i clienti attuali persi. Il range include clienti potenziali scoraggiati dal passaparola negativo.</div>' +
-          '<div style="background:#0F2C30;border-radius:14px;padding:18px 22px;font:400 14.5px/1.5 \'Hanken Grotesk\';color:#B7D2D5"><span style="color:#FFFFFF;font-weight:600">E questo senza contare l\'anima 1:</span> far droppare i candidati migliori prima di assumerli ha un costo a parte - una mis-hire vale fino al <span style="color:#FFFFFF;font-weight:600">30% dello stipendio annuo</span> del ruolo.</div>' +
+          '<div style="background:#FBF7F1;border:1px solid #DBDDD5;border-radius:14px;padding:20px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">' +
+            '<div><div style="font:600 12px/1 \'Hanken Grotesk\';letter-spacing:.12em;text-transform:uppercase;color:#C96442;margin-bottom:6px">Danno diretto / anno</div>' +
+            '<div style="font:400 13.5px/1.35 \'Hanken Grotesk\';color:rgba(18,51,56,.55)">≈ <span id="out-clientslost">324</span> clienti attuali persi</div></div>' +
+            '<div style="font:800 clamp(28px,4vw,38px)/1 \'Hanken Grotesk\';letter-spacing:-.02em;color:#C96442"><span id="out-directdamage">€0</span></div></div>' +
+          '<div style="background:#FBF7F1;border:1px solid #DBDDD5;border-radius:14px;padding:20px 22px;display:flex;flex-direction:column;gap:8px">' +
+            '<div style="font:600 12px/1 \'Hanken Grotesk\';letter-spacing:.12em;text-transform:uppercase;color:#C96442">Persone esposte / anno</div>' +
+            '<div style="font:800 clamp(28px,4vw,38px)/1 \'Hanken Grotesk\';letter-spacing:-.02em;color:#C96442"><span id="out-esposte">0</span></div>' +
+            '<div style="font:400 13.5px/1.4 \'Hanken Grotesk\';color:rgba(18,51,56,.7)">persone potenzialmente raggiunte da un giudizio negativo sul vostro employer brand, tramite passaparola diretto</div></div>' +
+          '<div style="margin-top:-8px;font:400 12px/1.5 \'Hanken Grotesk\';color:rgba(18,51,56,.55)">Stima basata su: quota di candidati che vive un\'esperienza negativa (55-60%, fonte CareerArc/QuestionPro), quota che ne parla nella propria rete personale (69%, fonte LinkedIn Business), reach medio del passaparola diretto (9 persone, fonte TARP/White House Office of Consumer Affairs, studio customer experience applicato per analogia). Il calcolo esclude la condivisione pubblica online (social, review site), che amplierebbe ulteriormente l\'esposizione reale — è quindi una stima conservativa per difetto.</div>' +
+          '<div style="background:#C96442;border-radius:16px;padding:24px 26px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 16px 40px rgba(201,100,66,.28)">' +
+            '<div style="font:700 16px/1.3 \'Hanken Grotesk\';color:#FFFFFF;max-width:260px">Impatto potenziale totale / anno</div>' +
+            '<div style="font:800 clamp(32px,5vw,50px)/1 \'Hanken Grotesk\';letter-spacing:-.03em;color:#FFFFFF"><span id="out-total">€0</span></div></div>' +
+          '<div style="margin-top:-8px;font:400 13.5px/1.4 \'Hanken Grotesk\';color:rgba(18,51,56,.55)">Il diretto conta solo i clienti attuali persi. Il range include clienti potenziali scoraggiati dal passaparola negativo.</div>' +
+          '<div style="background:#EEF0EA;border-radius:14px;padding:18px 22px;font:400 14.5px/1.5 \'Hanken Grotesk\';color:rgba(18,51,56,.68)"><span style="color:#123338;font-weight:600">E questo senza contare l\'anima 1:</span> far droppare i candidati migliori prima di assumerli ha un costo a parte - una mis-hire vale fino al <span style="color:#123338;font-weight:600">30% dello stipendio annuo</span> del ruolo.</div>' +
         '</div>' +
       '</div>' +
     '</div>';
