@@ -9,8 +9,11 @@ confermarle o correggerle.
 
 > AGGIORNAMENTO: i due screenshot ora si agganciano ai mockup "momento 1" e
 > "momento 2" della slide 7. Sono opzionali (fallback ai mockup attuali) e si
-> adattano da soli al riquadro (object-fit: cover, allineati in alto) senza
-> deformazioni ne' overflow, qualsiasi dimensione abbia l'immagine caricata.
+> adattano da soli al riquadro **mostrando l'immagine intera** (object-fit:
+> contain, mai tagliata ne' deformata); i margini vuoti che restano quando le
+> proporzioni non combaciano vengono riempiti da una **versione sfocata della
+> stessa immagine** (stile copertine Spotify/YouTube), cosi' il riquadro e'
+> sempre pieno e nulla viene ritagliato, qualsiasi dimensione abbia l'immagine.
 > Il generatore ha due campi upload dedicati. Il nome "Marta" e' unificato
 > (vedi punto 2).
 
