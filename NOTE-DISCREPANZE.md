@@ -100,6 +100,18 @@ formato fisso 16:9 risulta piccolo in verticale: meglio in orizzontale o da
 desktop. Renderlo davvero responsive richiederebbe rifare l'impaginazione del
 deck (fuori scope: non tocchiamo la logica/animazioni del deck).
 
+## 2-quinquies. Nuova slide "Il costo di non fare nulla" (06)  [AGGIUNTA]
+
+Aggiunta dopo la slide "Il costo" (05) la slide "Il costo di non fare nulla"
+(occhiello 06): un muro di card sparse - recensioni, post pubblici, DM, bias e
+requisiti a rischio - che mostra come il costo cresca da solo mentre si aspetta.
+E' **sempre presente in ogni deck** (nessuna condizione data-if). Gli occhielli
+delle slide successive sono stati **rinumerati staticamente** (06->07, 07->08,
+... 15->16). La slide arriva da un export standalone: convertita al formato
+del deck (section, sc-camel-view-box, colori tokenizzati sul tema
+nebbia-petrolio) e con la sua animazione di ingresso (.riskcard / cardPop)
+aggiunta allo stile del deck.
+
 ## 3. Numeri di slide negli occhielli ("03 ·", "05 ·", "11 ·"…)
 
 Come da spec ("se i numeri sono hardcoded nei titoli tipo '04 ·', lasciarli come
