@@ -140,12 +140,27 @@ variante si diventa "La sostanza"; la caption della journey cambia con lo step
 statistica "hero" nel deck e' una delle tre card di "I dati", non una slide a
 statistica singola: applicato a entrambe le varianti volume.
 
+## 2-septies. "Il carico" — variante volume=pochi  [AGGIUNTA]
+
+Prima la sezione 4 "Il carico" esisteva solo per volume=tanti. Aggiunta la
+variante volume=pochi (data-if-volume="pochi"), stessa posizione (dopo "I dati /
+Il funnel", prima di "Il costo"), stesso layout e ruolo narrativo ("Non e' colpa
+vostra"), ma contenuto diverso: non il sovraccarico da volumi, bensi' la
+burocrazia (compliance, coordinamento, amministrazione) che divora il tempo per
+attrarre. Kicker "04 · Il carico che non si vede", 3 card (30-40% tempo in
+amministrazione - SHRM; 11-50% settimana HR in compliance, +57% cresciuto -
+HR.com 2025; +23% competenze richieste in 5 anni - Deloitte 2025), box di
+chiusura arancione. Le due varianti sono mutuamente esclusive (mai entrambe).
+Target enterprise: nessun dato su PMI/small business, nessuna sovrapposizione
+col funnel della sezione 3 pochi.
+
 ## 3. Numeri di slide negli occhielli ("03 ·", "05 ·", "11 ·"…)
 
 Come da spec ("se i numeri sono hardcoded nei titoli tipo '04 ·', lasciarli come
-sono — non rinumerare dinamicamente in v1"), gli occhielli restano fissi. Quindi
-nel branch volume=pochi (dove "Il carico" sparisce) la numerazione visibile non
-si ricompatta. È voluto per la v1.
+sono — non rinumerare dinamicamente in v1"), gli occhielli restano fissi. Con
+l'aggiunta della variante pochi di "Il carico", ora la posizione 04 e' sempre
+presente in entrambi i branch volume, quindi la numerazione visibile non ha piu'
+buchi in volume=pochi.
 
 ## 4. Quirk di contrasto nel contenuto aurello (Vera / Il feedback)
 
