@@ -211,9 +211,17 @@
       var v = fieldValue(elx.getAttribute('data-copy-field'), cfg, elx);
       if (v != null) elx.setAttribute('data-copy', v);
     });
-    // speaker-notes per pack (presenter view)
+    // speaker-notes per varianti (presenter view).
+    // Ordine di applicazione: pack -> volume -> feedback (l'ultima che matcha
+    // vince, cosi' se una sezione ha piu' varianti non confliggono).
     Array.prototype.slice.call(root.querySelectorAll('[data-notes-adriatec]')).forEach(function (elx) {
       if (cfg.pack === 'adriatec') elx.setAttribute('data-speaker-notes', elx.getAttribute('data-notes-adriatec'));
+    });
+    Array.prototype.slice.call(root.querySelectorAll('[data-notes-volume-pochi]')).forEach(function (elx) {
+      if (cfg.volume === 'pochi') elx.setAttribute('data-speaker-notes', elx.getAttribute('data-notes-volume-pochi'));
+    });
+    Array.prototype.slice.call(root.querySelectorAll('[data-notes-feedback-si]')).forEach(function (elx) {
+      if (cfg.feedback === 'si') elx.setAttribute('data-speaker-notes', elx.getAttribute('data-notes-feedback-si'));
     });
   }
 

@@ -154,6 +154,31 @@ chiusura arancione. Le due varianti sono mutuamente esclusive (mai entrambe).
 Target enterprise: nessun dato su PMI/small business, nessuna sovrapposizione
 col funnel della sezione 3 pochi.
 
+## 2-octies. Patch di coerenza tra varianti  [AGGIUNTE]
+
+Cinque ritocchi per evitare che slide diverse si contraddicano tra loro:
+
+1. Slide 2 "Dall'altra parte": l'intro era incondizionata ("annegano nei
+   volumi") e stonava con "Il carico" pochi ("non annegate nei volumi"). Ora
+   l'intro ha due varianti data-if-volume: tanti = "annegano nei volumi",
+   pochi = "annegano nel processo". Anche le speaker-notes seguono il volume via
+   il nuovo attributo data-notes-volume-pochi.
+2. Slide 3 pochi ("Il funnel"): la frase "Non è un problema di attrazione, è di
+   conversione" contraddiceva "Il carico" pochi (che parla di non aver tempo per
+   attrarre). Riscritta in "Non basta attrarre: le perdete anche sulla porta..."
+   cosi' le due slide si sommano invece di escludersi.
+3. Speaker-notes ora seguono anche il toggle feedback: nuovo attributo
+   data-notes-feedback-si su "I dati", "Il costo di non fare nulla" e "Oggi"
+   (con feedback=si le note descrivono +126% referral / feedback percepito come
+   falso / email-template, non silenzio). Ordine di applific.: pack, volume,
+   feedback (l'ultima che matcha vince).
+4. Le due sezioni "Il carico" avevano la stessa data-label: ora "Il carico ·
+   volumi" e "Il carico · burocrazia". Il runtime DC usa data-label solo come
+   etichetta di visualizzazione (getSlideLabel), non come chiave: navigazione e
+   presenter view restano intatte (verificato).
+5. Aggiunta feedback_branch alla view analytics deck_link_stats e alla riga di
+   pill nell'admin.
+
 ## 3. Numeri di slide negli occhielli ("03 ·", "05 ·", "11 ·"…)
 
 Come da spec ("se i numeri sono hardcoded nei titoli tipo '04 ·', lasciarli come

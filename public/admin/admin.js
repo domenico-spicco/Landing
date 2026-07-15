@@ -215,7 +215,8 @@
       var st = stats[l.slug] || { opens: 0, opens_via_marketing: 0 };
       var opens = st.opens || 0;
       var cfg = '<span class="pill">' + esc(l.volume_branch) + '</span><span class="pill">' + esc(l.role) +
-        '</span><span class="pill">' + esc(l.market) + '</span><span class="pill">' + esc(l.pack) + '</span>';
+        '</span><span class="pill">' + esc(l.market) + '</span><span class="pill">' + esc(l.pack) +
+        '</span><span class="pill">feedback: ' + esc(l.feedback_branch || 'no') + '</span>';
       var twinCell = '';
       if (l.twin_slug) {
         var tw = stats[l.twin_slug] || { opens: 0 };

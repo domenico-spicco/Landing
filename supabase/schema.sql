@@ -114,6 +114,7 @@ create or replace view public.deck_link_stats as
          l.role,
          l.market,
          l.volume_branch,
+         l.feedback_branch,
          l.pack,
          l.twin_slug,
          l.created_at,
