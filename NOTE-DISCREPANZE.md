@@ -123,10 +123,11 @@ Punti che cambiano (tutti e soli):
 1. Slide 06 "Il costo di non fare nulla": 3 card su 8 (post pubblico M.R.,
    r/lavoro, DM anonimo) cambiano solo il testo. Le altre 5 restano identiche.
 2. Journey "oggi" (occhiello 07): solo l'ultimo step (Momento 04). No = box
-   "Silenzio" (nessun messaggio, 30 giorni dopo). Si = stesso box (stessa
-   dimensione/posizione/colore) con dentro un frammento di email-template con
-   placeholder non sostituiti ([NOME]/[RUOLO]) sfumato ai bordi come screenshot;
-   la caption diventa "E poi, lo stesso template." (invariati gli step 01-03).
+   "Silenzio" (nessun messaggio, 30 giorni dopo). Si = una scatola email nello
+   stesso stile del Momento 03 (grigia, header mittente + oggetto "Esito della
+   candidatura", corpo con "Gentile [NOME], dopo attenta valutazione... per la
+   posizione di [RUOLO]..." e placeholder non sostituiti in grassetto); la
+   caption diventa "E poi, lo stesso template." (invariati gli step 01-03).
 3. Metrica hero: la card "Il silenzio" (75%) della slide "I dati" (03), in
    entrambe le varianti di volume. No = "Il silenzio / 75% / non riceve mai
    risposta / Fonte: Starred". Si = "La sostanza / +126% / referral in piu' da
