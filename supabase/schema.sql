@@ -16,6 +16,7 @@ create table if not exists public.deck_links (
   role              text not null check (role in ('ta','marketing')),
   market            text not null check (market in ('b2b','b2c')),
   pack              text not null check (pack in ('aurello','adriatec')),
+  feedback_branch   text not null default 'no' check (feedback_branch in ('si','no')),
   pilot_spots       int default 2,
   twin_slug         text,
   note              text,

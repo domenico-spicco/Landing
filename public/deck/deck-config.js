@@ -26,11 +26,12 @@
     role: 'ta',        // 'ta' | 'marketing'
     market: 'b2c',     // 'b2b' | 'b2c'
     pack: 'aurello',   // 'aurello' | 'adriatec'
+    feedback: 'no',    // 'si' | 'no' — l'azienda da' feedback ai candidati?
     pilot_spots: 2,
     twin_slug: null
   };
 
-  var IF_KEYS = ['volume', 'role', 'market', 'pack'];
+  var IF_KEYS = ['volume', 'role', 'market', 'pack', 'feedback'];
 
   // ---- config resolution -------------------------------------------------
   // 1) default; 2) se c'e' uno slug e Supabase e' configurato, fetch da DB e
@@ -61,6 +62,7 @@
       role: row.role || DEFAULT_CONFIG.role,
       market: row.market || DEFAULT_CONFIG.market,
       pack: row.pack || DEFAULT_CONFIG.pack,
+      feedback: row.feedback_branch || DEFAULT_CONFIG.feedback,
       pilot_spots: (row.pilot_spots == null ? DEFAULT_CONFIG.pilot_spots : row.pilot_spots),
       twin_slug: row.twin_slug || null
     };

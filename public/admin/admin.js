@@ -81,6 +81,7 @@
       role: radioVal('role'),
       market: radioVal('market'),
       pack: $('f_pack').value,
+      feedback_branch: radioVal('feedback') || 'no',
       pilot_spots: parseInt($('f_pilot').value, 10),
       note: $('f_note').value.trim() || null
     };
@@ -89,7 +90,7 @@
     editingSlug = null;
     $('f_company').value = ''; $('f_pilot').value = '2'; $('f_note').value = '';
     $('f_logo').value = ''; $('f_shot1').value = ''; $('f_shot2').value = '';
-    setRadio('volume', 'tanti'); setRadio('role', 'ta'); setRadio('market', 'b2c'); $('f_pack').value = 'aurello';
+    setRadio('volume', 'tanti'); setRadio('role', 'ta'); setRadio('market', 'b2c'); $('f_pack').value = 'aurello'; setRadio('feedback', 'no');
     $('formTitle').textContent = 'Genera un nuovo link';
     $('genBtn').textContent = 'Genera link';
     show($('cancelEditBtn'), false);
@@ -245,7 +246,7 @@
     $('f_company').value = l.company_name || '';
     $('f_pilot').value = (l.pilot_spots == null ? 2 : l.pilot_spots);
     $('f_note').value = l.note || '';
-    setRadio('volume', l.volume_branch); setRadio('role', l.role); setRadio('market', l.market); $('f_pack').value = l.pack;
+    setRadio('volume', l.volume_branch); setRadio('role', l.role); setRadio('market', l.market); $('f_pack').value = l.pack; setRadio('feedback', l.feedback_branch || 'no');
     $('f_logo').value = ''; $('f_shot1').value = ''; $('f_shot2').value = '';
     $('formTitle').textContent = 'Modifica link · ' + l.slug + ' (config live)';
     $('genBtn').textContent = 'Salva modifiche';

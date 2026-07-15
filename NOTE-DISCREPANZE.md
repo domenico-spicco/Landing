@@ -112,6 +112,33 @@ del deck (section, sc-camel-view-box, colori tokenizzati sul tema
 nebbia-petrolio) e con la sua animazione di ingresso (.riskcard / cardPop)
 aggiunta allo stile del deck.
 
+## 2-sexies. Toggle "Danno feedback ai candidati?" (si/no, default no)  [AGGIUNTO]
+
+Nuovo controllo nel generatore (e nell'admin) che NON crea slide: cambia solo
+testi puntuali dentro slide gia' esistenti, lasciando invariati layout,
+animazioni, posizioni, bordi e tutte le altre card. Campo config `feedback`
+(`si`/`no`, default `no`), gestito come gli altri toggle (`data-if-feedback`).
+
+Punti che cambiano (tutti e soli):
+1. Slide 06 "Il costo di non fare nulla": 3 card su 8 (post pubblico M.R.,
+   r/lavoro, DM anonimo) cambiano solo il testo. Le altre 5 restano identiche.
+2. Journey "oggi" (occhiello 07): solo l'ultimo step (Momento 04). No = box
+   "Silenzio" (nessun messaggio, 30 giorni dopo). Si = stesso box (stessa
+   dimensione/posizione/colore) con dentro un frammento di email-template con
+   placeholder non sostituiti ([NOME]/[RUOLO]) sfumato ai bordi come screenshot;
+   la caption diventa "E poi, lo stesso template." (invariati gli step 01-03).
+3. Metrica hero: la card "Il silenzio" (75%) della slide "I dati" (03), in
+   entrambe le varianti di volume. No = "Il silenzio / 75% / non riceve mai
+   risposta / Fonte: Starred". Si = "La sostanza / +126% / referral in piu' da
+   chi riceve feedback specifico... / Fonte: Talent Board CandE 2024 (230.000+
+   risposte)". Le altre due card (candidatura, rifiuto) restano identiche.
+
+Scelte fatte (lo spec non le dettagliava): il titolo card "Il silenzio" nella
+variante si diventa "La sostanza"; la caption della journey cambia con lo step
+(altrimenti direbbe "silenzio" sotto un'email); testi senza trattino lungo. La
+statistica "hero" nel deck e' una delle tre card di "I dati", non una slide a
+statistica singola: applicato a entrambe le varianti volume.
+
 ## 3. Numeri di slide negli occhielli ("03 ·", "05 ·", "11 ·"…)
 
 Come da spec ("se i numeri sono hardcoded nei titoli tipo '04 ·', lasciarli come

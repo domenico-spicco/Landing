@@ -39,6 +39,7 @@
         role: radioVal('role'),
         market: radioVal('market'),
         pack: $('f_pack').value,
+        feedback: radioVal('feedback') || 'no',
         pilot_spots: pilot,
         logo_url: res[0] || null,
         screenshot_1_url: res[1] || null,
