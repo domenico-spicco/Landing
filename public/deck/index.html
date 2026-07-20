@@ -858,8 +858,11 @@
         <span class="lh"><span class="li" style="--d:.34s">a fare il candidato.</span></span>
       </h2>
 
-      <p class="r" style="--d:.7s;margin:56px 0 0;max-width:1180px;font:300 40px/1.45 'Hanken Grotesk';color:rgba(18,51,56,.62)">
+      <p class="r" data-if-market="b2c" style="--d:.7s;margin:56px 0 0;max-width:1180px;font:300 40px/1.45 'Hanken Grotesk';color:rgba(18,51,56,.62)">
         Per la prima volta ho pensato male di brand che amavo. Non per il <span style="color:var(--text-main);font-weight:500">«no»</span>, per <span style="font-family:'Newsreader';font-style:italic;color:var(--text-main);font-weight:400">come me l'hanno fatto vivere.</span> E da uno di quei brand, da cliente, <span style="color:var(--text-main);font-weight:500">ho smesso di comprare.</span>
+      </p>
+      <p class="r" data-if-market="b2b" style="--d:.7s;margin:56px 0 0;max-width:1180px;font:300 40px/1.45 'Hanken Grotesk';color:rgba(18,51,56,.62)">
+        Per la prima volta ho pensato male di brand che amavo. Non per il <span style="color:var(--text-main);font-weight:500">«no»</span>, per <span style="font-family:'Newsreader';font-style:italic;color:var(--text-main);font-weight:400">come me l'hanno fatto vivere.</span> E di uno di quei brand ho iniziato a parlare male, ripromettendomi di <span style="color:var(--text-main);font-weight:500">non candidarmi più.</span>
       </p>
     </div>
   </section>
@@ -991,7 +994,7 @@
       <div class="r" data-if-market="b2c" style="--d:.95s;margin-top:24px;font-family:'Newsreader';font-style:italic;font-size:28px;color:rgba(18,51,56,.72)">Non è un'ipotesi. Sono due voci di conto economico.</div>
       <div class="r" data-if-market="b2b" style="--d:.95s;margin-top:24px;font-family:'Newsreader';font-style:italic;font-size:28px;color:rgba(18,51,56,.72)">Il primo è un'equazione. Il secondo è la regola dei mercati stretti.</div>
 
-      <button type="button" class="r" data-action="open-calc" style="--d:1.05s;margin-top:22px;align-self:flex-start;display:inline-flex;align-items:center;gap:10px;background:var(--accent-strong);color:#FFFFFF;border:none;border-radius:12px;padding:15px 26px;font:700 22px/1.1 'Hanken Grotesk';letter-spacing:-.01em;cursor:pointer"><span data-field="calc_button_label">Quanto costa alla vostra azienda? → Apri il calcolatore</span></button>
+      <button type="button" class="r" data-if-market="b2c" data-action="open-calc" style="--d:1.05s;margin-top:22px;align-self:flex-start;display:inline-flex;align-items:center;gap:10px;background:var(--accent-strong);color:#FFFFFF;border:none;border-radius:12px;padding:15px 26px;font:700 22px/1.1 'Hanken Grotesk';letter-spacing:-.01em;cursor:pointer"><span data-field="calc_button_label">Quanto costa alla vostra azienda? → Apri il calcolatore</span></button>
     </div>
   </section>
 

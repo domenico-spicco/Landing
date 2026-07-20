@@ -179,6 +179,17 @@ Cinque ritocchi per evitare che slide diverse si contraddicano tra loro:
 5. Aggiunta feedback_branch alla view analytics deck_link_stats e alla riga di
    pill nell'admin.
 
+## 2-nonies. Coerenza B2B su "La storia" e "Il costo"  [AGGIUNTE]
+
+- Slide 1 "La storia": l'intro finiva con "da cliente, ho smesso di comprare",
+  che in B2B non ha senso (il candidato non e' un cliente). Ora il paragrafo ha
+  due varianti data-if-market: b2c invariato; b2b = "...E di uno di quei brand ho
+  iniziato a parlare male, ripromettendomi di non candidarmi piu'."
+- Slide 5 "Il costo": il bottone del calcolatore ROI (che stima clienti/LTV
+  persi) non ha senso in B2B. Ora ha data-if-market="b2c": presente in B2C,
+  rimosso in B2B. Il contenuto della slide era gia' B2B-aware (COSTO 2 diventa
+  "L'ecosistema" invece di "Il brand").
+
 ## 3. Numeri di slide negli occhielli ("03 ·", "05 ·", "11 ·"…)
 
 Come da spec ("se i numeri sono hardcoded nei titoli tipo '04 ·', lasciarli come
