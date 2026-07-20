@@ -190,6 +190,23 @@ Cinque ritocchi per evitare che slide diverse si contraddicano tra loro:
   rimosso in B2B. Il contenuto della slide era gia' B2B-aware (COSTO 2 diventa
   "L'ecosistema" invece di "Il brand").
 
+## 2-decies. Toggle "Processo di candidatura lungo?" (si/no, default si)  [AGGIUNTO]
+
+Nuova variabile processo_lungo nel generatore (e admin/schema), gestita come gli
+altri toggle (data-if-processo_lungo). Con Si non cambia niente. Con No cambia
+solo la prima card di slide 3 "I dati" ("La candidatura", il 92%), in entrambe
+le varianti volume, piu' l'intro della slide:
+- card: al posto del "92%" mostra l'asterisco Spicco + un elenco puntato delle
+  leve per ricevere piu' candidature giuste (linguaggio senza bias, job
+  description chiara, processo semplice, seniority/requisiti in equilibrio),
+  senza numero ne' fonte. Le altre due card (silenzio/sostanza, rifiuto) restano.
+- intro: riscritta per il ramo No (tanti e pochi) togliendo il riferimento al
+  numero/funnel e spostando il focus sulle leve dell'esperienza.
+
+Nota: sulla slide 5 "Il costo" resta la frase "fino al 92% di chi avvia non
+completa" (argomento del form corto/lungo, slide diversa). Non toccata: fuori
+dallo scope indicato (solo la prima statistica di slide 3).
+
 ## 3. Numeri di slide negli occhielli ("03 ·", "05 ·", "11 ·"…)
 
 Come da spec ("se i numeri sono hardcoded nei titoli tipo '04 ·', lasciarli come

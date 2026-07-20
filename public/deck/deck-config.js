@@ -27,11 +27,12 @@
     market: 'b2c',     // 'b2b' | 'b2c'
     pack: 'aurello',   // 'aurello' | 'adriatec'
     feedback: 'no',    // 'si' | 'no' — l'azienda da' feedback ai candidati?
+    processo_lungo: 'si', // 'si' | 'no' — il processo di candidatura e' lungo?
     pilot_spots: 2,
     twin_slug: null
   };
 
-  var IF_KEYS = ['volume', 'role', 'market', 'pack', 'feedback'];
+  var IF_KEYS = ['volume', 'role', 'market', 'pack', 'feedback', 'processo_lungo'];
 
   // ---- config resolution -------------------------------------------------
   // 1) default; 2) se c'e' uno slug e Supabase e' configurato, fetch da DB e
@@ -63,6 +64,7 @@
       market: row.market || DEFAULT_CONFIG.market,
       pack: row.pack || DEFAULT_CONFIG.pack,
       feedback: row.feedback_branch || DEFAULT_CONFIG.feedback,
+      processo_lungo: row.processo_lungo_branch || DEFAULT_CONFIG.processo_lungo,
       pilot_spots: (row.pilot_spots == null ? DEFAULT_CONFIG.pilot_spots : row.pilot_spots),
       twin_slug: row.twin_slug || null
     };
