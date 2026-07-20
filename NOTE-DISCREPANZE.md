@@ -196,10 +196,12 @@ Nuova variabile processo_lungo nel generatore (e admin/schema), gestita come gli
 altri toggle (data-if-processo_lungo). Con Si non cambia niente. Con No cambia
 solo la prima card di slide 3 "I dati" ("La candidatura", il 92%), in entrambe
 le varianti volume, piu' l'intro della slide:
-- card: al posto del "92%" mostra l'asterisco Spicco + un elenco puntato delle
-  leve per ricevere piu' candidature giuste (linguaggio senza bias, job
-  description chiara, processo semplice, seniority/requisiti in equilibrio),
-  senza numero ne' fonte. Le altre due card (silenzio/sostanza, rifiuto) restano.
+- card: al posto del "92%" mostra un "+" con una freccia in su (in accento, a
+  indicare piu' candidature) e in linea il testo scorrevole delle leve per
+  riceverne di piu' giuste (linguaggio senza bias, job description chiara,
+  processo semplice, seniority/requisiti in equilibrio), senza numero ne' fonte.
+  Stessa impaginazione delle card sorelle. Le altre due card (silenzio/sostanza,
+  rifiuto) restano invariate.
 - intro: riscritta per il ramo No (tanti e pochi) togliendo il riferimento al
   numero/funnel e spostando il focus sulle leve dell'esperienza.
 
