@@ -209,6 +209,18 @@ Nota: sulla slide 5 "Il costo" resta la frase "fino al 92% di chi avvia non
 completa" (argomento del form corto/lungo, slide diversa). Non toccata: fuori
 dallo scope indicato (solo la prima statistica di slide 3).
 
+## 2-undecies. Scelta formato HTML / PDF nel generatore  [AGGIUNTO]
+
+Nel generatore c'e' una scelta "Formato": HTML (file autonomo, come prima) o
+PDF. Il PDF sfrutta la stampa del browser: il runtime del deck impagina gia' una
+slide per pagina in 16:9 (@page 1920x1080, margin 0), con colori inclusi e
+animazioni congelate allo stato finale (beforeprint). Scelto PDF, il generatore
+apre il deck in una scheda con il flag window.SPICCO_AUTOPRINT; deck-config.js,
+quando il deck e' renderizzato, apre la finestra di stampa e l'utente sceglie
+"Salva come PDF". Nessuna dipendenza aggiunta, qualita' vettoriale. (Non e' un
+download silenzioso: passa dal dialogo di stampa, perche' il generatore gira solo
+lato browser, senza server.)
+
 ## 3. Numeri di slide negli occhielli ("03 ·", "05 ·", "11 ·"…)
 
 Come da spec ("se i numeri sono hardcoded nei titoli tipo '04 ·', lasciarli come

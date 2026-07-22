@@ -318,4 +318,20 @@
   } else {
     start();
   }
+
+  // ---- auto-stampa (export PDF dal generatore) ---------------------------
+  // Se il file e' stato aperto in modalita' PDF, aspettiamo che il deck sia
+  // renderizzato e poi apriamo la finestra di stampa del browser (il runtime
+  // impagina gia' una slide per pagina in 16:9; il gestore beforeprint congela
+  // le animazioni allo stato finale). L'utente sceglie "Salva come PDF".
+  if (window.SPICCO_AUTOPRINT) {
+    var _pt = 0;
+    (function _waitPrint() {
+      var st = document.querySelector('deck-stage');
+      var ready = st && (st.shadowRoot || st.children.length);
+      if (ready) { setTimeout(function () { try { window.print(); } catch (e) {} }, 1600); }
+      else if (_pt++ < 300) { setTimeout(_waitPrint, 60); }
+      else { setTimeout(function () { try { window.print(); } catch (e) {} }, 800); }
+    })();
+  }
 })();

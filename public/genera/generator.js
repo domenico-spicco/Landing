@@ -61,22 +61,36 @@
     });
   }
 
-  function personalize(template, cfg) {
+  function personalize(template, cfg, autoprint) {
     var inject = 'window.SPICCO_FIXED_CONFIG = ' + JSON.stringify(cfg) + ';';
+    if (autoprint) inject += ' window.SPICCO_AUTOPRINT = true;';
     // funzione di replace: evita l'interpretazione di $ nella stringa config
     return template.replace(MARKER, function () { return inject; });
   }
 
-  function withDeck(action) {
+  function withDeck(action, autoprint) {
     msg('Preparo il deck…', 'ok');
     Promise.all([buildConfig(), getTemplate()]).then(function (r) {
-      var html = personalize(r[1], r[0]);
+      var html = personalize(r[1], r[0], autoprint);
       action(html, r[0]);
-      msg('', 'ok');
+      if (!autoprint) msg('', 'ok');
     }).catch(function (e) { msg('Errore: ' + (e.message || e), 'err'); });
   }
 
   $('downloadBtn').onclick = function () {
+    var fmt = radioVal('format') || 'html';
+    if (fmt === 'pdf') {
+      // PDF: apre il deck in una scheda; il deck fa partire la stampa del
+      // browser (una slide per pagina) e l'utente sceglie "Salva come PDF".
+      withDeck(function (html) {
+        var blob = new Blob([html], { type: 'text/html' });
+        var url = URL.createObjectURL(blob);
+        window.open(url, '_blank');
+        setTimeout(function () { URL.revokeObjectURL(url); }, 120000);
+        msg('Si apre il deck e parte la finestra di stampa: scegli "Salva come PDF" e tieni l\'orientamento orizzontale.', 'ok');
+      }, true);
+      return;
+    }
     withDeck(function (html, cfg) {
       var blob = new Blob([html], { type: 'text/html' });
       var url = URL.createObjectURL(blob);
@@ -84,7 +98,7 @@
       a.href = url; a.download = 'deck-' + slugify(cfg.company_name) + '.html';
       document.body.appendChild(a); a.click(); a.remove();
       setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
-    });
+    }, false);
   };
 
   $('previewBtn').onclick = function () {
