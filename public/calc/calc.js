@@ -14,7 +14,7 @@
   'use strict';
 
   // LTV suggerito per settore (fatturato annuo per cliente × 3)
-  var SECTORS = { telco: 1800, banca: 1200, assicurazioni: 2100, utility: 2700, gdo: 3000, moda: 900, ecommerce: 750, automotive: 9000, ristorazione: 600 };
+  var SECTORS = { telco: 1800, banca: 1200, assicurazioni: 2100, utility: 2700, gdo: 3000, travel: 2400, moda: 900, ecommerce: 750, automotive: 9000, ristorazione: 600 };
 
   // Coefficienti (con fonte) — richiesti dallo spec, usati nelle formule.
   var COEFFICIENTS = {
@@ -85,7 +85,7 @@
         '<div style="padding:26px 34px 4px;display:flex;flex-direction:column;gap:22px">' +
           '<div><label style="display:block;font:600 15px/1.3 \'Hanken Grotesk\';color:#123338;margin-bottom:8px">Candidature ricevute all\'anno</label>' +
             '<input type="number" min="0" id="in-applications" value="30000" oninput="onApplications(this)" style="width:100%;background:#FFFFFF;border:1px solid #DBDDD5;border-radius:10px;padding:13px 15px;font:600 17px/1 \'Hanken Grotesk\';color:#123338;outline:none" data-focus-style="border-color:#C96442;box-shadow:0 0 0 3px rgba(201,100,66,.18)"></div>' +
-          '<div><label style="display:block;font:600 15px/1.3 \'Hanken Grotesk\';color:#123338;margin-bottom:8px">Quanti dei tuoi candidati sono anche clienti?</label>' +
+          '<div><label style="display:block;font:600 15px/1.3 \'Hanken Grotesk\';color:#123338;margin-bottom:8px">Quanti dei tuoi candidati sono anche clienti o potenziali tali?</label>' +
             '<div style="display:flex;align-items:center;gap:10px"><input type="number" min="0" max="100" id="in-pctclients" value="18" oninput="onPctClients(this)" style="flex:1;background:#FFFFFF;border:1px solid #DBDDD5;border-radius:10px;padding:13px 15px;font:600 17px/1 \'Hanken Grotesk\';color:#123338;outline:none" data-focus-style="border-color:#C96442;box-shadow:0 0 0 3px rgba(201,100,66,.18)"><span style="font:600 17px/1 \'Hanken Grotesk\';color:rgba(18,51,56,.55)">%</span></div>' +
             '<div style="margin-top:7px;font:400 13.5px/1.4 \'Hanken Grotesk\';color:rgba(18,51,56,.55)">Non lo sai con precisione? Usa la tua quota di mercato: è la stima più conservativa.</div></div>' +
           '<div><div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px"><label style="font:600 15px/1.3 \'Hanken Grotesk\';color:#123338">Di questi, quanti ne perdi dopo una cattiva esperienza?</label>' +
@@ -99,6 +99,7 @@
               '<option value="assicurazioni">Assicurazioni · €2.100</option>' +
               '<option value="utility">Utility/Energia · €2.700</option>' +
               '<option value="gdo">GDO/Retail alimentare · €3.000</option>' +
+              '<option value="travel">Travel & Hospitality · €2.400</option>' +
               '<option value="moda">Moda/Abbigliamento · €900</option>' +
               '<option value="ecommerce">E-commerce · €750</option>' +
               '<option value="automotive">Automotive · €9.000</option>' +
