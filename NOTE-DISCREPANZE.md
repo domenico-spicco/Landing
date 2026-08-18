@@ -221,6 +221,21 @@ quando il deck e' renderizzato, apre la finestra di stampa e l'utente sceglie
 download silenzioso: passa dal dialogo di stampa, perche' il generatore gira solo
 lato browser, senza server.)
 
+## 2-duodecies. Deck bilingue: opzione "Lingua" (it/en) nel generatore  [AGGIUNTO]
+
+Nuova variabile lang ('it' default / 'en') come gli altri toggle
+(data-if-lang). Tutte le 18 sezioni del deck sono duplicate in una gemella
+data-if-lang="en" (l'originale e' data-if-lang="it"): la traduzione e' applicata
+via script solo ai nodi di testo e agli attributi data-label / data-fallback,
+mai a note relatore (restano in italiano, come richiesto), SVG o stili. Con
+lang='en' applyConfig tiene solo le sezioni inglesi. Il calcolatore ROI
+(calc.js) e' bilingue (mappa STR it/en, etichette settori tradotte, formattatori
+en-GB) e legge window.__spiccoConfig.lang. deck-config.js: lang in DEFAULT_CONFIG
++ IF_KEYS + mapRowToConfig; fieldValue reso bilingue per company_name,
+calc_button_label e pilot_spots_text. Generatore/admin: toggle Lingua; schema:
+colonna lang_branch + view deck_link_stats. Nota build: il deck sorgente e'
+passato da ~300KB a ~560KB (doppia lingua); il bundle standalone da ~1.5 a ~1.7MB.
+
 ## 3. Numeri di slide negli occhielli ("03 ·", "05 ·", "11 ·"…)
 
 Come da spec ("se i numeri sono hardcoded nei titoli tipo '04 ·', lasciarli come

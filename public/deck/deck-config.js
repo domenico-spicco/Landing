@@ -28,11 +28,12 @@
     pack: 'aurello',   // 'aurello' | 'adriatec'
     feedback: 'no',    // 'si' | 'no' — l'azienda da' feedback ai candidati?
     processo_lungo: 'si', // 'si' | 'no' — il processo di candidatura e' lungo?
+    lang: 'it',        // 'it' | 'en' — lingua del deck
     pilot_spots: 2,
     twin_slug: null
   };
 
-  var IF_KEYS = ['volume', 'role', 'market', 'pack', 'feedback', 'processo_lungo'];
+  var IF_KEYS = ['volume', 'role', 'market', 'pack', 'feedback', 'processo_lungo', 'lang'];
 
   // ---- config resolution -------------------------------------------------
   // 1) default; 2) se c'e' uno slug e Supabase e' configurato, fetch da DB e
@@ -65,6 +66,7 @@
       pack: row.pack || DEFAULT_CONFIG.pack,
       feedback: row.feedback_branch || DEFAULT_CONFIG.feedback,
       processo_lungo: row.processo_lungo_branch || DEFAULT_CONFIG.processo_lungo,
+      lang: row.lang_branch || DEFAULT_CONFIG.lang,
       pilot_spots: (row.pilot_spots == null ? DEFAULT_CONFIG.pilot_spots : row.pilot_spots),
       twin_slug: row.twin_slug || null
     };
@@ -124,7 +126,12 @@
   }
 
   // ---- field values ------------------------------------------------------
-  function pilotSpotsText(n) {
+  function pilotSpotsText(n, lang) {
+    if (lang === 'en') {
+      if (n === 1) return 'One is still available';
+      if (n === 0) return 'They are all assigned: let\'s talk anyway';
+      return 'Two are still available';
+    }
     if (n === 2) return 'Due sono ancora disponibili';
     if (n === 1) return 'Uno è ancora disponibile';
     if (n === 0) return 'Sono tutti assegnati: parliamone comunque';
@@ -132,18 +139,25 @@
   }
 
   function fieldValue(field, cfg, el) {
+    var en = cfg.lang === 'en';
     switch (field) {
-      case 'company_name':
-        return cfg.company_name || (el && el.getAttribute('data-fallback')) || 'il vostro brand';
+      case 'company_name': {
+        var generic = !cfg.company_name || cfg.company_name === 'il vostro brand' || cfg.company_name === 'your brand';
+        if (generic) return (el && el.getAttribute('data-fallback')) || (en ? 'your brand' : 'il vostro brand');
+        return cfg.company_name;
+      }
       case 'calc_button_label': {
-        var named = cfg.company_name && cfg.company_name !== 'il vostro brand';
+        var named = cfg.company_name && cfg.company_name !== 'il vostro brand' && cfg.company_name !== 'your brand';
+        if (en) {
+          return 'What does it cost ' + (named ? cfg.company_name : 'your company') + '? → Open the calculator';
+        }
         var who = named ? ('a ' + cfg.company_name) : 'alla vostra azienda';
         return 'Quanto costa ' + who + '? → Apri il calcolatore';
       }
       case 'pilot_spots':
         return String(cfg.pilot_spots);
       case 'pilot_spots_text':
-        return pilotSpotsText(cfg.pilot_spots);
+        return pilotSpotsText(cfg.pilot_spots, cfg.lang);
       case 'logo':
         return cfg.logo_url || null;
       case 'screenshot_1':

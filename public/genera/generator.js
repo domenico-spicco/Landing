@@ -41,6 +41,7 @@
         pack: $('f_pack').value,
         feedback: radioVal('feedback') || 'no',
         processo_lungo: radioVal('processo_lungo') || 'si',
+        lang: radioVal('lang') || 'it',
         pilot_spots: pilot,
         logo_url: res[0] || null,
         screenshot_1_url: res[1] || null,
