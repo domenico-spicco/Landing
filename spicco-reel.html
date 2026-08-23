@@ -108,6 +108,8 @@ body{display:flex;align-items:center;justify-content:center;font-family:Inter,-a
 .card .rl{font-size:.8rem;color:#8b847c;margin-top:2px}
 .card .ln{margin-top:11px;padding-top:10px;border-top:1px solid rgba(21,20,23,.08);font-size:.79rem;color:#5b5651;display:flex;justify-content:space-between}
 .card .ln b{color:#1a63ff;font-weight:600}
+.sync{margin-top:12px;display:inline-block;border:1px solid rgba(26,99,255,.28);background:rgba(26,99,255,.08);
+  color:#1246c9;border-radius:100px;padding:5px 13px;font-size:.79rem;font-weight:600;opacity:0}
 .conn-foot{margin-top:96px;text-align:center;font-size:1.02rem;color:#6f6963;font-weight:300}
 .conn-foot b{color:#151417;font-weight:600}
 
@@ -200,33 +202,13 @@ body{display:flex;align-items:center;justify-content:center;font-family:Inter,-a
       </div>
 
       <div class="node" data-el>
-        <div class="box"><div class="atsbox"><span class="sq">M</span><span class="t">TalentSuite<small>ATS aziendale</small></span></div></div>
+        <div class="box" id="atsnode"><div class="atsbox"><span class="sq">M</span><span class="t">TalentSuite<small>ATS aziendale</small></span></div></div>
         <div class="cap"><b>Il sistema che usi già</b>candidati, stati, workflow</div>
+        <div class="sync" id="sync">✓ Profilo sincronizzato</div>
       </div>
     </div>
     <div class="conn-foot" data-el>Il candidato arriva nel sistema con i <b>campi compilati</b> e la <b>conversazione allegata</b>.</div>
   </div></section>
-
-  <!-- 4 — ATS AZIENDALE -->
-  <section class="scene" id="s4"><div class="win" data-el>
-    <div class="chrome"><span class="d"></span><span class="d"></span><span class="d"></span>
-      <span class="url">talentsuite.gruppomeridiana.example/candidati/pm-0457</span></div>
-    <div class="ats">
-      <div class="top"><span class="sq">M</span><span class="ti">Gruppo Meridiana — Selezione<small>PROJECT MANAGER · RIF. IT-OPS-PM-0457/24</small></span></div>
-      <div class="sub">Candidati ricevuti: 47 · Da valutare: 12</div>
-      <table>
-        <tr><th>Candidato</th><th>Esperienza</th><th>Fonte</th><th>Stato</th></tr>
-        <tr><td class="name">Marta Bellini</td><td>5 anni</td><td>Portale annunci</td><td><span class="state">Da valutare</span></td></tr>
-        <tr class="new" id="row"><td>
-            <span class="name">Giovanni Rossi</span>
-            <div class="note">Budget gestito <b>600.000 €</b> · emerso dalla conversazione, non dal CV</div>
-          </td><td>4 anni</td><td><span class="src">✳ Spicco</span></td><td><span class="state">Da valutare</span></td></tr>
-        <tr><td class="name">Luca Ferrari</td><td>3 anni</td><td>Sito aziendale</td><td><span class="state">Da valutare</span></td></tr>
-      </table>
-    </div>
-  </div>
-    <div class="flag" id="flag">Scheda candidato compilata in automatico — <b>zero data entry</b></div>
-  </section>
 
   <!-- barra -->
   <footer class="bar">
@@ -238,7 +220,6 @@ body{display:flex;align-items:center;justify-content:center;font-family:Inter,-a
       <span class="step" id="l1">La posizione, <b>raccontata come merita</b></span>
       <span class="step" id="l2">Domande su misura, <b>generate dal CV</b></span>
       <span class="step" id="l3">Il profilo arricchito <b>passa al tuo ATS</b></span>
-      <span class="step" id="l4">Nel sistema che usi già, <b>senza cambiare processo</b></span>
     </span>
   </footer>
 
@@ -295,19 +276,17 @@ function wrap(el,tOut,dOut,tIn,y){
   ]);
 }
 
-/* ---------- tempi delle scene ---------- */
-const S=[[0,2.95],[3.05,5.95],[6.05,7.45],[7.55,9.45]];
-wrap(document.getElementById('s1'),2.95,.4,9.64,22);
-['s2','s3','s4'].forEach((id,i)=>{
-  const sc=document.getElementById(id);
-  show(sc,S[i+1][0],S[i+1][1],{y:22,dIn:.5,dOut:.3,yOut:-14});
-  stagger(sc,S[i+1][0]+.15);
-});
+/* ---------- tempi delle scene: 3s landing · 4s conversazione · 3s connettore ---------- */
+wrap(document.getElementById('s1'),2.72,.34,9.62,22);
+show(document.getElementById('s2'),3.0,6.78,{y:22,dIn:.5,dOut:.3,yOut:-14});
+stagger(document.getElementById('s2'),3.12);
+show(document.getElementById('s3'),7.0,9.58,{y:22,dIn:.5,dOut:.32,yOut:-14});
+stagger(document.getElementById('s3'),7.12);
+
 /* etichette in basso */
-wrap(document.getElementById('l1'),2.85,.3,9.72,8);
-['l2','l3','l4'].forEach((id,i)=>{
-  show(document.getElementById(id),S[i+1][0]+.25,S[i+1][1]-.12,{y:8,dIn:.45,dOut:.3,yOut:-8});
-});
+wrap(document.getElementById('l1'),2.62,.3,9.7,8);
+show(document.getElementById('l2'),3.3,6.7,{y:8,dIn:.45,dOut:.3,yOut:-8});
+show(document.getElementById('l3'),7.3,9.5,{y:8,dIn:.45,dOut:.3,yOut:-8});
 
 /* ---------- 1. cursore che clicca ---------- */
 play(document.getElementById('cursor'),[
@@ -335,9 +314,9 @@ play(document.getElementById('cta'),[
 ]);
 
 /* ---------- 2. conversazione ---------- */
-show(document.getElementById('m1'),3.3,5.7,{y:14,dIn:.45,dOut:.3});
-show(document.getElementById('typ'),4.0,4.6,{y:10,dIn:.25,dOut:.2});
-show(document.getElementById('m2'),4.75,5.7,{y:14,dIn:.45,dOut:.3});
+show(document.getElementById('m1'),3.3,6.6,{y:14,dIn:.45,dOut:.3});
+show(document.getElementById('typ'),4.05,4.75,{y:10,dIn:.25,dOut:.2});
+show(document.getElementById('m2'),4.9,6.6,{y:14,dIn:.45,dOut:.3});
 ['t1','t2','t3'].forEach((id,i)=>{
   const a=document.getElementById(id).animate(
     [{transform:'translateY(0)',opacity:.35},{transform:'translateY(-4px)',opacity:1},{transform:'translateY(0)',opacity:.35}],
@@ -348,10 +327,10 @@ show(document.getElementById('m2'),4.75,5.7,{y:14,dIn:.45,dOut:.3});
 /* ---------- 3. connettore: il profilo viaggia ---------- */
 play(document.getElementById('pcard'),[
   {offset:0,opacity:0,transform:'translateX(0) scale(.94)'},
-  {offset:pc(6.4),opacity:0,transform:'translateX(0) scale(.94)',easing:EASE},
-  {offset:pc(6.7),opacity:1,transform:'translateX(14px) scale(1)',easing:'cubic-bezier(.5,0,.3,1)'},
-  {offset:pc(7.15),opacity:1,transform:'translateX(268px) scale(1)'},
-  {offset:pc(7.35),opacity:0,transform:'translateX(304px) scale(.95)'},
+  {offset:pc(7.45),opacity:0,transform:'translateX(0) scale(.94)',easing:EASE},
+  {offset:pc(7.8),opacity:1,transform:'translateX(14px) scale(1)',easing:'cubic-bezier(.45,0,.25,1)'},
+  {offset:pc(9.0),opacity:1,transform:'translateX(268px) scale(1)'},
+  {offset:pc(9.25),opacity:0,transform:'translateX(300px) scale(.95)'},
   {offset:1,opacity:0,transform:'translateX(0) scale(.94)'}
 ]);
 ['pk1','pk2','pk3'].forEach((id,i)=>{
@@ -361,15 +340,15 @@ play(document.getElementById('pcard'),[
   A.push(a);
 });
 
-/* ---------- 4. la riga che compare nell'ATS ---------- */
-play(document.getElementById('row'),[
-  {offset:0,opacity:0,transform:'translateY(10px)',backgroundColor:'rgba(26,99,255,.16)'},
-  {offset:pc(8.05),opacity:0,transform:'translateY(10px)',backgroundColor:'rgba(26,99,255,.16)',easing:EASE},
-  {offset:pc(8.4),opacity:1,transform:'translateY(0)',backgroundColor:'rgba(26,99,255,.16)'},
-  {offset:pc(9.1),opacity:1,transform:'translateY(0)',backgroundColor:'rgba(26,99,255,.05)'},
-  {offset:1,opacity:1,transform:'translateY(0)',backgroundColor:'rgba(26,99,255,.05)'}
+/* ---------- il nodo di destra conferma la ricezione ---------- */
+play(document.getElementById('atsnode'),[
+  {offset:0,boxShadow:'0 24px 50px -40px rgba(21,20,23,.7)'},
+  {offset:pc(8.95),boxShadow:'0 24px 50px -40px rgba(21,20,23,.7)',easing:'ease-out'},
+  {offset:pc(9.15),boxShadow:'0 24px 50px -40px rgba(21,20,23,.7), 0 0 0 7px rgba(26,99,255,.16)'},
+  {offset:pc(9.55),boxShadow:'0 24px 50px -40px rgba(21,20,23,.7), 0 0 0 0 rgba(26,99,255,0)'},
+  {offset:1,boxShadow:'0 24px 50px -40px rgba(21,20,23,.7)'}
 ]);
-show(document.getElementById('flag'),8.7,9.25,{y:14,dIn:.4,dOut:.28});
+show(document.getElementById('sync'),9.05,9.5,{y:8,dIn:.3,dOut:.25,yOut:-6});
 
 /* ---------- adatta il palco alla finestra ---------- */
 function fit(){
