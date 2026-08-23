@@ -32,9 +32,9 @@ body{display:flex;align-items:center;justify-content:center;font-family:Inter,-a
   display:flex;align-items:center;justify-content:space-between;
   border-top:1px solid rgba(21,20,23,.08);background:rgba(250,247,243,.75);backdrop-filter:blur(6px);z-index:20
 }
-.logo{display:inline-flex;align-items:center;gap:10px}
-.logo svg{width:19px;height:19px}
-.logo .word{font-size:1.16rem;font-weight:800;letter-spacing:-.05em;color:#151417}
+.logo{display:inline-flex;flex-direction:column;align-items:flex-start;line-height:1;font-size:1.32rem}
+.logo svg{display:block;width:.27em;height:.27em;margin:0 0 .045em 35.4%}   /* l'asterisco sta sopra la i */
+.logo .word{font-size:1em;font-weight:800;letter-spacing:-.052em;color:#151417}
 .steps{position:relative;height:22px;flex:1;margin-left:34px}
 .step{position:absolute;right:0;top:0;white-space:nowrap;font-size:.9rem;color:#6f6963;opacity:0}
 .step b{color:#151417;font-weight:600}
@@ -169,7 +169,7 @@ body{display:flex;align-items:center;justify-content:center;font-family:Inter,-a
   <!-- 2 — CONVERSAZIONE -->
   <section class="scene" id="s2"><div class="chatwrap">
     <div class="chat-head" data-el>
-      <div class="av"><svg width="21" height="21" viewBox="0 0 100 100"><g stroke="#c9633f" stroke-width="16" stroke-linecap="round"><line x1="50" y1="13" x2="50" y2="87"/><line x1="17.9" y1="31.5" x2="82.1" y2="68.5"/><line x1="17.9" y1="68.5" x2="82.1" y2="31.5"/></g></svg></div>
+      <div class="av"><svg width="21" height="21" viewBox="0 0 100 100"><g stroke="#c86441" stroke-width="17" stroke-linecap="round"><line x1="50" y1="10" x2="50" y2="90"/><line x1="16.5" y1="30" x2="83.5" y2="70"/><line x1="16.5" y1="70" x2="83.5" y2="30"/></g></svg></div>
       <div><div class="nm">Spicco · Gruppo Meridiana</div><div class="st">sta leggendo il CV di Giovanni</div></div>
     </div>
     <div class="msg bot" id="m1">Nel tuo CV non ho trovato la responsabilità diretta su <b>budget sopra i 500.000 €</b>, che per questa posizione è un requisito. Sai raccontarmi qualcosa di collegato?</div>
@@ -181,7 +181,7 @@ body{display:flex;align-items:center;justify-content:center;font-family:Inter,-a
   <section class="scene" id="s3"><div class="conn">
     <div class="conn-row">
       <div class="node" data-el>
-        <div class="box"><span class="logo"><svg viewBox="0 0 100 100" style="width:26px;height:26px"><g stroke="#c9633f" stroke-width="15" stroke-linecap="round"><line x1="50" y1="13" x2="50" y2="87"/><line x1="17.9" y1="31.5" x2="82.1" y2="68.5"/><line x1="17.9" y1="68.5" x2="82.1" y2="31.5"/></g></svg><span class="word" style="font-size:1.7rem">spicco</span></span></div>
+        <div class="box"><span class="logo" style="font-size:2.5rem"><svg viewBox="0 0 100 100" aria-label="Spicco"><g stroke="#c86441" stroke-width="17" stroke-linecap="round"><line x1="50" y1="10" x2="50" y2="90"/><line x1="16.5" y1="30" x2="83.5" y2="70"/><line x1="16.5" y1="70" x2="83.5" y2="30"/></g></svg><span class="word">sp&#x131;cco</span></span></div>
         <div class="cap"><b>Candidatura + conversazione</b>profilo arricchito</div>
       </div>
 
@@ -214,8 +214,8 @@ body{display:flex;align-items:center;justify-content:center;font-family:Inter,-a
   <!-- barra -->
   <footer class="bar">
     <span class="logo">
-      <svg viewBox="0 0 100 100"><g stroke="#c9633f" stroke-width="15" stroke-linecap="round"><line x1="50" y1="13" x2="50" y2="87"/><line x1="17.9" y1="31.5" x2="82.1" y2="68.5"/><line x1="17.9" y1="68.5" x2="82.1" y2="31.5"/></g></svg>
-      <span class="word">spicco</span>
+      <svg viewBox="0 0 100 100" aria-label="Spicco"><g stroke="#c86441" stroke-width="17" stroke-linecap="round"><line x1="50" y1="10" x2="50" y2="90"/><line x1="16.5" y1="30" x2="83.5" y2="70"/><line x1="16.5" y1="70" x2="83.5" y2="30"/></g></svg>
+      <span class="word">sp&#x131;cco</span>
     </span>
     <span class="steps">
       <span class="step" id="l1">La posizione, <b>raccontata come merita</b></span>
