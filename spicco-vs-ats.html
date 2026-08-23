@@ -31,19 +31,6 @@ body{margin:0;background:#f6f2ee;color:#17161a;overflow:hidden;font-family:Inter
 #deck>.screen.out-up{opacity:0;transform:translateY(-28px) scale(.992);z-index:1}
 #deck>.screen.out-down{opacity:0;transform:translateY(32px) scale(.992);z-index:1}
 
-/* ---- suggerimento "avanti" ---- */
-.hint{
-  position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:60;
-  display:flex;align-items:center;gap:9px;padding:9px 17px;border-radius:100px;
-  background:rgba(255,255,255,.88);backdrop-filter:blur(10px);
-  border:1px solid rgba(21,20,23,.1);box-shadow:0 10px 26px -16px rgba(0,0,0,.55);
-  font-family:Inter,sans-serif;font-size:.76rem;color:#6f6963;letter-spacing:.01em;
-  cursor:pointer;opacity:0;pointer-events:none;transition:opacity .45s ease
-}
-.hint.show{opacity:1;pointer-events:auto}
-.hint kbd{font:inherit;background:#fff;border:1px solid rgba(21,20,23,.15);border-bottom-width:2px;border-radius:6px;padding:2px 7px;color:#3d3934}
-.hint .arw{color:#c9633f;animation:hintbob 1.7s ease-in-out infinite}
-@keyframes hintbob{0%,100%{transform:translateY(0);opacity:.45}50%{transform:translateY(3px);opacity:1}}
 img{max-width:100%;display:block}
 button{font:inherit;cursor:pointer}
 input,select,textarea{font:inherit}
@@ -764,22 +751,18 @@ input,select,textarea{font:inherit}
 </section>
 </div>
 
-<div class="hint" id="hint"><span class="arw">↓</span> <span id="hint-text">Scorri ancora o premi <kbd>Spazio</kbd></span></div>
 
 <script>
 /* ============================================================
    DECK — una schermata alla volta, con cambio schermata
    ============================================================ */
 const screens=[...document.querySelectorAll('.screen')];
-const hint=document.getElementById('hint');
-const hintText=document.getElementById('hint-text');
-let idx=0,lock=false,acc=0,edgeSince=0,enteredAt=0,chromeOff=false;
+let idx=0,lock=false,acc=0,edgeSince=0,enteredAt=0;
 
 /* le schermate-manifesto non scorrono: sono sempre "a fine schermata" */
 const scrollable=el=>!el.classList.contains('statement')&&el.scrollHeight-el.clientHeight>8;
 const atTop=el=>!scrollable(el)||el.scrollTop<4;
 const atBottom=el=>!scrollable(el)||el.scrollHeight-el.clientHeight-el.scrollTop<4;
-const fits=el=>!scrollable(el);
 
 function playReveal(sc){
   sc.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
@@ -799,11 +782,10 @@ function setScreen(i,dir){
   void nxt.offsetWidth;
   nxt.classList.add('is-active');
   idx=i; enteredAt=performance.now(); acc=0; edgeSince=0;
-  hint.classList.remove('show');
   requestAnimationFrame(()=>playReveal(nxt));
   setTimeout(()=>{
     cur.classList.remove('out-up','out-down');
-    lock=false; onEnter(nxt); updateHint();
+    lock=false; onEnter(nxt);
   },640);
 }
 function next(){setScreen(idx+1,'fwd')}
@@ -813,25 +795,6 @@ function goTo(id){
   if(i>-1) setScreen(i, i>idx?'fwd':'back');
 }
 
-/* suggerimento contestuale */
-function updateHint(){
-  const el=screens[idx],id=el.id;
-  const last=idx===screens.length-1;
-  let ready=fits(el)||atBottom(el);
-  let text=(scrollable(el)?'Scorri ancora':'Scorri')+' o premi <kbd>Spazio</kbd>',arrow=true;
-  if(last){ready=false}                      /* chiusura pulita: nessun elemento a schermo */
-  else if(id==='sp-apply'){                 /* prima si carica il CV */
-    ready=uploaded; text='Invia la candidatura per continuare'; arrow=false;
-  }
-  else if(id==='sp-chat'){                  /* prima si chiude la conversazione */
-    ready=badge.classList.contains('show');
-  }
-  hintText.innerHTML=text;
-  hint.querySelector('.arw').style.display=arrow?'':'none';
-  hint.classList.toggle('show',!chromeOff&&ready&&!lock);
-}
-hint.addEventListener('click',()=>{ idx===screens.length-1?location.reload():next() });
-screens.forEach(sc=>sc.addEventListener('scroll',()=>{ if(sc===screens[idx]) updateHint() },{passive:true}));
 
 /* rotella / trackpad: si avanza solo con un'ulteriore scrollata a fine schermata */
 window.addEventListener('wheel',e=>{
@@ -862,7 +825,6 @@ window.addEventListener('keydown',e=>{
     if(atTop(el)){e.preventDefault();prev()} else el.scrollBy({top:-140,behavior:'smooth'});
   }
   else if(k==='r'||k==='R') location.reload();
-  else if(k==='h'||k==='H'){chromeOff=!chromeOff;updateHint()}
 });
 
 /* swipe su trackpad touch / mobile */
@@ -884,7 +846,6 @@ document.querySelectorAll('.ats a').forEach(a=>a.addEventListener('click',e=>e.p
 screens[0].classList.add('is-active');
 enteredAt=performance.now();
 requestAnimationFrame(()=>playReveal(screens[0]));
-setTimeout(updateHint,900);
 
 /* ============================================================
    UPLOAD SIMULATO DEL CV
@@ -903,7 +864,6 @@ drop.addEventListener('click',()=>{
     fok.style.opacity='1';
     document.querySelector('#file .bar').classList.add('done');
     spSend.style.opacity='1'; spSend.style.pointerEvents='auto';
-    updateHint();
   },2300);
 });
 
@@ -960,7 +920,6 @@ async function sendAnswer(){
   badge.classList.add('show');
   document.querySelector('#sp-chat .st').textContent='candidatura completata';
   ta.placeholder='Conversazione conclusa — grazie!';
-  updateHint();
 }
 sendBtn.addEventListener('click',sendAnswer);
 spSend.addEventListener('click',()=>goTo('sp-chat'));
