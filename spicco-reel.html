@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Spicco — reel 10s</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%;margin:0;background:#e9e4de;overflow:hidden}
+body{display:flex;align-items:center;justify-content:center;font-family:Inter,-apple-system,sans-serif}
+
+/* palcoscenico 1280x720, scalato per riempire la finestra */
+#fit{transform-origin:center center}
+.stage{
+  width:1280px;height:720px;position:relative;overflow:hidden;
+  background:#faf7f3;color:#151417
+}
+.stage::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(760px 420px at 84% -8%,rgba(26,99,255,.13),transparent 62%),
+             radial-gradient(560px 380px at 6% 104%,rgba(201,99,63,.08),transparent 64%)
+}
+.scene{position:absolute;inset:0;opacity:0}
+.pad{position:absolute;inset:0;padding:74px 84px 104px}
+
+/* ---------- barra inferiore ---------- */
+.bar{
+  position:absolute;left:0;right:0;bottom:0;height:74px;padding:0 84px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid rgba(21,20,23,.08);background:rgba(250,247,243,.75);backdrop-filter:blur(6px);z-index:20
+}
+.logo{display:inline-flex;align-items:center;gap:10px}
+.logo svg{width:19px;height:19px}
+.logo .word{font-size:1.16rem;font-weight:800;letter-spacing:-.05em;color:#151417}
+.steps{position:relative;height:22px;flex:1;margin-left:34px}
+.step{position:absolute;right:0;top:0;white-space:nowrap;font-size:.9rem;color:#6f6963;opacity:0}
+.step b{color:#151417;font-weight:600}
+
+/* ---------- 1. landing ---------- */
+.pill{display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(21,20,23,.12);background:#fff;
+  padding:8px 16px;border-radius:100px;font-size:.83rem;color:#6f6963}
+.pill .dot{width:6px;height:6px;border-radius:50%;background:#1a63ff;box-shadow:0 0 0 4px rgba(26,99,255,.14)}
+.hero h1{font-size:4.05rem;line-height:1.03;letter-spacing:-.04em;margin:26px 0 0;font-weight:700;max-width:1000px}
+.hero h1 em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;color:#1a63ff}
+.facts{display:flex;gap:12px;margin-top:34px}
+.fact{border:1px solid rgba(21,20,23,.11);background:#fff;border-radius:14px;padding:12px 18px}
+.fact .k{font-size:.63rem;letter-spacing:.16em;text-transform:uppercase;color:#8b847c}
+.fact .v{font-size:1rem;font-weight:600;margin-top:4px}
+.cta{display:flex;align-items:center;gap:18px;margin-top:36px}
+.btn{border:none;border-radius:100px;padding:16px 34px;font-weight:600;font-size:1.05rem;color:#fff;
+  background:#1a63ff;box-shadow:0 12px 30px -14px rgba(26,99,255,.8);font-family:inherit}
+.cta .note{font-size:.92rem;color:#6f6963}
+
+/* cursore */
+.cursor{position:absolute;left:0;top:0;width:26px;height:26px;z-index:30;opacity:0}
+.ripple{position:absolute;left:50%;top:50%;width:70px;height:70px;margin:-35px 0 0 -35px;border-radius:50%;
+  border:2px solid rgba(26,99,255,.55);opacity:0;transform:scale(.3)}
+
+/* ---------- 2. chat ---------- */
+.chatwrap{position:absolute;left:220px;top:150px;width:840px}
+.chat-head{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.chat-head .av{width:40px;height:40px;border-radius:12px;background:#f2eee9;display:flex;align-items:center;justify-content:center}
+.chat-head .nm{font-size:1rem;font-weight:600}
+.chat-head .st{font-size:.82rem;color:#8b847c}
+.msg{max-width:600px;padding:19px 23px;border-radius:20px;font-size:1.06rem;line-height:1.55;font-weight:300;opacity:0}
+.msg.bot{background:#f2eee9;border-bottom-left-radius:7px;color:#33302c}
+.msg.bot b{font-weight:600;color:#1a63ff}
+.msg.me{background:#1a63ff;color:#fff;border-bottom-right-radius:7px;margin-left:auto}
+.msg.me b{font-weight:600}
+.reply{position:relative;margin-top:18px;min-height:118px}
+.typing{position:absolute;left:0;top:0;display:inline-flex;gap:6px;background:#f2eee9;padding:19px 22px;border-radius:20px;border-bottom-left-radius:7px;opacity:0}
+.typing i{width:8px;height:8px;border-radius:50%;background:#b3aca3;display:block}
+
+/* ---------- 3. connettore ---------- */
+.conn{position:absolute;left:0;right:0;top:214px;padding:0 110px}
+.conn-row{display:flex;align-items:center;justify-content:space-between;position:relative}
+.node{width:242px;text-align:center;position:relative;z-index:3}
+.node .box{
+  border:1px solid rgba(21,20,23,.12);background:#fff;border-radius:20px;padding:24px 18px;
+  box-shadow:0 24px 50px -40px rgba(21,20,23,.7);display:flex;align-items:center;justify-content:center;height:104px
+}
+.node .cap{margin-top:14px;font-size:.85rem;color:#6f6963}
+.node .cap b{display:block;color:#151417;font-weight:600;font-size:.95rem;margin-bottom:3px}
+.atsbox{display:flex;align-items:center;gap:12px}
+.atsbox .sq{width:44px;height:44px;border-radius:11px;background:#1a4f8a;color:#fff;display:flex;align-items:center;
+  justify-content:center;font-family:Georgia,serif;font-size:19px;font-weight:bold}
+.atsbox .t{text-align:left;font-size:1.02rem;font-weight:700;letter-spacing:-.01em}
+.atsbox .t small{display:block;font-size:.74rem;font-weight:400;color:#8b847c;letter-spacing:.06em;text-transform:uppercase;margin-top:3px}
+.wire{position:absolute;left:250px;right:250px;top:52px;height:2px}
+.wire .line{position:absolute;inset:0;border-top:2px dashed rgba(21,20,23,.18)}
+.wire .pk{position:absolute;top:-4px;width:10px;height:10px;border-radius:50%;background:#1a63ff;box-shadow:0 0 0 5px rgba(26,99,255,.16)}
+.wire .lbl{
+  position:absolute;left:50%;top:-152px;transform:translateX(-50%);text-align:center;white-space:nowrap
+}
+.wire .lbl .tag{
+  display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(26,99,255,.28);background:rgba(26,99,255,.07);
+  color:#1246c9;border-radius:100px;padding:8px 17px;font-size:.87rem;font-weight:600
+}
+.wire .lbl .sub{margin-top:9px;font-size:.83rem;color:#8b847c}
+.card{
+  position:absolute;top:-54px;left:0;width:262px;border:1px solid rgba(21,20,23,.12);background:#fff;
+  border-radius:16px;padding:15px 17px;box-shadow:0 26px 46px -30px rgba(21,20,23,.55);opacity:0
+}
+.card .nm{font-size:.98rem;font-weight:600}
+.card .rl{font-size:.8rem;color:#8b847c;margin-top:2px}
+.card .ln{margin-top:11px;padding-top:10px;border-top:1px solid rgba(21,20,23,.08);font-size:.79rem;color:#5b5651;display:flex;justify-content:space-between}
+.card .ln b{color:#1a63ff;font-weight:600}
+.conn-foot{margin-top:96px;text-align:center;font-size:1.02rem;color:#6f6963;font-weight:300}
+.conn-foot b{color:#151417;font-weight:600}
+
+/* ---------- 4. ATS ---------- */
+.win{
+  position:absolute;left:130px;top:150px;width:1020px;
+  border-radius:14px;overflow:hidden;background:#fff;border:1px solid rgba(21,20,23,.14);
+  box-shadow:0 50px 90px -50px rgba(21,20,23,.7)
+}
+.win .chrome{background:#ecebe9;border-bottom:1px solid #dcd9d5;padding:11px 14px;display:flex;align-items:center;gap:9px}
+.win .chrome .d{width:11px;height:11px;border-radius:50%;background:#cfccc8}
+.win .chrome .url{margin-left:12px;background:#fff;border:1px solid #dcd9d5;border-radius:6px;padding:5px 14px;
+  font-size:.76rem;color:#8b847c;font-family:Arial,sans-serif}
+.ats{font-family:Arial,Helvetica,sans-serif;color:#222}
+.ats .top{background:#1a4f8a;color:#fff;padding:13px 20px;display:flex;align-items:center;gap:11px}
+.ats .top .sq{width:26px;height:26px;background:#fff;color:#1a4f8a;display:flex;align-items:center;justify-content:center;
+  font-family:Georgia,serif;font-weight:bold;font-size:14px}
+.ats .top .ti{font-size:14px;font-weight:bold}
+.ats .top .ti small{display:block;font-weight:normal;font-size:11px;opacity:.75;margin-top:2px}
+.ats .sub{background:#f4f4f2;border-bottom:1px solid #e2e0dd;padding:9px 20px;font-size:12px;color:#666}
+.ats table{width:100%;border-collapse:collapse;font-size:13px}
+.ats th{background:#fafafa;border-bottom:1px solid #e2e0dd;text-align:left;padding:10px 20px;font-size:11.5px;
+  color:#777;font-weight:bold;letter-spacing:.3px;text-transform:uppercase}
+.ats td{border-bottom:1px solid #eeecea;padding:13px 20px;color:#333}
+.ats tr.new td{background:#f2f6ff}
+.ats .src{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(26,99,255,.3);background:rgba(26,99,255,.08);
+  color:#1246c9;border-radius:100px;padding:3px 10px;font-size:11.5px;font-family:Inter,sans-serif;font-weight:600}
+.ats .state{color:#8a7a1f;background:#fdf6d8;border:1px solid #eddfa0;border-radius:3px;padding:2px 8px;font-size:11.5px}
+.ats .name{font-weight:bold}
+.ats .note{font-size:11.5px;color:#777;margin-top:3px}
+.ats .note b{color:#1246c9}
+.flag{
+  position:absolute;right:112px;top:452px;background:#151417;color:#fff;border-radius:12px;
+  padding:12px 18px;font-size:.88rem;font-family:Inter,sans-serif;box-shadow:0 20px 40px -24px rgba(0,0,0,.8);opacity:0
+}
+.flag b{color:#7fa8ff;font-weight:600}
+</style>
+</head>
+<body>
+<div id="fit"><div class="stage">
+
+  <!-- 1 — LANDING -->
+  <section class="scene" id="s1"><div class="pad hero">
+    <div class="pill" data-el><span class="dot"></span> Operations · Milano · Ibrido 3 giorni</div>
+    <h1 data-el>Project Manager,<br>per progetti che <em>arrivano davvero</em><br>in produzione.</h1>
+    <div class="facts" data-el>
+      <div class="fact"><div class="k">Retribuzione</div><div class="v">45.000 – 58.000 €</div></div>
+      <div class="fact"><div class="k">Team</div><div class="v">7 persone</div></div>
+      <div class="fact"><div class="k">Risposta</div><div class="v">Entro 5 giorni, sempre</div></div>
+    </div>
+    <div class="cta" data-el>
+      <button class="btn" id="cta">Candidati in 3 minuti<span class="ripple" id="ripple"></span></button>
+      <span class="note">Nome, e-mail, CV. Il resto lo scopriamo parlando.</span>
+    </div>
+    <svg class="cursor" id="cursor" viewBox="0 0 24 24"><path d="M5 2l14 10.5-6.2.7 3.3 6.6-2.9 1.4-3.3-6.6L5 19z" fill="#fff" stroke="#151417" stroke-width="1.4" stroke-linejoin="round"/></svg>
+  </div></section>
+
+  <!-- 2 — CONVERSAZIONE -->
+  <section class="scene" id="s2"><div class="chatwrap">
+    <div class="chat-head" data-el>
+      <div class="av"><svg width="21" height="21" viewBox="0 0 100 100"><g stroke="#c9633f" stroke-width="16" stroke-linecap="round"><line x1="50" y1="13" x2="50" y2="87"/><line x1="17.9" y1="31.5" x2="82.1" y2="68.5"/><line x1="17.9" y1="68.5" x2="82.1" y2="31.5"/></g></svg></div>
+      <div><div class="nm">Spicco · Gruppo Meridiana</div><div class="st">sta leggendo il CV di Giovanni</div></div>
+    </div>
+    <div class="msg bot" id="m1">Nel tuo CV non ho trovato la responsabilità diretta su <b>budget sopra i 500.000 €</b>, che per questa posizione è un requisito. Sai raccontarmi qualcosa di collegato?</div>
+    <div class="reply"><div class="typing" id="typ"><i id="t1"></i><i id="t2"></i><i id="t3"></i></div>
+    <div class="msg me" id="m2">Ho gestito <b>600.000 €</b> di delivery sul programma cloud di un cliente retail: forecast, scostamenti e due SOW rinegoziati. Chiuso il 4% sotto budget.</div></div>
+  </div></section>
+
+  <!-- 3 — CONNETTORE -->
+  <section class="scene" id="s3"><div class="conn">
+    <div class="conn-row">
+      <div class="node" data-el>
+        <div class="box"><span class="logo"><svg viewBox="0 0 100 100" style="width:26px;height:26px"><g stroke="#c9633f" stroke-width="15" stroke-linecap="round"><line x1="50" y1="13" x2="50" y2="87"/><line x1="17.9" y1="31.5" x2="82.1" y2="68.5"/><line x1="17.9" y1="68.5" x2="82.1" y2="31.5"/></g></svg><span class="word" style="font-size:1.7rem">spicco</span></span></div>
+        <div class="cap"><b>Candidatura + conversazione</b>profilo arricchito</div>
+      </div>
+
+      <div class="wire">
+        <div class="line"></div>
+        <div class="pk" id="pk1"></div><div class="pk" id="pk2"></div><div class="pk" id="pk3"></div>
+        <div class="lbl" data-el>
+          <span class="tag">⇄ Connettore Spicco</span>
+          <div class="sub">via API · nessuna migrazione, nessun cambio di processo</div>
+        </div>
+        <div class="card" id="pcard">
+          <div class="nm">Giovanni Rossi</div>
+          <div class="rl">Project Manager · 4 anni · Milano</div>
+          <div class="ln"><span>Budget gestito</span><b>600.000 €</b></div>
+          <div class="ln" style="border:none;padding-top:4px"><span>Agile / Scrum</span><b>Sì</b></div>
+        </div>
+      </div>
+
+      <div class="node" data-el>
+        <div class="box"><div class="atsbox"><span class="sq">M</span><span class="t">TalentSuite<small>ATS aziendale</small></span></div></div>
+        <div class="cap"><b>Il sistema che usi già</b>candidati, stati, workflow</div>
+      </div>
+    </div>
+    <div class="conn-foot" data-el>Il candidato arriva nel sistema con i <b>campi compilati</b> e la <b>conversazione allegata</b>.</div>
+  </div></section>
+
+  <!-- 4 — ATS AZIENDALE -->
+  <section class="scene" id="s4"><div class="win" data-el>
+    <div class="chrome"><span class="d"></span><span class="d"></span><span class="d"></span>
+      <span class="url">talentsuite.gruppomeridiana.example/candidati/pm-0457</span></div>
+    <div class="ats">
+      <div class="top"><span class="sq">M</span><span class="ti">Gruppo Meridiana — Selezione<small>PROJECT MANAGER · RIF. IT-OPS-PM-0457/24</small></span></div>
+      <div class="sub">Candidati ricevuti: 47 · Da valutare: 12</div>
+      <table>
+        <tr><th>Candidato</th><th>Esperienza</th><th>Fonte</th><th>Stato</th></tr>
+        <tr><td class="name">Marta Bellini</td><td>5 anni</td><td>Portale annunci</td><td><span class="state">Da valutare</span></td></tr>
+        <tr class="new" id="row"><td>
+            <span class="name">Giovanni Rossi</span>
+            <div class="note">Budget gestito <b>600.000 €</b> · emerso dalla conversazione, non dal CV</div>
+          </td><td>4 anni</td><td><span class="src">✳ Spicco</span></td><td><span class="state">Da valutare</span></td></tr>
+        <tr><td class="name">Luca Ferrari</td><td>3 anni</td><td>Sito aziendale</td><td><span class="state">Da valutare</span></td></tr>
+      </table>
+    </div>
+  </div>
+    <div class="flag" id="flag">Scheda candidato compilata in automatico — <b>zero data entry</b></div>
+  </section>
+
+  <!-- barra -->
+  <footer class="bar">
+    <span class="logo">
+      <svg viewBox="0 0 100 100"><g stroke="#c9633f" stroke-width="15" stroke-linecap="round"><line x1="50" y1="13" x2="50" y2="87"/><line x1="17.9" y1="31.5" x2="82.1" y2="68.5"/><line x1="17.9" y1="68.5" x2="82.1" y2="31.5"/></g></svg>
+      <span class="word">spicco</span>
+    </span>
+    <span class="steps">
+      <span class="step" id="l1">La posizione, <b>raccontata come merita</b></span>
+      <span class="step" id="l2">Domande su misura, <b>generate dal CV</b></span>
+      <span class="step" id="l3">Il profilo arricchito <b>passa al tuo ATS</b></span>
+      <span class="step" id="l4">Nel sistema che usi già, <b>senza cambiare processo</b></span>
+    </span>
+  </footer>
+
+</div></div>
+
+<script>
+/* ============================================================
+   REEL — timeline unica di 10s, animazioni WAAPI in loop.
+   Ogni animazione dura 10s: impostando currentTime si ottiene
+   lo stato esatto a un dato istante (usato per l'export video).
+   ============================================================ */
+const T=10000, A=[];
+const pc=s=>s*1000/T;                       /* secondi -> offset 0..1 */
+const EASE='cubic-bezier(.22,.7,.25,1)';
+
+function play(el,frames){
+  const a=el.animate(frames,{duration:T,iterations:Infinity,fill:'both'});
+  A.push(a); return a;
+}
+/* comparsa/scomparsa con scorrimento verticale */
+function show(el,tIn,tOut,{y=16,dIn=.55,dOut=.35,yOut=-10}={}){
+  tOut=Math.min(tOut,T/1000-dOut-.02);      /* l'uscita resta dentro il ciclo */
+  play(el,[
+    {offset:0,opacity:0,transform:`translateY(${y}px)`},
+    {offset:pc(tIn),opacity:0,transform:`translateY(${y}px)`,easing:EASE},
+    {offset:pc(tIn+dIn),opacity:1,transform:'translateY(0)'},
+    {offset:pc(tOut),opacity:1,transform:'translateY(0)',easing:'ease'},
+    {offset:pc(tOut+dOut),opacity:0,transform:`translateY(${yOut}px)`},
+    {offset:1,opacity:0,transform:`translateY(${y}px)`}
+  ]);
+}
+/* elementi interni: entrano in sequenza dopo l'inizio della scena */
+function stagger(sc,t0,gap=.13){
+  [...sc.querySelectorAll('[data-el]')].forEach((el,i)=>{
+    const s=t0+i*gap;
+    play(el,[
+      {offset:0,opacity:0,transform:'translateY(22px)'},
+      {offset:pc(s),opacity:0,transform:'translateY(22px)',easing:EASE},
+      {offset:pc(s+.6),opacity:1,transform:'translateY(0)'},
+      {offset:1,opacity:1,transform:'translateY(0)'}
+    ]);
+  });
+}
+
+/* la prima scena entra alla fine del ciclo: il loop non ha stacchi vuoti */
+function wrap(el,tOut,dOut,tIn,y){
+  play(el,[
+    {offset:0,opacity:1,transform:'translateY(0)',easing:'ease'},
+    {offset:pc(tOut),opacity:1,transform:'translateY(0)'},
+    {offset:pc(tOut+dOut),opacity:0,transform:`translateY(${-y*.6}px)`},
+    {offset:pc(tOut+dOut+.01),opacity:0,transform:`translateY(${y}px)`},
+    {offset:pc(tIn),opacity:0,transform:`translateY(${y}px)`,easing:EASE},
+    {offset:1,opacity:1,transform:'translateY(0)'}
+  ]);
+}
+
+/* ---------- tempi delle scene ---------- */
+const S=[[0,2.95],[3.05,5.95],[6.05,7.45],[7.55,9.45]];
+wrap(document.getElementById('s1'),2.95,.4,9.64,22);
+['s2','s3','s4'].forEach((id,i)=>{
+  const sc=document.getElementById(id);
+  show(sc,S[i+1][0],S[i+1][1],{y:22,dIn:.5,dOut:.3,yOut:-14});
+  stagger(sc,S[i+1][0]+.15);
+});
+/* etichette in basso */
+wrap(document.getElementById('l1'),2.85,.3,9.72,8);
+['l2','l3','l4'].forEach((id,i)=>{
+  show(document.getElementById(id),S[i+1][0]+.25,S[i+1][1]-.12,{y:8,dIn:.45,dOut:.3,yOut:-8});
+});
+
+/* ---------- 1. cursore che clicca ---------- */
+play(document.getElementById('cursor'),[
+  {offset:0,opacity:0,transform:'translate(760px,610px)'},
+  {offset:pc(1.35),opacity:0,transform:'translate(760px,610px)'},
+  {offset:pc(1.6),opacity:1,transform:'translate(700px,580px)',easing:EASE},
+  {offset:pc(2.15),opacity:1,transform:'translate(206px,498px)'},
+  {offset:pc(2.35),opacity:1,transform:'translate(206px,498px)'},
+  {offset:pc(2.6),opacity:0,transform:'translate(206px,498px)'},
+  {offset:1,opacity:0,transform:'translate(760px,610px)'}
+]);
+play(document.getElementById('ripple'),[
+  {offset:0,opacity:0,transform:'scale(.3)'},
+  {offset:pc(2.2),opacity:0,transform:'scale(.3)',easing:'ease-out'},
+  {offset:pc(2.24),opacity:.9,transform:'scale(.5)'},
+  {offset:pc(2.75),opacity:0,transform:'scale(1.5)'},
+  {offset:1,opacity:0,transform:'scale(.3)'}
+]);
+play(document.getElementById('cta'),[
+  {offset:0,transform:'scale(1)'},
+  {offset:pc(2.2),transform:'scale(1)',easing:'ease-out'},
+  {offset:pc(2.28),transform:'scale(.965)'},
+  {offset:pc(2.45),transform:'scale(1)'},
+  {offset:1,transform:'scale(1)'}
+]);
+
+/* ---------- 2. conversazione ---------- */
+show(document.getElementById('m1'),3.3,5.7,{y:14,dIn:.45,dOut:.3});
+show(document.getElementById('typ'),4.0,4.6,{y:10,dIn:.25,dOut:.2});
+show(document.getElementById('m2'),4.75,5.7,{y:14,dIn:.45,dOut:.3});
+['t1','t2','t3'].forEach((id,i)=>{
+  const a=document.getElementById(id).animate(
+    [{transform:'translateY(0)',opacity:.35},{transform:'translateY(-4px)',opacity:1},{transform:'translateY(0)',opacity:.35}],
+    {duration:1000,iterations:Infinity,delay:-i*160,fill:'both'});
+  A.push(a);
+});
+
+/* ---------- 3. connettore: il profilo viaggia ---------- */
+play(document.getElementById('pcard'),[
+  {offset:0,opacity:0,transform:'translateX(0) scale(.94)'},
+  {offset:pc(6.4),opacity:0,transform:'translateX(0) scale(.94)',easing:EASE},
+  {offset:pc(6.7),opacity:1,transform:'translateX(14px) scale(1)',easing:'cubic-bezier(.5,0,.3,1)'},
+  {offset:pc(7.15),opacity:1,transform:'translateX(268px) scale(1)'},
+  {offset:pc(7.35),opacity:0,transform:'translateX(304px) scale(.95)'},
+  {offset:1,opacity:0,transform:'translateX(0) scale(.94)'}
+]);
+['pk1','pk2','pk3'].forEach((id,i)=>{
+  const a=document.getElementById(id).animate([
+    {left:'0%',opacity:0},{left:'6%',opacity:1},{left:'94%',opacity:1},{left:'100%',opacity:0}
+  ],{duration:1250,iterations:Infinity,delay:-i*420,easing:'linear',fill:'both'});
+  A.push(a);
+});
+
+/* ---------- 4. la riga che compare nell'ATS ---------- */
+play(document.getElementById('row'),[
+  {offset:0,opacity:0,transform:'translateY(10px)',backgroundColor:'rgba(26,99,255,.16)'},
+  {offset:pc(8.05),opacity:0,transform:'translateY(10px)',backgroundColor:'rgba(26,99,255,.16)',easing:EASE},
+  {offset:pc(8.4),opacity:1,transform:'translateY(0)',backgroundColor:'rgba(26,99,255,.16)'},
+  {offset:pc(9.1),opacity:1,transform:'translateY(0)',backgroundColor:'rgba(26,99,255,.05)'},
+  {offset:1,opacity:1,transform:'translateY(0)',backgroundColor:'rgba(26,99,255,.05)'}
+]);
+show(document.getElementById('flag'),8.7,9.25,{y:14,dIn:.4,dOut:.28});
+
+/* ---------- adatta il palco alla finestra ---------- */
+function fit(){
+  const s=Math.min(innerWidth/1280,innerHeight/720);
+  document.getElementById('fit').style.transform='scale('+s+')';
+}
+addEventListener('resize',fit); fit();
+
+/* ---------- modalità export: timeline pilotata a mano ---------- */
+window.__seek=t=>{document.getAnimations().forEach(a=>{a.pause();a.currentTime=t})};
+if(location.search.includes('capture')) window.__seek(0);
+</script>
+</body>
+</html>
