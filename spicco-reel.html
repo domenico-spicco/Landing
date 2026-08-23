@@ -45,7 +45,10 @@ body{display:flex;align-items:center;justify-content:center;font-family:Inter,-a
 .pill .dot{width:6px;height:6px;border-radius:50%;background:#1a63ff;box-shadow:0 0 0 4px rgba(26,99,255,.14)}
 .hero h1{font-size:4.05rem;line-height:1.03;letter-spacing:-.04em;margin:26px 0 0;font-weight:700;max-width:1000px}
 .hero h1 em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;color:#1a63ff}
-.facts{display:flex;gap:12px;margin-top:34px}
+.role{display:flex;align-items:center;gap:14px;margin-top:26px;font-size:1.28rem}
+.role span{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:#8b847c;border:1px solid rgba(21,20,23,.12);border-radius:100px;padding:6px 14px;background:#fff}
+.role b{font-weight:600;letter-spacing:-.02em}
+.facts{display:flex;gap:12px;margin-top:28px}
 .fact{border:1px solid rgba(21,20,23,.11);background:#fff;border-radius:14px;padding:12px 18px}
 .fact .k{font-size:.63rem;letter-spacing:.16em;text-transform:uppercase;color:#8b847c}
 .fact .v{font-size:1rem;font-weight:600;margin-top:4px}
@@ -152,8 +155,9 @@ body{display:flex;align-items:center;justify-content:center;font-family:Inter,-a
 
   <!-- 1 — LANDING -->
   <section class="scene" id="s1"><div class="pad hero">
-    <div class="pill" data-el><span class="dot"></span> Project Manager · Operations · Milano · Ibrido 3 giorni</div>
+    <div class="pill" data-el><span class="dot"></span> Operations · Milano · Ibrido 3 giorni</div>
     <h1 data-el>Raccontaci <em>chi sei</em><br>ed entra in ACME.</h1>
+    <div class="role" data-el><span>Posizione aperta</span><b>Project Manager</b></div>
     <div class="facts" data-el>
       <div class="fact"><div class="k">Retribuzione</div><div class="v">45.000 – 58.000 €</div></div>
       <div class="fact"><div class="k">Team</div><div class="v">7 persone</div></div>
@@ -294,9 +298,9 @@ play(document.getElementById('cursor'),[
   {offset:0,opacity:0,transform:'translate(760px,610px)'},
   {offset:pc(1.35),opacity:0,transform:'translate(760px,610px)'},
   {offset:pc(1.6),opacity:1,transform:'translate(690px,520px)',easing:EASE},
-  {offset:pc(2.15),opacity:1,transform:'translate(202px,430px)'},
-  {offset:pc(2.35),opacity:1,transform:'translate(202px,430px)'},
-  {offset:pc(2.6),opacity:0,transform:'translate(202px,430px)'},
+  {offset:pc(2.15),opacity:1,transform:'translate(195px,458px)'},
+  {offset:pc(2.35),opacity:1,transform:'translate(195px,458px)'},
+  {offset:pc(2.6),opacity:0,transform:'translate(195px,458px)'},
   {offset:1,opacity:0,transform:'translate(760px,610px)'}
 ]);
 play(document.getElementById('ripple'),[
