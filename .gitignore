@@ -1,3 +1,11 @@
 # Python bytecode caches (generated when running skill search scripts)
 __pycache__/
 *.py[cod]
+
+node_modules/
+dist/
+*.local
+.env
+.env.*
+!.env.example
+*.tsbuildinfo
