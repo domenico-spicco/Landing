@@ -4,15 +4,7 @@ import AxsDiagram from "../components/AxsDiagram";
 import Em from "../components/Em";
 import Reveal from "../components/Reveal";
 import usePageMeta from "../components/usePageMeta";
-import {
-  IconFileText,
-  IconLayout,
-  IconListX,
-  IconMessageCircle,
-  IconReply,
-  IconShieldCheck,
-  IconUserCheck,
-} from "../components/icons";
+import { IconListX, IconShieldCheck, IconUserCheck } from "../components/icons";
 
 // Sezione 6 (bivio verticale): le pagine verticali non esistono ancora.
 // Tenere il flag a false finché non sono pubblicate. Mai linkare pagine vuote.
@@ -26,22 +18,34 @@ function Eyebrow({ children }: { children: string }) {
 
 const momentCards = [
   {
-    icon: IconFileText,
+    image: "/media/momento-1.webp",
+    imageWidth: 720,
+    imageHeight: 838,
+    alt: "Anteprima: bozza di job description con le verifiche di Spicco",
     title: "La job giusta",
     body: "Annunci chiari, senza bias, validati su dati di mercato. Attraggono candidature in target prima ancora che il processo inizi.",
   },
   {
-    icon: IconLayout,
+    image: "/media/momento-2.webp",
+    imageWidth: 720,
+    imageHeight: 787,
+    alt: "Anteprima: pagina di candidatura con il brand dell'azienda",
     title: "La pagina",
     body: "Una pagina di candidatura con il vostro brand, non un form anonimo. Fa venire voglia di candidarsi.",
   },
   {
-    icon: IconMessageCircle,
+    image: "/media/momento-3.webp",
+    imageWidth: 720,
+    imageHeight: 838,
+    alt: "Anteprima: conversazione di candidatura",
     title: "La conversazione",
     body: "Se il profilo è in linea, è velocissimo. Se no, il candidato ha modo di raccontare quello che un CV non dice.",
   },
   {
-    icon: IconReply,
+    image: "/media/momento-4.webp",
+    imageWidth: 720,
+    imageHeight: 838,
+    alt: "Anteprima: feedback personalizzato inviato al candidato",
     title: "Il feedback",
     body: "Una risposta sempre, anche il no, con dignità. Mai un no-reply, mai il silenzio.",
   },
@@ -177,14 +181,20 @@ export default function Home() {
             porta il vostro logo. Spicco li presidia tutti.
           </p>
         </Reveal>
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-12 grid gap-x-6 gap-y-12 sm:grid-cols-2 xl:grid-cols-4">
           {momentCards.map((card) => (
-            <Reveal
-              key={card.title}
-              className="flex flex-col rounded-2xl bg-surface p-6 shadow-[0_4px_24px_rgba(26,26,24,0.08)]"
-            >
-              <card.icon className="h-6 w-6 text-accent-strong" />
-              <h3 className="mt-4 text-xl font-bold">{card.title}</h3>
+            <Reveal key={card.title} className="flex flex-col">
+              <div className="flex aspect-[720/838] items-center">
+                <img
+                  src={card.image}
+                  alt={card.alt}
+                  width={card.imageWidth}
+                  height={card.imageHeight}
+                  loading="lazy"
+                  className="h-auto max-h-full w-full object-contain"
+                />
+              </div>
+              <h3 className="mt-6 text-xl font-bold">{card.title}</h3>
               <p className="mt-3 leading-relaxed text-ink/80">{card.body}</p>
             </Reveal>
           ))}
