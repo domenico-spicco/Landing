@@ -85,9 +85,8 @@ body{display:flex;align-items:center;justify-content:center;font-family:Inter,-a
 .node .cap{margin-top:14px;font-size:.85rem;color:#6f6963}
 .node .cap b{display:block;color:#151417;font-weight:600;font-size:.95rem;margin-bottom:3px}
 .atsbox{display:flex;align-items:center;gap:12px}
-.atsbox .sq{width:44px;height:44px;border-radius:11px;background:#1a4f8a;color:#fff;display:flex;align-items:center;
-  justify-content:center;font-family:Georgia,serif;font-size:19px;font-weight:bold}
-.atsbox .t{text-align:left;font-size:1.02rem;font-weight:700;letter-spacing:-.01em}
+.atsbox .sq{width:44px;height:44px;border-radius:11px;background:#1a4f8a;color:#fff;display:flex;align-items:center;justify-content:center;flex:none}
+.atsbox .t{text-align:left;font-size:1.12rem;font-weight:700;letter-spacing:-.02em}
 .atsbox .t small{display:block;font-size:.74rem;font-weight:400;color:#8b847c;letter-spacing:.06em;text-transform:uppercase;margin-top:3px}
 .wire{position:absolute;left:250px;right:250px;top:52px;height:2px}
 .wire .line{position:absolute;inset:0;border-top:2px dashed rgba(21,20,23,.18)}
@@ -202,8 +201,10 @@ body{display:flex;align-items:center;justify-content:center;font-family:Inter,-a
       </div>
 
       <div class="node" data-el>
-        <div class="box" id="atsnode"><div class="atsbox"><span class="sq">M</span><span class="t">TalentSuite<small>ATS aziendale</small></span></div></div>
-        <div class="cap"><b>Il sistema che usi già</b>candidati, stati, workflow</div>
+        <div class="box" id="atsnode"><div class="atsbox">
+          <span class="sq"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>
+          <span class="t">Il vostro ATS</span></div></div>
+        <div class="cap"><b>Dove lavorate già</b>candidati, stati e workflow</div>
         <div class="sync" id="sync">✓ Profilo sincronizzato</div>
       </div>
     </div>
@@ -219,7 +220,7 @@ body{display:flex;align-items:center;justify-content:center;font-family:Inter,-a
     <span class="steps">
       <span class="step" id="l1">La posizione, <b>raccontata come merita</b></span>
       <span class="step" id="l2">Domande su misura, <b>generate dal CV</b></span>
-      <span class="step" id="l3">Il profilo arricchito <b>passa al tuo ATS</b></span>
+      <span class="step" id="l3">Il profilo arricchito <b>passa al vostro ATS</b></span>
     </span>
   </footer>
 
