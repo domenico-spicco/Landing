@@ -1,0 +1,228 @@
+<title>Spicco Founder Memo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap">
+<style>
+  :root{
+    --ground:#152B25;
+    --panel:#1C3830;
+    --ink:#F2EDE1;
+    --muted:#9DAFA4;
+    --faint:#71857A;
+    --terra:#E08A62;
+    --terra-deep:#C05B39;
+    --cream:#F1EEE6;
+    --cream-ink:#211B12;
+    --cream-muted:#756D5F;
+    --line:rgba(242,237,225,.14);
+    --sans:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+    --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:15px;line-height:1.6;
+    padding:clamp(22px,4vw,60px) clamp(16px,4vw,40px);
+  }
+  .page{max-width:920px;margin:0 auto;display:flex;flex-direction:column;gap:26px}
+
+  .label{font-size:10.5px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;color:var(--terra)}
+
+  /* ---------- header ---------- */
+  header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;border-bottom:1px solid var(--line);padding-bottom:18px}
+  .brand{display:flex;align-items:center;gap:11px}
+  .wordmark{font-size:26px;font-weight:800;letter-spacing:-.03em;color:var(--ink)}
+  .doc-kind{text-align:right}
+  .doc-kind .t{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--ink)}
+  .doc-kind .d{font-size:11px;color:var(--faint);letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+
+  /* ---------- deal strip ---------- */
+  .deal{
+    background:var(--cream);color:var(--cream-ink);border-radius:12px;
+    display:flex;flex-wrap:wrap;align-items:stretch;
+    padding:16px 22px;gap:14px 0;
+  }
+  .deal .cell{flex:1;min-width:150px;padding:2px 22px;border-left:1px solid #DDD6C8;display:flex;flex-direction:column;gap:1px}
+  .deal .cell:first-child{border-left:none;padding-left:0}
+  .deal .k{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra-deep)}
+  .deal .v{font-size:19px;font-weight:800;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+  .deal .s{font-size:11.5px;color:var(--cream-muted);line-height:1.4}
+
+  /* ---------- main layout ---------- */
+  .main{display:grid;grid-template-columns:minmax(0,1fr) 236px;gap:40px;align-items:start}
+  .narrative{display:flex;flex-direction:column;gap:26px}
+  .narrative section{display:flex;flex-direction:column;gap:9px;border-top:1px solid var(--line);padding-top:20px}
+  .narrative section:first-child{border-top:none;padding-top:0}
+  .narrative h2{
+    font-family:var(--serif);font-weight:500;font-size:23px;line-height:1.25;
+    letter-spacing:.005em;color:var(--ink);text-wrap:balance;
+  }
+  .narrative p{max-width:62ch;color:var(--muted);font-size:14px}
+  .narrative p b{color:var(--ink);font-weight:600}
+  .narrative p .em{font-family:var(--serif);font-style:italic;color:var(--terra);font-size:15px}
+  .pull{
+    font-family:var(--serif);font-style:italic;font-size:16.5px;line-height:1.5;
+    color:var(--ink);border-left:2px solid var(--terra);padding-left:16px;max-width:56ch;
+  }
+
+  /* opening thesis */
+  .thesis{
+    font-family:var(--serif);font-weight:400;font-size:clamp(24px,3.4vw,31px);
+    line-height:1.3;letter-spacing:.002em;color:var(--ink);text-wrap:balance;max-width:24em;
+  }
+  .thesis i{font-style:italic;color:var(--terra)}
+
+  /* ---------- rail ---------- */
+  .rail{display:flex;flex-direction:column;gap:0;border-left:1px solid var(--line);padding-left:22px}
+  .rail .rail-title{font-size:10.5px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;color:var(--terra);padding-bottom:10px}
+  .stat{padding:11px 0;border-top:1px solid var(--line)}
+  .stat .v{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.15}
+  .stat .v small{font-size:12px;font-weight:600;color:var(--faint)}
+  .stat .k{font-size:11.5px;color:var(--muted);line-height:1.4;margin-top:2px}
+  .stat.hot .v{color:var(--terra)}
+
+  /* ---------- closing / contact ---------- */
+  .closing{
+    border-top:1px solid var(--line);padding-top:20px;
+    display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:14px;
+  }
+  .closing .sign .serif-line{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--ink);max-width:36em}
+  .closing .sign .who{font-size:12px;color:var(--faint);margin-top:8px}
+  .closing .contacts{text-align:right;font-size:12.5px;color:var(--muted);line-height:1.7}
+  .closing .contacts b{color:var(--ink);font-weight:600}
+
+  @media (max-width:720px){
+    .main{grid-template-columns:1fr}
+    .rail{border-left:none;border-top:1px solid var(--line);padding-left:0;padding-top:14px;
+      display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+    .rail .rail-title{grid-column:1/-1}
+    .doc-kind{text-align:left}
+    .closing .contacts{text-align:left}
+  }
+  @media print{
+    body{padding:0;background:var(--ground);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .page{gap:16px;max-width:none}
+  }
+</style>
+
+<div class="page">
+
+  <header>
+    <div class="brand">
+      <svg width="40" height="40" viewBox="0 0 46 46" aria-hidden="true">
+        <g stroke="#E08A62" stroke-width="7.5" stroke-linecap="round">
+          <line x1="23" y1="5" x2="23" y2="41"/>
+          <line x1="7.4" y1="14" x2="38.6" y2="32"/>
+          <line x1="7.4" y1="32" x2="38.6" y2="14"/>
+        </g>
+        <circle cx="18.4" cy="20.6" r="2.5" fill="#152B25"/>
+        <circle cx="27.6" cy="20.6" r="2.5" fill="#152B25"/>
+        <path d="M18.8 26.2 q4.2 3.4 8.4 0" fill="none" stroke="#152B25" stroke-width="2.1" stroke-linecap="round"/>
+      </svg>
+      <span class="wordmark">spicco</span>
+    </div>
+    <div class="doc-kind">
+      <div class="t">Nota del founder agli investitori</div>
+      <div class="d">Bridge round · agosto 2026</div>
+    </div>
+  </header>
+
+  <div class="deal">
+    <div class="cell">
+      <span class="k">Raccolta bridge</span>
+      <span class="v">€50k</span>
+      <span class="s">in SAFE · cap 2M · sconto 20%</span>
+    </div>
+    <div class="cell">
+      <span class="k">Già sottoscritti</span>
+      <span class="v">€80k</span>
+      <span class="s">a cap 1,5M, tra cash e servizi dei partner fondatori</span>
+    </div>
+    <div class="cell">
+      <span class="k">In negoziazione</span>
+      <span class="v">3 piloti</span>
+      <span class="s">a pagamento, 15k €/anno, su tre ATS diversi</span>
+    </div>
+    <div class="cell">
+      <span class="k">Prossimo round</span>
+      <span class="v">Apr 2027</span>
+      <span class="s">pre-seed da 500k, con piloti in produzione e 45k ARR</span>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="narrative">
+
+      <section>
+        <p class="thesis">Ogni azienda ha un sistema per gestire chi assume. <i>Nessuna ha un sistema per gestire chi si candida.</i></p>
+      </section>
+
+      <section>
+        <span class="label">Da dove nasce</span>
+        <h2>Ho fatto candidature curate e candidature svogliate. Ho ricevuto indietro la stessa pessima esperienza.</h2>
+        <p>Da un'azienda del mio settore non ho avuto riscontro dopo venti minuti di form e due colloqui — ed ero arrivato in fondo al processo. Ne ho parlato male per settimane: <b>un candidato diventato un detrattore, nel loro stesso mercato</b>. Se succede a chi il processo lo attraversa tutto, immaginate a chi si ferma al primo passaggio.</p>
+        <p>Non è un caso isolato: oggi solo il <b>3% di chi si candida arriva a colloquio</b> (era il 15% nel 2016), e per chi vende a consumatori il conto è misurabile — Virgin Media ha calcolato 4,4 milioni di sterline l'anno persi in clienti trattati male da candidati.</p>
+      </section>
+
+      <section>
+        <span class="label">Cosa costruiamo</span>
+        <h2>Un layer sopra l'ATS che gestisce il 100% di chi si candida, non il 3% che entra in selezione.</h2>
+        <p>Lo chiamiamo <b>AXS — Applicant Experience System</b>: la job description corretta prima di pubblicare, una pagina con il brand dell'azienda, una conversazione con Vera (la nostra AI) al posto del form da ventotto step, e un feedback per ogni candidato — che il recruiter approva e invia. <span class="em">Niente punteggi: il recruiter decide sempre.</span></p>
+        <p>Tutti gli altri — ATS, AI screener, talent experience — ottimizzano il processo, perché è quello che il loro compratore paga. Noi partiamo dall'altra premessa: <b>chi si candida non è un CV da screenare; è un talento, un cliente e un ambassador</b> che entra in contatto con l'azienda. E siccome tutto il funnel passa da noi, diamo alle aziende numeri che oggi non hanno: oggi vendiamo una piattaforma, domani vendiamo la conversione.</p>
+      </section>
+
+      <section>
+        <span class="label">Perché adesso</span>
+        <h2>Tre movimenti che convergono, e un mercato che ha già votato.</h2>
+        <p><b>L'AI che decide si sta scoprendo esposta</b> — il caso Mobley contro Workday negli USA, l'AI Act in Europa dal 2027: noi non deleghiamo decisioni. <b>La personalizzazione su scala è arrivata ovunque tranne qui</b> — e ora costa abbastanza poco da essere possibile. <b>Il candidato ha smesso di essere il lato debole</b> — trasparenza salariale, selezioni recensite in pubblico, candidature scritte dall'AI.</p>
+        <p class="pull">Workday ha pagato un miliardo di dollari per Paradox. Il mercato ha già dichiarato che questo spazio vale.</p>
+      </section>
+
+      <section>
+        <span class="label">Le prove</span>
+        <h2>Ancora in stealth, zero marketing. E i clienti stanno già negoziando.</h2>
+        <p>Il prodotto nasce da più di cinquanta conversazioni con HR director, recruiter e founder del settore. Delle quindici aziende contattate senza forzare la mano, dodici si sono dette interessate, cinque hanno discusso il pricing, tre hanno chiesto una demo a settembre — e <b>tre piloti a pagamento da 15k l'anno sono in negoziazione, su tre ATS diversi</b>. La macchina outbound parte a settembre.</p>
+      </section>
+
+      <section>
+        <span class="label">Chi c'è dietro</span>
+        <h2>Vendita, prodotto e una rete che ha già costruito startup.</h2>
+        <p><b>Domenico Uva</b> (founder) — dieci anni in Salesforce, ha costruito e scalato team commerciali e business unit; guida sales e sviluppo. <b>Co-founder &amp; CTO</b> in negoziazione — background AI/ML, oggi guida un team in una grande società di consulenza. <b>Alessio Boceda e Giulia D'Amato</b> (founding partner) — founder di Startup Geeks, che affianca Spicco anche come venture builder su societario, rete investitori, brand e comunicazione.</p>
+      </section>
+
+      <section>
+        <span class="label">Cosa chiediamo</span>
+        <h2>50k per non arrivare al round con la cassa vuota.</h2>
+        <p>Il bridge finanzia un founder associate da novembre e un SDR da gennaio: ad aprile arriviamo al pre-seed con la pipeline già aperta, <b>nove mesi di cassa davanti</b> e la possibilità di negoziare da una posizione di forza. <b>Cerchiamo smart money</b>: chi entra ora entra prima del round, e il capitale non è l'unico modo di aiutarci.</p>
+      </section>
+
+    </div>
+
+    <aside class="rail">
+      <div class="rail-title">In numeri</div>
+      <div class="stat hot"><div class="v">3% → 100%</div><div class="k">le candidature di cui qualcuno si occupa, con Spicco</div></div>
+      <div class="stat"><div class="v">−4,4M £<small>/anno</small></div><div class="k">il costo dei candidati trattati male (caso Virgin Media)</div></div>
+      <div class="stat"><div class="v">$1B</div><div class="k">pagati da Workday per Paradox</div></div>
+      <div class="stat"><div class="v">50+</div><div class="k">conversazioni con HR dietro il prodotto</div></div>
+      <div class="stat"><div class="v">15 → 12 → 5 → 3</div><div class="k">contattate → interessate → pricing → demo</div></div>
+      <div class="stat hot"><div class="v">3 × 15k €</div><div class="k">piloti a pagamento in negoziazione, su tre ATS</div></div>
+      <div class="stat"><div class="v">€117M</div><div class="k">SAM: 7.800 aziende europee nel target (TAM €3,4B)</div></div>
+      <div class="stat"><div class="v">€2,8M</div><div class="k">ARR obiettivo 2029, 140 clienti</div></div>
+    </aside>
+  </div>
+
+  <div class="closing">
+    <div class="sign">
+      <div class="serif-line">Tre piloti in produzione ad aprile. È il punto in cui questa storia diventa un'azienda. Parliamone.</div>
+      <div class="who">Domenico Uva · Founder</div>
+    </div>
+    <div class="contacts">
+      <b>domenico@spicco.ai</b><br>
+      +39 328 729 0301<br>
+      linkedin.com/in/domenico-uva-dd16
+    </div>
+  </div>
+
+</div>
