@@ -1,0 +1,289 @@
+<title>Spicco One-Pager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&display=swap">
+<style>
+  :root{
+    --cream:#F1EEE6;
+    --card:#FBF9F3;
+    --ink:#211B12;
+    --green:#1D372F;
+    --green-ink:#EFEAE0;
+    --green-muted:#A9B5AC;
+    --terra:#C05B39;
+    --terra-soft:#F3E0D6;
+    --muted:#756D5F;
+    --line:#DDD6C8;
+    --sans:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+    --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:15px;
+    line-height:1.55;
+    padding:clamp(20px,4vw,56px) clamp(16px,4vw,40px);
+  }
+  .page{max-width:880px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+
+  .eyebrow{
+    font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--terra);
+  }
+  h2{font-size:19px;font-weight:800;letter-spacing:-.01em;margin-top:4px;text-wrap:balance}
+  .serif{font-family:var(--serif);font-style:italic}
+
+  /* ---------- header ---------- */
+  header{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:16px;padding-bottom:6px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .wordmark{font-size:30px;font-weight:800;letter-spacing:-.03em;line-height:1}
+  .brand-tag{margin-top:6px;font-size:12px;color:var(--muted)}
+  .head-meta{text-align:right;display:flex;flex-direction:column;gap:3px}
+  .head-meta .round{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terra)}
+  .head-meta .contact{font-size:12px;color:var(--muted)}
+  .thesis{
+    font-family:var(--serif);font-style:italic;font-size:clamp(19px,2.6vw,23px);line-height:1.4;
+    color:var(--ink);max-width:34em;text-wrap:balance;
+  }
+  .thesis strong{color:var(--terra);font-weight:500}
+
+  /* ---------- cards & grids ---------- */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:20px 22px;display:flex;flex-direction:column;gap:10px;
+  }
+  .card p{color:#4B443A}
+  .big{font-size:34px;font-weight:800;letter-spacing:-.02em;line-height:1;color:var(--terra);font-variant-numeric:tabular-nums}
+  .big small{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:0;margin-left:6px}
+  .note{font-size:12px;color:var(--muted)}
+
+  .steps{display:flex;flex-direction:column;gap:7px;font-size:13.5px;color:#4B443A}
+  .steps b{color:var(--ink)}
+  .steps li{display:flex;gap:10px;align-items:baseline;list-style:none}
+  .steps .n{font-size:10.5px;font-weight:700;color:var(--terra);letter-spacing:.08em;min-width:20px;font-variant-numeric:tabular-nums}
+  .axs{
+    margin-top:auto;background:var(--terra-soft);border-radius:8px;padding:9px 12px;
+    font-size:12.5px;color:#7A3A22;
+  }
+  .axs b{color:var(--terra)}
+
+  /* ---------- dark bands ---------- */
+  .band{
+    background:var(--green);color:var(--green-ink);border-radius:12px;
+    padding:22px 24px;display:flex;flex-direction:column;gap:14px;
+  }
+  .band .eyebrow{color:#D98A6A}
+  .band h2{color:#FBF9F3}
+  .band-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+  .band-cols h3{font-size:13.5px;font-weight:700;color:#FBF9F3;margin-bottom:4px;text-wrap:balance}
+  .band-cols p{font-size:12.5px;color:var(--green-muted)}
+  .band-foot{
+    border-top:1px solid rgba(251,249,243,.15);padding-top:12px;
+    font-family:var(--serif);font-style:italic;font-size:14px;color:var(--green-ink);text-align:center;
+  }
+  .band-foot b{color:#E8916C;font-weight:500}
+
+  /* ---------- traction ---------- */
+  .funnel{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap}
+  .funnel .stage{
+    flex:1;min-width:110px;background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:12px 14px;
+  }
+  .funnel .stage.hot{background:var(--terra-soft);border-color:#E3BCA7}
+  .funnel .num{font-size:24px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .funnel .hot .num{color:var(--terra)}
+  .funnel .lbl{font-size:11.5px;color:var(--muted);line-height:1.35}
+  .pilots{
+    background:var(--terra-soft);border-radius:10px;padding:12px 16px;
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;font-size:13.5px;color:#7A3A22;
+  }
+  .pilots b{color:var(--terra)}
+
+  .market{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:baseline;font-size:12.5px;color:var(--muted)}
+  .market b{font-size:15px;color:var(--ink);font-variant-numeric:tabular-nums}
+
+  /* ---------- team ---------- */
+  .team{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .member{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+  .member .name{font-size:13px;font-weight:700}
+  .member .role{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--terra);margin:2px 0 5px}
+  .member p{font-size:11.5px;color:var(--muted);line-height:1.45}
+
+  /* ---------- ask ---------- */
+  .ask{display:grid;grid-template-columns:auto 1fr 1fr;gap:22px;align-items:start}
+  .ask-amount .big{font-size:42px;color:#E8916C}
+  .ask-amount .terms{font-size:12.5px;color:var(--green-ink);margin-top:4px}
+  .ask-amount .note{color:var(--green-muted)}
+  .ask h3{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#D98A6A;margin-bottom:6px}
+  .ask p{font-size:12.5px;color:var(--green-muted)}
+  .ask p b{color:var(--green-ink);font-weight:700}
+
+  footer{
+    display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;
+    border-top:1px solid var(--line);padding-top:14px;font-size:12px;color:var(--muted);
+  }
+  footer .serif{font-size:13px;color:var(--ink)}
+
+  @media (max-width:680px){
+    .grid-2,.band-cols,.ask{grid-template-columns:1fr}
+    .team{grid-template-columns:1fr 1fr}
+    .head-meta{text-align:left}
+  }
+  @media print{
+    body{padding:0;font-size:13px;background:#fff}
+    .page{gap:14px;max-width:none}
+    .band,.card,.member,.funnel .stage{border-radius:8px}
+    .band{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+</style>
+
+<div class="page">
+
+  <header>
+    <div class="brand">
+      <svg width="46" height="46" viewBox="0 0 46 46" aria-hidden="true">
+        <g stroke="#C05B39" stroke-width="7.5" stroke-linecap="round">
+          <line x1="23" y1="5" x2="23" y2="41"/>
+          <line x1="7.4" y1="14" x2="38.6" y2="32"/>
+          <line x1="7.4" y1="32" x2="38.6" y2="14"/>
+        </g>
+        <circle cx="18.4" cy="20.6" r="2.5" fill="#211B12"/>
+        <circle cx="27.6" cy="20.6" r="2.5" fill="#211B12"/>
+        <path d="M18.8 26.2 q4.2 3.4 8.4 0" fill="none" stroke="#211B12" stroke-width="2.1" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <div class="wordmark">spicco</div>
+        <div class="brand-tag">Applicant Experience System</div>
+      </div>
+    </div>
+    <div class="head-meta">
+      <span class="round">Bridge Round 2026</span>
+      <span class="contact">domenico@spicco.ai &nbsp;·&nbsp; +39 328 729 0301</span>
+      <span class="contact">linkedin.com/in/domenico-uva-dd16</span>
+    </div>
+  </header>
+
+  <p class="thesis">Ogni azienda ha un sistema per gestire chi assume. <strong>Nessuna ha un sistema per gestire chi si candida.</strong></p>
+
+  <div class="grid-2">
+    <section class="card">
+      <div>
+        <span class="eyebrow">Il problema</span>
+        <h2>Le aziende perdono talenti e clienti nel momento della candidatura.</h2>
+      </div>
+      <div class="big">3% <small>arriva a colloquio · era il 15% nel 2016</small></div>
+      <p>Candidarsi non costa più niente e i CV li scrive l'AI: i volumi sono esplosi, il segnale è collassato. La risposta del mercato è filtrare più forte — e il 97% riceve silenzio o un'email automatica.</p>
+      <p>Per chi vende a consumatori il danno è diretto: Virgin Media ha calcolato <b>−4,4 milioni di sterline l'anno</b> in clienti persi per candidati trattati male. Gli strumenti degli ultimi vent'anni tracciano il processo, non si occupano di chi lo attraversa.</p>
+    </section>
+
+    <section class="card">
+      <div>
+        <span class="eyebrow">La soluzione</span>
+        <h2>Quattro momenti, un'unica esperienza.</h2>
+      </div>
+      <ul class="steps">
+        <li><span class="n">01</span><span><b>La posizione</b> — un semaforo dice cosa correggere nella job description prima di pubblicare.</span></li>
+        <li><span class="n">02</span><span><b>La pagina</b> — una landing con il brand dell'azienda, non un link a un numero di requisizione.</span></li>
+        <li><span class="n">03</span><span><b>La conversazione</b> — Vera, l'AI di Spicco, chiede quello che nel CV non c'è. Niente form da 28 step.</span></li>
+        <li><span class="n">04</span><span><b>La risposta</b> — ogni candidato riceve un feedback sul suo profilo. Il recruiter approva e invia.</span></li>
+      </ul>
+      <div class="axs"><b>3% → 100%.</b> L'ATS traccia il processo per chi entra in selezione. Spicco parla al 100% di chi si candida — un layer sopra l'ATS, senza sostituirlo. Niente punteggi: il recruiter decide sempre.</div>
+    </section>
+  </div>
+
+  <section class="band">
+    <div>
+      <span class="eyebrow">Why now</span>
+      <h2>Tre movimenti che convergono adesso.</h2>
+    </div>
+    <div class="band-cols">
+      <div>
+        <h3>L'AI che decide si sta scoprendo esposta.</h3>
+        <p>Caso Mobley vs Workday negli USA; in Europa l'AI Act rende lo screening automatico alto rischio dal 2027. Spicco non produce punteggi: nessuna decisione delegata.</p>
+      </div>
+      <div>
+        <h3>La personalizzazione su scala è arrivata ovunque tranne qui.</h3>
+        <p>Sales e marketing personalizzano da anni. Per chi si candida il pezzo mancava — e ora costa abbastanza poco da renderlo possibile.</p>
+      </div>
+      <div>
+        <h3>Il candidato ha smesso di essere il lato debole.</h3>
+        <p>Trasparenza salariale obbligatoria, selezioni recensite in pubblico, candidature scritte dall'AI. Il rapporto è cambiato; le aziende comunicano come prima.</p>
+      </div>
+    </div>
+    <div class="band-foot">Workday ha pagato <b>1 miliardo di dollari</b> per Paradox. Il mercato ha già dichiarato che questo spazio vale.</div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:12px">
+    <div>
+      <span class="eyebrow">Traction</span>
+      <h2>Prodotto nato da 50+ conversazioni con HR. Ancora in stealth, zero marketing.</h2>
+    </div>
+    <div class="funnel">
+      <div class="stage"><div class="num">15</div><div class="lbl">aziende contattate</div></div>
+      <div class="stage"><div class="num">12</div><div class="lbl">interessate</div></div>
+      <div class="stage"><div class="num">5</div><div class="lbl">hanno discusso il pricing</div></div>
+      <div class="stage hot"><div class="num">3</div><div class="lbl">demo richieste a settembre</div></div>
+    </div>
+    <div class="pilots"><b>3 piloti a pagamento in negoziazione</b> · 15k €/anno ciascuno · su tre ATS diversi <span style="flex:1"></span><span class="serif">In produzione ad aprile: è lì che questa storia diventa un'azienda.</span></div>
+    <div class="market">
+      <span><b>€3,4B</b> TAM · recruitment software globale</span>
+      <span><b>€117M</b> SAM · 7.800 aziende europee nel target</span>
+      <span><b>€2,8M</b> SOM · ARR obiettivo 2029, 140 clienti</span>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:12px">
+    <div>
+      <span class="eyebrow">Team</span>
+      <h2>Chi lo sta costruendo.</h2>
+    </div>
+    <div class="team">
+      <div class="member">
+        <div class="name">Domenico Uva</div>
+        <div class="role">Founder</div>
+        <p>10 anni in Salesforce: ha costruito e scalato team commerciali e business unit. Guida sales e sviluppo.</p>
+      </div>
+      <div class="member">
+        <div class="name">Co-founder &amp; CTO</div>
+        <div class="role">In negoziazione</div>
+        <p>Background AI/ML, oggi guida un team in una grande società di consulenza. Seguirà prodotto e integrazioni.</p>
+      </div>
+      <div class="member">
+        <div class="name">Alessio Boceda &amp; Giulia D'Amato</div>
+        <div class="role">Founding Partner</div>
+        <p>Founder di Startup Geeks: gestione societaria, rete investitori, brand e persone.</p>
+      </div>
+      <div class="member">
+        <div class="name">Startup Geeks</div>
+        <div class="role">Venture Builder</div>
+        <p>Investitore e builder: supporta Spicco su PR, comunicazione e preparazione del lancio.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band ask">
+    <div class="ask-amount">
+      <span class="eyebrow" style="display:block;margin-bottom:6px">L'ask · bridge</span>
+      <div class="big">€50k</div>
+      <div class="terms">in SAFE · cap 2M · sconto 20%</div>
+      <div class="note">Già sottoscritti a cap 1,5M: 80k tra cash e servizi dei partner fondatori.</div>
+    </div>
+    <div>
+      <h3>Cosa compra</h3>
+      <p>Un founder associate da novembre e un <b>SDR da gennaio</b>. Ad aprile arriviamo con la pipeline già aperta e <b>nove mesi di cassa davanti</b> — non al round con la cassa vuota.</p>
+    </div>
+    <div>
+      <h3>Dove ci porta → round di aprile 2027</h3>
+      <p><b>Pre-seed da 500k</b> con tre clienti paganti su tre ATS diversi, 45k di ARR e prodotto in produzione. Chi entra ora entra prima del round — e <b>cerchiamo smart money</b>: il capitale non è l'unico modo di aiutarci.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span class="serif">Il sistema per gestire chi assume esiste da vent'anni. Quello per chi si candida lo stiamo costruendo adesso. Parliamone.</span>
+    <span>Domenico Uva · Founder · domenico@spicco.ai</span>
+  </footer>
+
+</div>
