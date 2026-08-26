@@ -238,17 +238,16 @@ input,select,textarea{font:inherit}
 .ed-cta .btn{background:#c9633f;box-shadow:0 12px 30px -14px rgba(201,99,63,.85);padding:13px 28px;font-size:.95rem}
 .ed-cta .btn:hover{background:#b3552f}
 
-/* prima / dopo */
-.pd{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:940px;margin:0 auto;text-align:left}
-@media(max-width:860px){.pd{grid-template-columns:1fr}}
-.pd-card{border-radius:20px;padding:28px 30px;border:1px solid rgba(21,20,23,.12)}
-.pd-card .pd-k{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;margin-bottom:14px}
-.pd-card p{margin:0;font-size:1.08rem;line-height:1.6;font-weight:300;color:#3d3934}
-.pd-card.prima{background:rgba(255,255,255,.5)}
-.pd-card.prima .pd-k{color:#a3988c}
-.pd-card.prima p{color:#8b847c}
-.pd-card.dopo{background:#fff;border-color:rgba(201,99,63,.4);box-shadow:0 26px 50px -38px rgba(201,99,63,.7)}
-.pd-card.dopo .pd-k{color:#c9633f}
+/* prima / dopo - chiusura editoriale */
+.fin{max-width:900px;margin:0 auto;text-align:center}
+.fin .k{display:inline-block;font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;font-weight:700;margin-bottom:14px}
+.fin .prima .k{color:#b3aa9f}
+.fin .prima p{margin:0 auto;max-width:640px;font-size:1.02rem;line-height:1.6;font-weight:300;color:#a89e93}
+.fin .sep{width:1px;height:34px;background:linear-gradient(rgba(21,20,23,.25),transparent);margin:26px auto}
+.fin .dopo .k{color:#c9633f}
+.fin .dopo p{margin:0 auto;max-width:960px;font-family:"Instrument Serif",Georgia,serif;font-size:clamp(1.35rem,2.35vw,1.95rem);line-height:1.42;color:#17161a}
+.fin .punchline{margin:44px auto 0;font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-size:clamp(1.7rem,3.2vw,2.7rem);color:#17161a}
+.fin .punchline b{font-style:italic;font-weight:400;color:#c9633f}
 
 /* ============================================================
    MONDO 2 - SPICCO (chiaro)
@@ -949,13 +948,18 @@ input,select,textarea{font:inherit}
      9. CHIUSURA
      ============================================================ -->
 <section class="screen statement tight" id="s4">
-  <div class="inner">
-    <div class="pd">
-      <div class="pd-card prima reveal"><div class="pd-k">Prima</div><p>Un processo standard per tutti.<br>Un biglietto da visita non alla vostra altezza.</p></div>
-      <div class="pd-card dopo reveal d1"><div class="pd-k">Dopo</div><p>Un'esperienza cucita su ogni posizione e su ogni candidato.<br>Uno strumento che valorizza i candidati, il vostro tempo e il vostro brand.</p></div>
+  <div class="inner fin">
+    <div class="prima reveal">
+      <span class="k">Prima</span>
+      <p>Un processo standard per tutti.<br>Un biglietto da visita non alla vostra altezza.</p>
     </div>
-    <h2 class="reveal d2" style="margin-top:52px;font-size:clamp(1.6rem,3vw,2.6rem)">…e tutto <span class="hl-2">senza cambiare ATS</span>.</h2>
-    <div class="reveal d3" style="display:flex;justify-content:center;margin-top:44px">
+    <div class="sep reveal d1"></div>
+    <div class="dopo reveal d1">
+      <span class="k">Dopo</span>
+      <p>Un'esperienza cucita su ogni posizione e su ogni candidato.<br>Uno strumento che valorizza i candidati, il vostro tempo e il vostro brand.</p>
+    </div>
+    <div class="punchline reveal d2">…e tutto <b>senza cambiare ATS</b>.</div>
+    <div class="reveal d3" style="display:flex;justify-content:center;margin-top:46px">
       <div class="logo stack sm-stack">
         <svg class="mark" viewBox="0 0 100 100" aria-label="Spicco"><g stroke="#c86441" stroke-width="17" stroke-linecap="round"><line x1="50" y1="10" x2="50" y2="90"/><line x1="16.5" y1="30" x2="83.5" y2="70"/><line x1="16.5" y1="70" x2="83.5" y2="30"/></g></svg>
         <span class="word">sp&#x131;cco</span>
