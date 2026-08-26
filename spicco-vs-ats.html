@@ -185,41 +185,57 @@ input,select,textarea{font:inherit}
 .memewrap.missing .ph{display:flex;align-items:center;justify-content:center;margin:0 auto;width:min(78vw,540px);height:44vh;border:2px dashed rgba(21,20,23,.25);border-radius:18px;color:#a3988c;font-size:.9rem}
 
 /* editor della job description */
-.editor-stage{display:flex;align-items:center;justify-content:center;padding:5vh 6vw}
-.ed-wrap{max-width:880px;width:100%;text-align:center}
-.ed-title{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(1.6rem,3vw,2.5rem);margin:0;letter-spacing:-.01em}
-.doc{background:#fff;border:1px solid rgba(21,20,23,.13);border-radius:16px;box-shadow:0 34px 60px -42px rgba(21,20,23,.6);margin:34px auto 0;text-align:left;overflow:hidden}
-.doc-chrome{background:#fcfaf8;border-bottom:1px solid rgba(21,20,23,.09);padding:11px 16px;display:flex;align-items:center;gap:8px;font-size:.78rem;color:#8b847c}
-.doc-chrome i{width:10px;height:10px;border-radius:50%;background:#e4ded7;display:block}
-.doc-chrome span{margin-left:8px}
-.doc-body{padding:26px 30px 8px;font-size:1.02rem;line-height:1.85;color:#3d3934;font-weight:300}
-.doc-body p{margin:0 0 14px}
+.editor-stage{min-height:100%;display:flex;align-items:center;justify-content:center;padding:3vh 5vw;background:#f4efe9}
+.ed-wrap{max-width:800px;width:100%;text-align:center}
+.ed-title{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(1.35rem,2.3vw,1.9rem);margin:0;letter-spacing:-.01em}
+.doc{background:#fff;border:1px solid rgba(21,20,23,.13);border-radius:16px;box-shadow:0 30px 55px -40px rgba(21,20,23,.6);margin:22px auto 0;text-align:left;overflow:visible}
+.doc-chrome{background:#fcfaf8;border-bottom:1px solid rgba(21,20,23,.09);padding:10px 16px;display:flex;align-items:center;gap:8px;font-size:.74rem;color:#8b847c;border-radius:16px 16px 0 0}
+.doc-chrome i{width:9px;height:9px;border-radius:50%;background:#e4ded7;display:block;flex:none}
+.doc-chrome span{margin-left:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.spb{margin-left:auto;display:flex;align-items:center;gap:8px;border:1px solid rgba(21,20,23,.1);background:#fff;border-radius:100px;padding:5px 12px;flex:none}
+.spb-k{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#8b847c}
+.spb-dot{width:9px;height:9px;border-radius:50%;background:#e2a33c;transition:background .5s}
+.spb-val{font-size:.92rem;font-weight:700;color:#b07714;transition:color .5s;min-width:22px;text-align:right}
+.spb.green .spb-dot{background:#2ea45f}
+.spb.green .spb-val{color:#1a7f37}
+.spb.red .spb-dot{background:#d64545}
+.spb.red .spb-val{color:#b3261e}
+.doc-body{padding:20px 26px 6px;font-size:.96rem;line-height:1.75;color:#3d3934;font-weight:300}
+.doc-body p{margin:0 0 12px}
+.edit{position:relative}
 .edit s{text-decoration:none;color:inherit;transition:color .5s}
 .edit ins{display:none;text-decoration:none;background:rgba(38,150,84,.13);color:#1a7f37;border-radius:5px;padding:1px 6px;font-weight:400}
-.edit .tag{display:none;font-style:normal;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;border-radius:100px;padding:3px 9px;margin-left:8px;vertical-align:2px;white-space:nowrap}
+.edit .tag{display:none;font-style:normal;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;border-radius:100px;padding:3px 8px;margin-left:6px;vertical-align:2px;white-space:nowrap}
 .edit.done s{text-decoration:line-through;color:#b9b2a9}
 .edit.done ins{display:inline;animation:pop .4s cubic-bezier(.2,.8,.3,1)}
-.edit.done .tag{display:inline-block;animation:pop .4s cubic-bezier(.2,.8,.3,1)}
+.edit.done .tag{display:inline-flex;align-items:center;gap:5px;animation:pop .4s cubic-bezier(.2,.8,.3,1)}
 .t-bias{background:rgba(201,99,63,.14);color:#a24f2f}
 .t-clear{background:rgba(26,99,255,.12);color:#1246c9}
 .t-cut{background:rgba(21,20,23,.08);color:#6f6963}
 @keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.sugg{display:flex;align-items:center;gap:14px;margin:8px 22px 22px;border:1px solid #eddfa0;background:#fdf6d8;border-radius:12px;padding:14px 18px;opacity:0;transform:translateY(10px);transition:opacity .5s,transform .5s;pointer-events:none}
+.info{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;
+  background:#a24f2f;color:#fff;font-size:.62rem;font-weight:700;font-style:normal;cursor:help;position:relative;font-family:Georgia,serif}
+.info .tip{display:none;position:absolute;bottom:22px;right:-12px;width:330px;z-index:40;white-space:normal;
+  font-family:Inter,sans-serif;background:#151417;color:#eceae6;border-radius:12px;padding:13px 16px;font-size:.78rem;line-height:1.6;font-weight:300;
+  letter-spacing:0;text-transform:none;text-align:left;box-shadow:0 18px 40px -18px rgba(0,0,0,.7)}
+.info .tip b{color:#ffb26b;font-weight:600}
+.info:hover .tip,.info.open .tip{display:block;animation:pop .25s ease}
+.sugg{display:flex;align-items:center;gap:12px;margin:6px 20px 18px;border:1px solid #eddfa0;background:#fdf6d8;border-radius:12px;padding:11px 16px;opacity:0;transform:translateY(10px);transition:opacity .5s,transform .5s;pointer-events:none}
 .sugg.show{opacity:1;transform:none;pointer-events:auto}
-.sugg .s-ico{font-size:1.2rem}
-.sugg .s-tx{flex:1;font-size:.92rem;color:#6b5c15;text-align:left}
+.sugg .s-ico{font-size:1.05rem}
+.sugg .s-tx{flex:1;font-size:.86rem;color:#6b5c15;text-align:left}
 .sugg .s-tx b{color:#4d420c}
-.sugg .s-btn{border:none;border-radius:100px;background:#c9633f;color:#fff;font-weight:600;padding:10px 22px;font-size:.9rem;animation:sugpulse 1.8s ease-in-out infinite}
+.sugg .s-btn{border:none;border-radius:100px;background:#c9633f;color:#fff;font-weight:600;padding:9px 20px;font-size:.86rem;animation:sugpulse 1.8s ease-in-out infinite;cursor:pointer}
 @keyframes sugpulse{0%,100%{box-shadow:0 0 0 0 rgba(201,99,63,.4)}50%{box-shadow:0 0 0 10px rgba(201,99,63,0)}}
-.qa{display:none;margin:0 22px 22px;border:1px solid rgba(21,20,23,.11);border-radius:12px;padding:18px;background:#fcfaf8;text-align:left}
+.qa{display:none;margin:0 20px 18px;border:1px solid rgba(21,20,23,.11);border-radius:12px;padding:14px 16px;background:#fcfaf8;text-align:left}
 .qa.show{display:block;animation:pop .4s cubic-bezier(.2,.8,.3,1)}
-.qa .q{margin-bottom:14px}
-.qa label{display:block;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:#8b847c;margin-bottom:6px}
-.qa input{width:100%;border:1px solid rgba(21,20,23,.14);border-radius:10px;padding:11px 13px;font-size:.95rem;background:#fff;color:#17161a;outline:none}
-.qa-ok{display:none;color:#1a7f37;font-size:.92rem;font-weight:600;margin-top:4px}
+.qa .q{margin-bottom:11px}
+.qa label{display:block;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#8b847c;margin-bottom:5px}
+.qa input{width:100%;border:1px solid rgba(21,20,23,.14);border-radius:9px;padding:9px 12px;font-size:.9rem;background:#fff;color:#17161a;outline:none}
+.qa-ok{display:none;color:#1a7f37;font-size:.86rem;font-weight:600;margin-top:2px}
 .qa-ok.show{display:block;animation:pop .4s cubic-bezier(.2,.8,.3,1)}
-.ed-cta{margin-top:26px}
-.ed-cta .btn{background:#c9633f;box-shadow:0 12px 30px -14px rgba(201,99,63,.85)}
+.ed-cta{margin-top:20px}
+.ed-cta .btn{background:#c9633f;box-shadow:0 12px 30px -14px rgba(201,99,63,.85);padding:13px 28px;font-size:.95rem}
 .ed-cta .btn:hover{background:#b3552f}
 
 /* prima / dopo */
@@ -706,14 +722,16 @@ input,select,textarea{font:inherit}
 <!-- ============================================================
      5b. L'EDITOR DELLA POSIZIONE
      ============================================================ -->
-<section class="screen statement editor-stage" id="s-editor">
+<section class="screen editor-stage" id="s-editor">
   <div class="ed-wrap">
     <h2 class="ed-title reveal">La stessa job description, sistemata in tempo reale.</h2>
     <div class="doc reveal d1">
-      <div class="doc-chrome"><i></i><i></i><i></i><span>Spicco - Editor posizione · Project Manager · ACME Corporation</span></div>
+      <div class="doc-chrome"><i></i><i></i><i></i><span>Spicco - Editor posizione · Project Manager · ACME Corporation</span>
+        <div class="spb" id="spb"><span class="spb-k">Spiccability</span><span class="spb-dot"></span><b class="spb-val" id="spb-val">58</b></div>
+      </div>
       <div class="doc-body">
-        <p>Per la nostra Direzione Operations cerchiamo <span class="edit" id="e1"><s>un profilo giovane, brillante e dinamico</s> <ins>una persona con esperienza nella gestione di progetti complessi</ins><em class="tag t-bias">Bias rimosso</em></span>, con responsabilità end-to-end sui progetti di trasformazione del gruppo.</p>
-        <p><span class="edit" id="e2"><s>Retribuzione commisurata all'effettiva esperienza maturata dal candidato.</s> <ins>RAL 45.000 – 58.000 € + bonus del 10%.</ins><em class="tag t-clear">Più chiarezza</em></span></p>
+        <p>Per la Direzione Operations cerchiamo un Project Manager <span class="edit" id="e1"><s>ambizioso e competitivo, pronto a imporsi in contesti sfidanti</s> <ins>a suo agio nel guidare team cross-funzionali verso obiettivi misurabili</ins><em class="tag t-bias">Bias <span class="info">i<span class="tip"><b>«Ambizioso», «competitivo», «imporsi»</b> sono termini a codifica maschile: è dimostrato che riducono le candidature femminili senza migliorare la qualità della selezione (Gaucher, Friesen &amp; Kay, 2011).</span></span></em></span>, con responsabilità end-to-end sui progetti di trasformazione del gruppo.</p>
+        <p><span class="edit" id="e2"><s>Costituisce titolo preferenziale una buona conoscenza degli strumenti di project management.</s> <ins>Must have: esperienza diretta su budget di progetto sopra i 500.000 €.</ins><em class="tag t-clear">Più chiarezza</em></span></p>
         <p><span class="edit" id="e3"><s>Il tutto in un'ottica di piena collaborazione trasversale, nel rispetto delle procedure aziendali e delle policy di Gruppo vigenti.</s><ins></ins><em class="tag t-cut">Ridondante - eliminato</em></span></p>
       </div>
       <div class="sugg" id="sugg">
@@ -1035,11 +1053,23 @@ let editorStarted=false;
 function typeVal(el,text,cb){
   let i=0;const t=setInterval(()=>{el.value=text.slice(0,++i);if(i>=text.length){clearInterval(t);cb&&cb()}},26);
 }
+function setScore(v){
+  const spb=document.getElementById('spb'),val=document.getElementById('spb-val');
+  let cur=parseInt(val.textContent),t=setInterval(()=>{
+    cur+=cur<v?1:-1; val.textContent=cur;
+    if(cur===v)clearInterval(t);
+  },40);
+  spb.classList.toggle('green',v>=85); spb.classList.toggle('red',v<45);
+}
 function startEditor(){
   if(editorStarted)return; editorStarted=true;
-  ['e1','e2','e3'].forEach((id,i)=>setTimeout(()=>document.getElementById(id).classList.add('done'),800+i*1200));
-  setTimeout(()=>document.getElementById('sugg').classList.add('show'),800+3*1200+300);
+  const scores=[71,84,93];
+  ['e1','e2','e3'].forEach((id,i)=>setTimeout(()=>{
+    document.getElementById(id).classList.add('done'); setScore(scores[i]);
+  },900+i*1300));
+  setTimeout(()=>document.getElementById('sugg').classList.add('show'),900+3*1300+300);
 }
+document.querySelectorAll('.info').forEach(el=>el.addEventListener('click',()=>el.classList.toggle('open')));
 document.getElementById('sugg-btn').addEventListener('click',()=>{
   document.getElementById('sugg').style.display='none';
   document.getElementById('qa').classList.add('show');
@@ -1047,6 +1077,7 @@ document.getElementById('sugg-btn').addEventListener('click',()=>{
     setTimeout(()=>typeVal(document.getElementById('qa2'),'Colloquio di 45 minuti con Chiara, Head of Operations',()=>{
       document.getElementById('qa-ok').classList.add('show');
       document.getElementById('mkwrap').style.visibility='visible';
+      setScore(98);
     }),350);
   }),450);
 });
