@@ -157,14 +157,11 @@ input,select,textarea{font:inherit}
 .ats .upload{border:1px solid #c4c4c4;background:#fafafa;padding:12px;font-size:12px;border-radius:2px;color:#555}
 
 /* ============================================================
-   ESITO — mail di rifiuto o silenzio
+   ESITO / MEME / EDITOR / PRIMA-DOPO
    ============================================================ */
 .outcome{background:#f4efe9;display:flex;align-items:center;justify-content:center;padding:5vh 6vw}
-.outcome .inner{max-width:1180px;width:100%;text-align:center}
-.outcome .duo{display:grid;grid-template-columns:1fr auto 1fr;gap:26px;align-items:stretch;margin-top:44px;text-align:left}
-@media(max-width:960px){.outcome .duo{grid-template-columns:1fr;gap:18px}}
-.outcome .oppure{align-self:center;font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-size:1.5rem;color:#a3988c;padding:0 4px}
-.mailwin{background:#fff;border:1px solid rgba(21,20,23,.14);border-radius:14px;overflow:hidden;box-shadow:0 34px 60px -42px rgba(21,20,23,.65)}
+.outcome .inner{max-width:1080px;width:100%;text-align:center}
+.mailwin{background:#fff;border:1px solid rgba(21,20,23,.14);border-radius:14px;overflow:hidden;box-shadow:0 34px 60px -42px rgba(21,20,23,.65);max-width:680px;margin:40px auto 0;text-align:left}
 .mailwin .mw-chrome{background:#ecebe9;border-bottom:1px solid #dcd9d5;padding:10px 14px;display:flex;gap:8px}
 .mailwin .mw-chrome i{width:10px;height:10px;border-radius:50%;background:#cfccc8;display:block}
 .mailwin .mw-head{padding:16px 22px 12px;border-bottom:1px solid #eee;font-family:Arial,sans-serif}
@@ -175,19 +172,67 @@ input,select,textarea{font:inherit}
 .mailwin .mw-body{padding:18px 22px 22px;font-family:Arial,sans-serif;font-size:13.5px;line-height:1.65;color:#333}
 .mailwin .mw-body p{margin:0 0 12px}
 .mailwin .mw-body .var{background:#fde8e6;color:#b3261e;border:1px dashed #e5a29c;border-radius:3px;padding:0 5px;font-family:Consolas,monospace;font-size:12.5px}
+.mailwin .mw-body .pers{background:rgba(26,99,255,.10);color:#1246c9;border-radius:3px;padding:0 4px}
 .mailwin .mw-body .foot{font-size:11.5px;color:#999;border-top:1px solid #eee;padding-top:10px;margin-top:16px}
-.silence{background:#fff;border:1px solid rgba(21,20,23,.14);border-radius:14px;display:flex;flex-direction:column;box-shadow:0 34px 60px -42px rgba(21,20,23,.65);overflow:hidden}
-.silence .sl-chrome{background:#ecebe9;border-bottom:1px solid #dcd9d5;padding:10px 14px;display:flex;gap:8px}
-.silence .sl-chrome i{width:10px;height:10px;border-radius:50%;background:#cfccc8;display:block}
-.silence .sl-head{padding:16px 22px 12px;border-bottom:1px solid #eee;font-family:Arial,sans-serif;font-size:13px;color:#444}
-.silence .sl-head b{font-size:15px;color:#1b1b1b;display:block;margin-bottom:4px}
-.silence .sl-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:30px 22px;text-align:center}
-.silence .skull{font-size:64px;line-height:1;filter:grayscale(.2)}
-.silence .wait{font-size:.95rem;color:#6f6963}
-.silence .wait b{color:#17161a}
-.silence .days{font-size:.78rem;color:#a3988c;letter-spacing:.14em;text-transform:uppercase}
-.outcome .punch{margin:40px auto 0;max-width:760px;font-family:"Instrument Serif",Georgia,serif;font-size:clamp(1.3rem,2.2vw,1.8rem);line-height:1.4;color:#17161a}
-.outcome .punch .hl{color:#c9633f}
+.mail-cap{margin-top:20px;font-size:.85rem;color:#8b847c}
+
+/* meme */
+.memewrap{margin-top:38px}
+.meme{display:block;margin:0 auto;max-height:50vh;max-width:min(78vw,600px);border-radius:18px;box-shadow:0 34px 64px -38px rgba(21,20,23,.65)}
+.meme-cap{margin-top:20px;color:#6f6963;font-style:italic;font-family:"Instrument Serif",Georgia,serif;font-size:1.3rem}
+.memewrap .ph{display:none}
+.memewrap.missing .meme{display:none}
+.memewrap.missing .ph{display:flex;align-items:center;justify-content:center;margin:0 auto;width:min(78vw,540px);height:44vh;border:2px dashed rgba(21,20,23,.25);border-radius:18px;color:#a3988c;font-size:.9rem}
+
+/* editor della job description */
+.editor-stage{display:flex;align-items:center;justify-content:center;padding:5vh 6vw}
+.ed-wrap{max-width:880px;width:100%;text-align:center}
+.ed-title{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(1.6rem,3vw,2.5rem);margin:0;letter-spacing:-.01em}
+.doc{background:#fff;border:1px solid rgba(21,20,23,.13);border-radius:16px;box-shadow:0 34px 60px -42px rgba(21,20,23,.6);margin:34px auto 0;text-align:left;overflow:hidden}
+.doc-chrome{background:#fcfaf8;border-bottom:1px solid rgba(21,20,23,.09);padding:11px 16px;display:flex;align-items:center;gap:8px;font-size:.78rem;color:#8b847c}
+.doc-chrome i{width:10px;height:10px;border-radius:50%;background:#e4ded7;display:block}
+.doc-chrome span{margin-left:8px}
+.doc-body{padding:26px 30px 8px;font-size:1.02rem;line-height:1.85;color:#3d3934;font-weight:300}
+.doc-body p{margin:0 0 14px}
+.edit s{text-decoration:none;color:inherit;transition:color .5s}
+.edit ins{display:none;text-decoration:none;background:rgba(38,150,84,.13);color:#1a7f37;border-radius:5px;padding:1px 6px;font-weight:400}
+.edit .tag{display:none;font-style:normal;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;border-radius:100px;padding:3px 9px;margin-left:8px;vertical-align:2px;white-space:nowrap}
+.edit.done s{text-decoration:line-through;color:#b9b2a9}
+.edit.done ins{display:inline;animation:pop .4s cubic-bezier(.2,.8,.3,1)}
+.edit.done .tag{display:inline-block;animation:pop .4s cubic-bezier(.2,.8,.3,1)}
+.t-bias{background:rgba(201,99,63,.14);color:#a24f2f}
+.t-clear{background:rgba(26,99,255,.12);color:#1246c9}
+.t-cut{background:rgba(21,20,23,.08);color:#6f6963}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.sugg{display:flex;align-items:center;gap:14px;margin:8px 22px 22px;border:1px solid #eddfa0;background:#fdf6d8;border-radius:12px;padding:14px 18px;opacity:0;transform:translateY(10px);transition:opacity .5s,transform .5s;pointer-events:none}
+.sugg.show{opacity:1;transform:none;pointer-events:auto}
+.sugg .s-ico{font-size:1.2rem}
+.sugg .s-tx{flex:1;font-size:.92rem;color:#6b5c15;text-align:left}
+.sugg .s-tx b{color:#4d420c}
+.sugg .s-btn{border:none;border-radius:100px;background:#c9633f;color:#fff;font-weight:600;padding:10px 22px;font-size:.9rem;animation:sugpulse 1.8s ease-in-out infinite}
+@keyframes sugpulse{0%,100%{box-shadow:0 0 0 0 rgba(201,99,63,.4)}50%{box-shadow:0 0 0 10px rgba(201,99,63,0)}}
+.qa{display:none;margin:0 22px 22px;border:1px solid rgba(21,20,23,.11);border-radius:12px;padding:18px;background:#fcfaf8;text-align:left}
+.qa.show{display:block;animation:pop .4s cubic-bezier(.2,.8,.3,1)}
+.qa .q{margin-bottom:14px}
+.qa label{display:block;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:#8b847c;margin-bottom:6px}
+.qa input{width:100%;border:1px solid rgba(21,20,23,.14);border-radius:10px;padding:11px 13px;font-size:.95rem;background:#fff;color:#17161a;outline:none}
+.qa-ok{display:none;color:#1a7f37;font-size:.92rem;font-weight:600;margin-top:4px}
+.qa-ok.show{display:block;animation:pop .4s cubic-bezier(.2,.8,.3,1)}
+.ed-cta{margin-top:26px}
+.ed-cta .btn{background:#c9633f;box-shadow:0 12px 30px -14px rgba(201,99,63,.85)}
+.ed-cta .btn:hover{background:#b3552f}
+
+/* prima / dopo */
+.pd{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:940px;margin:0 auto;text-align:left}
+@media(max-width:860px){.pd{grid-template-columns:1fr}}
+.pd-card{border-radius:20px;padding:28px 30px;border:1px solid rgba(21,20,23,.12)}
+.pd-card .pd-k{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;margin-bottom:14px}
+.pd-card p{margin:0;font-size:1.08rem;line-height:1.6;font-weight:300;color:#3d3934}
+.pd-card.prima{background:rgba(255,255,255,.5)}
+.pd-card.prima .pd-k{color:#a3988c}
+.pd-card.prima p{color:#8b847c}
+.pd-card.dopo{background:#fff;border-color:rgba(201,99,63,.4);box-shadow:0 26px 50px -38px rgba(201,99,63,.7)}
+.pd-card.dopo .pd-k{color:#c9633f}
 
 /* ============================================================
    MONDO 2 — SPICCO (chiaro)
@@ -358,9 +403,7 @@ input,select,textarea{font:inherit}
 <div id="deck">
 <section class="screen statement" id="s1">
   <div class="inner">
-    <div class="kicker reveal">Candidati · esperienza reale</div>
-    <h2 class="reveal d1">Questa è la candidatura<br>che il vostro brand offre oggi.</h2>
-    <p class="sub reveal d2">Stessa posizione. Stessa azienda. Due modi molto diversi di trattare chi si candida.</p>
+    <h2 class="reveal">Questa è la candidatura<br>che il vostro brand offre oggi.</h2>
   </div>
 </section>
 
@@ -569,48 +612,78 @@ input,select,textarea{font:inherit}
 </section>
 
 <!-- ============================================================
-     4. IL PROBLEMA
+     3b. I CANDIDATI SI SENTONO COSÌ
      ============================================================ -->
-<section class="screen statement tight" id="s2">
+<section class="screen statement" id="s-girl">
   <div class="inner">
-    <div class="kicker reveal">Il paradosso del form</div>
-    <h2 class="reveal d1">Se è troppo lungo ottieni informazioni,<br>ma perdi candidature: <span class="hl">fino al 92%</span>.<br>Se è troppo corto, non hai abbastanza<br>informazioni per portare avanti i migliori.</h2>
-    <p class="sub reveal d2">Ogni campo in più è una persona in meno. Ogni campo in meno è una decisione presa al buio.</p>
+    <h2 class="reveal">I candidati si sentono così</h2>
+    <div class="memewrap reveal d1">
+      <img class="meme" src="assets/meme-girl.jpg" alt="" onerror="this.closest('.memewrap').classList.add('missing')">
+      <div class="ph">manca assets/meme-girl.jpg</div>
+      <div class="meme-cap">(Gliel'abbiamo chiesto)</div>
+    </div>
   </div>
 </section>
 
 <!-- ============================================================
-     4b. E POI? MAIL FOTOCOPIA O SILENZIO
+     3c. NON TI FA SENTIRE SPECIALE
      ============================================================ -->
-<section class="screen statement outcome" id="s2b">
+<section class="screen statement tight" id="s-special">
   <div class="inner">
-    <div class="kicker reveal">E a chi ha compilato tutto, cosa arriva?</div>
-    <div class="duo">
-      <div class="mailwin reveal d1">
-        <div class="mw-chrome"><i></i><i></i><i></i></div>
-        <div class="mw-head">
-          <div class="obj">Esito della Sua candidatura — Rif. IT-OPS-PM-0457/24</div>
-          <div class="meta">Da: <b>no-reply@acmecorp.example</b><span class="late">4 mesi dopo l'invio</span><br>A: <b>giovanni.rossi@example.com</b></div>
-        </div>
-        <div class="mw-body">
-          <p>Gentile <span class="var">{{nome_candidato}}</span>,</p>
-          <p>La ringraziamo per l'interesse dimostrato verso la nostra azienda. Dopo un'attenta valutazione dei profili pervenuti, Le comunichiamo che è stato deciso di proseguire con candidature maggiormente in linea con la posizione.</p>
-          <p>Il Suo curriculum resterà nei nostri archivi per eventuali future opportunità.</p>
-          <div class="foot">Comunicazione generata automaticamente. La preghiamo di non rispondere a questa e-mail.</div>
-        </div>
+    <h2 class="reveal">Il problema del form è che<br>non ti fa sentire <span class="hl">speciale</span>.</h2>
+  </div>
+</section>
+
+<!-- ============================================================
+     4. IL PROBLEMA
+     ============================================================ -->
+<section class="screen statement tight" id="s2">
+  <div class="inner">
+    <h2 class="reveal">E a voi non dà flessibilità.<br>Se è troppo lungo perdete candidati: <span class="hl">fino al 92%</span>.<br>Se è troppo corto, non avete le informazioni<br>per selezionare i migliori.</h2>
+  </div>
+</section>
+
+<!-- ============================================================
+     4b. UNO SU MILLE
+     ============================================================ -->
+<section class="screen statement tight" id="s-mille">
+  <div class="inner">
+    <h2 class="reveal">E poi, lo sappiamo:<br>uno su mille ce la fa.<br><span class="hl">E gli altri?</span></h2>
+  </div>
+</section>
+
+<!-- ============================================================
+     4c. NEL MIGLIORE DEI CASI — LA MAIL STANDARD
+     ============================================================ -->
+<section class="screen statement outcome" id="s-best">
+  <div class="inner">
+    <h2 class="reveal" style="font-size:clamp(1.7rem,3.2vw,2.8rem)">Nel migliore dei casi</h2>
+    <div class="mailwin reveal d1">
+      <div class="mw-chrome"><i></i><i></i><i></i></div>
+      <div class="mw-head">
+        <div class="obj">Esito della Sua candidatura — Rif. IT-OPS-PM-0457/24</div>
+        <div class="meta">Da: <b>no-reply@acmecorp.example</b><span class="late">4 mesi dopo l'invio</span><br>A: <b>giovanni.rossi@example.com</b></div>
       </div>
-      <div class="oppure reveal d2">oppure</div>
-      <div class="silence reveal d2">
-        <div class="sl-chrome"><i></i><i></i><i></i></div>
-        <div class="sl-head"><b>Posta in arrivo</b>Ricerca: "esito candidatura Project Manager" — nessun risultato</div>
-        <div class="sl-body">
-          <div class="skull">💀⏳</div>
-          <div class="wait"><b>Giovanni</b>, in attesa di una risposta</div>
-          <div class="days">Candidatura inviata 127 giorni fa</div>
-        </div>
+      <div class="mw-body">
+        <p>Gentile <span class="var">{{nome_candidato}}</span>,</p>
+        <p>La ringraziamo per l'interesse dimostrato verso la nostra azienda. Dopo un'attenta valutazione dei profili pervenuti, Le comunichiamo che è stato deciso di proseguire con candidature maggiormente in linea con la posizione.</p>
+        <p>Il Suo curriculum resterà nei nostri archivi per eventuali future opportunità.</p>
+        <div class="foot">Comunicazione generata automaticamente. La preghiamo di non rispondere a questa e-mail.</div>
       </div>
     </div>
-    <p class="punch reveal d3">Una mail fotocopia, o il silenzio: è <span class="hl">l'ultima impressione</span> che il vostro brand lascia a chi aveva scelto di candidarsi.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     4d. OPPURE — IL SILENZIO
+     ============================================================ -->
+<section class="screen statement" id="s-worst">
+  <div class="inner">
+    <h2 class="reveal" style="font-size:clamp(1.7rem,3.2vw,2.8rem)">Oppure…</h2>
+    <div class="memewrap reveal d1">
+      <img class="meme" src="assets/meme-escobar.jpg" alt="" onerror="this.closest('.memewrap').classList.add('missing')">
+      <div class="ph">manca assets/meme-escobar.jpg</div>
+    </div>
   </div>
 </section>
 
@@ -627,6 +700,36 @@ input,select,textarea{font:inherit}
       </div>
     </div>
     <h2 class="reveal d2" style="font-size:clamp(1.6rem,3.2vw,2.8rem)">La stessa posizione,<br>raccontata come merita.</h2>
+  </div>
+</section>
+
+<!-- ============================================================
+     5b. L'EDITOR DELLA POSIZIONE
+     ============================================================ -->
+<section class="screen statement editor-stage" id="s-editor">
+  <div class="ed-wrap">
+    <h2 class="ed-title reveal">La stessa job description, sistemata in tempo reale.</h2>
+    <div class="doc reveal d1">
+      <div class="doc-chrome"><i></i><i></i><i></i><span>Spicco — Editor posizione · Project Manager · ACME Corporation</span></div>
+      <div class="doc-body">
+        <p>Per la nostra Direzione Operations cerchiamo <span class="edit" id="e1"><s>un profilo giovane, brillante e dinamico</s> <ins>una persona con esperienza nella gestione di progetti complessi</ins><em class="tag t-bias">Bias rimosso</em></span>, con responsabilità end-to-end sui progetti di trasformazione del gruppo.</p>
+        <p><span class="edit" id="e2"><s>Retribuzione commisurata all'effettiva esperienza maturata dal candidato.</s> <ins>RAL 45.000 – 58.000 € + bonus del 10%.</ins><em class="tag t-clear">Più chiarezza</em></span></p>
+        <p><span class="edit" id="e3"><s>Il tutto in un'ottica di piena collaborazione trasversale, nel rispetto delle procedure aziendali e delle policy di Gruppo vigenti.</s><ins></ins><em class="tag t-cut">Ridondante — eliminato</em></span></p>
+      </div>
+      <div class="sugg" id="sugg">
+        <div class="s-ico">⚠</div>
+        <div class="s-tx"><b>Manca l'iter di selezione.</b> Renderlo esplicito aiuta a convertire i candidati migliori.</div>
+        <button class="s-btn" id="sugg-btn" type="button">Aggiungi</button>
+      </div>
+      <div class="qa" id="qa">
+        <div class="q"><label>Da quanti step è composto l'iter?</label><input id="qa1" readonly></div>
+        <div class="q"><label>Qual è il primo step?</label><input id="qa2" readonly></div>
+        <div class="qa-ok" id="qa-ok">✓ Iter di selezione aggiunto alla pagina</div>
+      </div>
+    </div>
+    <div class="ed-cta" style="visibility:hidden" id="mkwrap">
+      <button class="btn" data-next="sp-job">Crea la pagina di candidatura →</button>
+    </div>
   </div>
 </section>
 
@@ -792,13 +895,40 @@ input,select,textarea{font:inherit}
 </section>
 
 <!-- ============================================================
+     8b. ANCHE IL NO, PERSONALIZZATO
+     ============================================================ -->
+<section class="screen statement outcome" id="s-yesmail">
+  <div class="inner">
+    <h2 class="reveal" style="font-size:clamp(1.6rem,3vw,2.6rem)">E se non è il profilo giusto?<br>Un no scritto <span class="hl">apposta per Giovanni</span>.</h2>
+    <div class="mailwin reveal d1">
+      <div class="mw-chrome"><i></i><i></i><i></i></div>
+      <div class="mw-head">
+        <div class="obj">La tua candidatura come Project Manager</div>
+        <div class="meta">Da: <b>Chiara D. — ACME Operations &lt;chiara.d@acmecorp.example&gt;</b><br>A: <b>giovanni.rossi@example.com</b></div>
+      </div>
+      <div class="mw-body">
+        <p>Ciao Giovanni,</p>
+        <p>grazie per il tempo che ci hai dedicato. Ci hanno colpito davvero <span class="pers">i 600.000 € di budget gestiti in autonomia</span> che ci hai raccontato in candidatura e <span class="pers">i quattro anni di delivery Agile in Nexa Consulting</span>.</p>
+        <p>Per questa posizione abbiamo scelto di proseguire con un candidato con più esperienza verticale nel nostro settore: non è stato un no facile.</p>
+        <p>Profili come il tuo, con esperienza su <span class="pers">budget di progetto</span> e <span class="pers">team cross-funzionali</span>, per noi sono preziosi: ci piacerebbe ricontattarti per le prossime aperture della Direzione Operations.</p>
+        <p>Chiara</p>
+      </div>
+    </div>
+    <div class="mail-cap reveal d2">Scritta da Spicco sul profilo di Giovanni — approvata e inviata dal recruiter.</div>
+  </div>
+</section>
+
+<!-- ============================================================
      9. CHIUSURA
      ============================================================ -->
 <section class="screen statement tight" id="s4">
   <div class="inner">
-    <div class="kicker reveal">Con Spicco</div>
-    <h2 class="reveal d1">Un processo più diretto e personalizzato,<br>per valorizzare le persone,<br>le loro esperienze<br>e il <span class="hl-2">tempo dei recruiter</span>.</h2>
-    <div class="reveal d3" style="display:flex;justify-content:center;margin-top:54px">
+    <div class="pd">
+      <div class="pd-card prima reveal"><div class="pd-k">Prima</div><p>Un processo standard per tutti.<br>Un biglietto da visita non alla vostra altezza.</p></div>
+      <div class="pd-card dopo reveal d1"><div class="pd-k">Dopo</div><p>Un'esperienza cucita su ogni posizione e su ogni candidato.<br>Uno strumento che valorizza i candidati, il vostro tempo e il vostro brand.</p></div>
+    </div>
+    <h2 class="reveal d2" style="margin-top:52px;font-size:clamp(1.6rem,3vw,2.6rem)">…e tutto <span class="hl-2">senza cambiare ATS</span>.</h2>
+    <div class="reveal d3" style="display:flex;justify-content:center;margin-top:44px">
       <div class="logo stack sm-stack">
         <svg class="mark" viewBox="0 0 100 100" aria-label="Spicco"><g stroke="#c86441" stroke-width="17" stroke-linecap="round"><line x1="50" y1="10" x2="50" y2="90"/><line x1="16.5" y1="30" x2="83.5" y2="70"/><line x1="16.5" y1="70" x2="83.5" y2="30"/></g></svg>
         <span class="word">sp&#x131;cco</span>
@@ -826,6 +956,7 @@ function playReveal(sc){
 }
 function onEnter(sc){
   if(sc.id==='sp-chat') startChat();
+  if(sc.id==='s-editor') startEditor();
 }
 function setScreen(i,dir){
   if(lock||i<0||i>=screens.length||i===idx)return;
@@ -898,6 +1029,27 @@ window.addEventListener('touchend',e=>{
 document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>goTo(b.dataset.next)));
 /* i link decorativi del portale ATS non navigano */
 document.querySelectorAll('.ats a').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));
+
+/* ---- editor della job description ---- */
+let editorStarted=false;
+function typeVal(el,text,cb){
+  let i=0;const t=setInterval(()=>{el.value=text.slice(0,++i);if(i>=text.length){clearInterval(t);cb&&cb()}},26);
+}
+function startEditor(){
+  if(editorStarted)return; editorStarted=true;
+  ['e1','e2','e3'].forEach((id,i)=>setTimeout(()=>document.getElementById(id).classList.add('done'),800+i*1200));
+  setTimeout(()=>document.getElementById('sugg').classList.add('show'),800+3*1200+300);
+}
+document.getElementById('sugg-btn').addEventListener('click',()=>{
+  document.getElementById('sugg').style.display='none';
+  document.getElementById('qa').classList.add('show');
+  setTimeout(()=>typeVal(document.getElementById('qa1'),'3 — colloquio, caso pratico, offerta',()=>{
+    setTimeout(()=>typeVal(document.getElementById('qa2'),'Colloquio di 45 minuti con Chiara, Head of Operations',()=>{
+      document.getElementById('qa-ok').classList.add('show');
+      document.getElementById('mkwrap').style.visibility='visible';
+    }),350);
+  }),450);
+});
 
 /* prima schermata */
 screens[0].classList.add('is-active');
