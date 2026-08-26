@@ -1122,8 +1122,6 @@ drop.addEventListener('click',()=>{
 const body=document.getElementById('chat-body'),ta=document.getElementById('chat-text'),
       sendBtn=document.getElementById('chat-send'),badge=document.getElementById('done-badge');
 
-const RISPOSTA="In effetti nel CV non l'ho scritto. Negli ultimi due anni in Nexa ho seguito il programma di migrazione cloud di un cliente retail: budget complessivo di 780.000 €, di cui gestivo direttamente la parte di delivery, circa 600.000 €. Preparavo il forecast mensile con il PMO, presentavo gli scostamenti al comitato di progetto e ho rinegoziato due SOW quando lo scope si è allargato. Abbiamo chiuso il 4% sotto budget.";
-
 function bubble(html,who){
   const d=document.createElement('div');
   d.className='msg '+who; d.innerHTML=html;
@@ -1146,31 +1144,44 @@ function typeInto(text){
   return new Promise(res=>{
     ta.value=''; let i=0;
     const step=()=>{ta.value=text.slice(0,i+=2);ta.scrollTop=ta.scrollHeight;i<text.length?setTimeout(step,16):res()};
-    setTimeout(step,600);
+    setTimeout(step,500);
   });
 }
 
-let chatStarted=false,autoSend=null,sent=false;
-async function startChat(){
-  if(chatStarted)return; chatStarted=true;
-  await botSay("Buongiorno <b>Giovanni</b>, e grazie per la candidatura come Project Manager in ACME Corporation. Ho appena letto il tuo CV: sono il primo passo del processo e ti rubo due minuti, poi passa tutto al team.",300,1200);
-  await botSay("Molto interessante il tuo percorso in <b>Nexa Consulting</b>: quattro anni di delivery su progetti di trasformazione digitale, con team cross-funzionali da 8-10 persone. Vedo anche la certificazione Scrum Master e la gestione di sprint e roadmap - è esattamente il tipo di esperienza Agile che questo ruolo richiede.",900,1900);
-  await botSay("Quello che invece <b>non ho trovato nel CV</b> è la responsabilità diretta su budget di progetto sopra i <b>500.000 €</b>, che per questa posizione è uno dei requisiti. Sai raccontarmi qualcosa che potrebbe essere collegato? Anche una responsabilità parziale su forecast, scostamenti o rapporto con il cliente sui costi.",900,2100);
-  await typeInto(RISPOSTA);
-  sendBtn.classList.add('ready');
-  autoSend=setTimeout(sendAnswer,3600);
-}
-async function sendAnswer(){
-  if(sent||!ta.value.trim())return; sent=true;
-  clearTimeout(autoSend); sendBtn.classList.remove('ready');
-  bubble(ta.value,'me'); ta.value='';
-  await botSay("Perfetto, è esattamente il livello di responsabilità che cercavamo: <b>600.000 € gestiti in autonomia</b>, forecast e rinegoziazione dello scope. L'ho aggiunto al tuo profilo, così Chiara lo vede subito accanto al CV.",600,2000);
-  await botSay("Abbiamo ricevuto la tua candidatura, Giovanni. Qualcuno del team la revisionerà a breve e ti risponderemo <b>entro 5 giorni lavorativi</b> - in ogni caso, anche se la risposta fosse negativa. Grazie per il tempo che ci hai dedicato.",800,1800);
+/* copione: battute brevi, botta e risposta */
+const SCRIPT=[
+ {who:'bot', html:"Ciao Giovanni, grazie per la candidatura! Ho appena letto il tuo CV.", think:1100},
+ {who:'bot', html:"Bello il percorso in <b>Nexa Consulting</b>: quattro anni di delivery Agile, team da 8-10 persone. Esattamente quello che serve qui.", think:1600},
+ {who:'bot', html:"Una cosa però nel CV non l'ho trovata: <b>budget sopra i 500.000 €</b>. Ti è capitato di gestirne?", think:1500},
+ {who:'me',  text:"Sì! Sul programma cloud di un cliente retail: circa 600.000 € di delivery, gestiti in autonomia."},
+ {who:'bot', html:"Ottimo. E il forecast lo seguivi tu?", think:1100},
+ {who:'me',  text:"Sì, forecast mensile con il PMO. E ho rinegoziato due SOW: chiuso il 4% sotto budget."},
+ {who:'bot', html:"Perfetto, era il pezzo che mancava. L'ho aggiunto al tuo profilo: <b>Chiara lo vede accanto al CV</b>.", think:1500},
+ {who:'bot', html:"Candidatura ricevuta! Ti rispondiamo <b>entro 5 giorni lavorativi</b>, in ogni caso. Grazie del tempo, Giovanni.", think:1300}
+];
+
+let chatStarted=false,autoSend=null,pendingResolve=null;
+async function runScript(){
+  for(const step of SCRIPT){
+    if(step.who==='bot'){ await botSay(step.html,450,step.think); }
+    else{
+      await typeInto(step.text);
+      sendBtn.classList.add('ready');
+      await new Promise(res=>{ pendingResolve=res; autoSend=setTimeout(doSend,2400); });
+    }
+  }
   badge.classList.add('show');
   document.querySelector('#sp-chat .st').textContent='candidatura completata';
   ta.placeholder='Conversazione conclusa - grazie!';
 }
-sendBtn.addEventListener('click',sendAnswer);
+function doSend(){
+  if(!ta.value.trim()||!pendingResolve)return;
+  clearTimeout(autoSend); sendBtn.classList.remove('ready');
+  bubble(ta.value,'me'); ta.value='';
+  const r=pendingResolve; pendingResolve=null; r();
+}
+function startChat(){ if(chatStarted)return; chatStarted=true; runScript(); }
+sendBtn.addEventListener('click',doSend);
 spSend.addEventListener('click',()=>goTo('sp-chat'));
 </script>
 </body>
