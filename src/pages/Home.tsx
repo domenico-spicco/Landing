@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import BrowserFrame from "../components/BrowserFrame";
 import AxsDiagram from "../components/AxsDiagram";
@@ -13,6 +14,56 @@ const SHOW_VERTICALS = false;
 function Eyebrow({ children }: { children: string }) {
   return (
     <p className="text-sm font-medium uppercase tracking-widest text-accent-strong">{children}</p>
+  );
+}
+
+const ROTATING_WORDS = ["convertire", "personalizzare", "analizzare"];
+
+// Parole a rotazione della Sezione 3: roll verticale, una alla volta.
+// Con prefers-reduced-motion la lista è mostrata statica.
+function RotatingWord() {
+  const [index, setIndex] = useState(0);
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setReduced(true);
+      return;
+    }
+    const id = setInterval(() => setIndex((i) => (i + 1) % ROTATING_WORDS.length), 2400);
+    return () => clearInterval(id);
+  }, []);
+
+  if (reduced) {
+    return <span className="em-turn text-accent-strong">{ROTATING_WORDS.join(", ")}</span>;
+  }
+
+  return (
+    <>
+      <span className="sr-only">{ROTATING_WORDS.join(", ")}</span>
+      <span aria-hidden="true" className="relative block h-[1.25em] overflow-hidden">
+        {ROTATING_WORDS.map((word, i) => {
+          const leaving = i === (index + ROTATING_WORDS.length - 1) % ROTATING_WORDS.length;
+          return (
+            <span
+              key={word}
+              className="em-turn absolute inset-x-0 text-accent-strong transition-all duration-500 ease-out"
+              style={{
+                transform:
+                  i === index
+                    ? "translateY(0)"
+                    : leaving
+                      ? "translateY(-110%)"
+                      : "translateY(110%)",
+                opacity: i === index ? 1 : 0,
+              }}
+            >
+              {word}
+            </span>
+          );
+        })}
+      </span>
+    </>
   );
 }
 
@@ -139,33 +190,34 @@ export default function Home() {
       </section>
 
       {/* Sezione 3 · Il problema */}
-      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <Reveal className="grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div>
-            <Eyebrow>Non è colpa vostra</Eyebrow>
-            <h2 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
-              Vent'anni di software HR hanno ottimizzato il processo. Nessuno ha progettato{" "}
-              <Em>l'esperienza</Em>.
-            </h2>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink/80">
-              Gli strumenti che avete servono a tracciare, filtrare, andare più veloci. Funzionano.
-              Ma sono stati costruiti per gestire pratiche, non persone. E il risultato si vede dove
-              nessun report lo misura: nell'esperienza di chi si candida da voi.
-            </p>
-            <p className="mt-8 text-xl font-bold">
-              Gli ATS rendono il recruiting efficiente. Spicco lo rende efficace.
-            </p>
-          </div>
-          <div className="rounded-2xl bg-surface p-8 shadow-[0_4px_24px_rgba(26,26,24,0.08)] sm:p-10">
-            <p className="text-5xl font-extrabold tracking-tight text-accent-strong sm:text-6xl">
+      <section className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6">
+        <Reveal>
+          <h2 className="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
+            Sales e Marketing hanno strumenti per
+            <span className="mt-2 block text-4xl sm:text-5xl">
+              <RotatingWord />
+            </span>
+          </h2>
+          <p className="mx-auto mt-10 max-w-2xl text-lg leading-relaxed text-ink/80">
+            Al recruiting viene chiesta invece sempre la stessa cosa: assumere i migliori,
+            velocemente.
+          </p>
+          <p className="mt-2 text-lg font-bold">
+            Ma il mercato è cambiato, e sono cambiati anche i candidati.
+          </p>
+          <div className="mx-auto mt-12 max-w-md rounded-2xl bg-surface p-8 shadow-[0_4px_24px_rgba(26,26,24,0.08)]">
+            <p className="text-5xl font-extrabold tracking-tight text-accent-strong">
               Quasi 6 su 10
             </p>
-            <p className="mt-4 text-lg leading-relaxed">
+            <p className="mt-4 leading-relaxed">
               candidati hanno vissuto una cattiva esperienza di candidatura. E il 72% l'ha
               raccontata.
             </p>
-            <p className="mt-6 text-sm text-ink/60">Fonte: Future Workplace / CareerArc</p>
+            <p className="mt-5 text-sm text-ink/60">Fonte: Future Workplace / CareerArc</p>
           </div>
+          <p className="mt-12 text-xl font-bold">
+            Gli ATS rendono il recruiting efficiente. Spicco lo rende efficace.
+          </p>
         </Reveal>
       </section>
 
