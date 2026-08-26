@@ -157,6 +157,39 @@ input,select,textarea{font:inherit}
 .ats .upload{border:1px solid #c4c4c4;background:#fafafa;padding:12px;font-size:12px;border-radius:2px;color:#555}
 
 /* ============================================================
+   ESITO — mail di rifiuto o silenzio
+   ============================================================ */
+.outcome{background:#f4efe9;display:flex;align-items:center;justify-content:center;padding:5vh 6vw}
+.outcome .inner{max-width:1180px;width:100%;text-align:center}
+.outcome .duo{display:grid;grid-template-columns:1fr auto 1fr;gap:26px;align-items:stretch;margin-top:44px;text-align:left}
+@media(max-width:960px){.outcome .duo{grid-template-columns:1fr;gap:18px}}
+.outcome .oppure{align-self:center;font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-size:1.5rem;color:#a3988c;padding:0 4px}
+.mailwin{background:#fff;border:1px solid rgba(21,20,23,.14);border-radius:14px;overflow:hidden;box-shadow:0 34px 60px -42px rgba(21,20,23,.65)}
+.mailwin .mw-chrome{background:#ecebe9;border-bottom:1px solid #dcd9d5;padding:10px 14px;display:flex;gap:8px}
+.mailwin .mw-chrome i{width:10px;height:10px;border-radius:50%;background:#cfccc8;display:block}
+.mailwin .mw-head{padding:16px 22px 12px;border-bottom:1px solid #eee;font-family:Arial,sans-serif}
+.mailwin .mw-head .obj{font-size:15px;font-weight:bold;color:#1b1b1b}
+.mailwin .mw-head .meta{font-size:12px;color:#777;margin-top:6px;line-height:1.6}
+.mailwin .mw-head .meta b{color:#444;font-weight:normal}
+.mailwin .mw-head .late{display:inline-block;background:#fdf6d8;border:1px solid #eddfa0;color:#8a7a1f;border-radius:3px;padding:2px 8px;font-size:11px;margin-left:8px}
+.mailwin .mw-body{padding:18px 22px 22px;font-family:Arial,sans-serif;font-size:13.5px;line-height:1.65;color:#333}
+.mailwin .mw-body p{margin:0 0 12px}
+.mailwin .mw-body .var{background:#fde8e6;color:#b3261e;border:1px dashed #e5a29c;border-radius:3px;padding:0 5px;font-family:Consolas,monospace;font-size:12.5px}
+.mailwin .mw-body .foot{font-size:11.5px;color:#999;border-top:1px solid #eee;padding-top:10px;margin-top:16px}
+.silence{background:#fff;border:1px solid rgba(21,20,23,.14);border-radius:14px;display:flex;flex-direction:column;box-shadow:0 34px 60px -42px rgba(21,20,23,.65);overflow:hidden}
+.silence .sl-chrome{background:#ecebe9;border-bottom:1px solid #dcd9d5;padding:10px 14px;display:flex;gap:8px}
+.silence .sl-chrome i{width:10px;height:10px;border-radius:50%;background:#cfccc8;display:block}
+.silence .sl-head{padding:16px 22px 12px;border-bottom:1px solid #eee;font-family:Arial,sans-serif;font-size:13px;color:#444}
+.silence .sl-head b{font-size:15px;color:#1b1b1b;display:block;margin-bottom:4px}
+.silence .sl-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:30px 22px;text-align:center}
+.silence .skull{font-size:64px;line-height:1;filter:grayscale(.2)}
+.silence .wait{font-size:.95rem;color:#6f6963}
+.silence .wait b{color:#17161a}
+.silence .days{font-size:.78rem;color:#a3988c;letter-spacing:.14em;text-transform:uppercase}
+.outcome .punch{margin:40px auto 0;max-width:760px;font-family:"Instrument Serif",Georgia,serif;font-size:clamp(1.3rem,2.2vw,1.8rem);line-height:1.4;color:#17161a}
+.outcome .punch .hl{color:#c9633f}
+
+/* ============================================================
    MONDO 2 — SPICCO (chiaro)
    ============================================================ */
 .spicco{
@@ -543,6 +576,41 @@ input,select,textarea{font:inherit}
     <div class="kicker reveal">Il paradosso del form</div>
     <h2 class="reveal d1">Se è troppo lungo ottieni informazioni,<br>ma perdi candidature: <span class="hl">fino al 92%</span>.<br>Se è troppo corto, non hai abbastanza<br>informazioni per portare avanti i migliori.</h2>
     <p class="sub reveal d2">Ogni campo in più è una persona in meno. Ogni campo in meno è una decisione presa al buio.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     4b. E POI? MAIL FOTOCOPIA O SILENZIO
+     ============================================================ -->
+<section class="screen statement outcome" id="s2b">
+  <div class="inner">
+    <div class="kicker reveal">E a chi ha compilato tutto, cosa arriva?</div>
+    <div class="duo">
+      <div class="mailwin reveal d1">
+        <div class="mw-chrome"><i></i><i></i><i></i></div>
+        <div class="mw-head">
+          <div class="obj">Esito della Sua candidatura — Rif. IT-OPS-PM-0457/24</div>
+          <div class="meta">Da: <b>no-reply@acmecorp.example</b><span class="late">4 mesi dopo l'invio</span><br>A: <b>giovanni.rossi@example.com</b></div>
+        </div>
+        <div class="mw-body">
+          <p>Gentile <span class="var">{{nome_candidato}}</span>,</p>
+          <p>La ringraziamo per l'interesse dimostrato verso la nostra azienda. Dopo un'attenta valutazione dei profili pervenuti, Le comunichiamo che è stato deciso di proseguire con candidature maggiormente in linea con la posizione.</p>
+          <p>Il Suo curriculum resterà nei nostri archivi per eventuali future opportunità.</p>
+          <div class="foot">Comunicazione generata automaticamente. La preghiamo di non rispondere a questa e-mail.</div>
+        </div>
+      </div>
+      <div class="oppure reveal d2">oppure</div>
+      <div class="silence reveal d2">
+        <div class="sl-chrome"><i></i><i></i><i></i></div>
+        <div class="sl-head"><b>Posta in arrivo</b>Ricerca: "esito candidatura Project Manager" — nessun risultato</div>
+        <div class="sl-body">
+          <div class="skull">💀⏳</div>
+          <div class="wait"><b>Giovanni</b>, in attesa di una risposta</div>
+          <div class="days">Candidatura inviata 127 giorni fa</div>
+        </div>
+      </div>
+    </div>
+    <p class="punch reveal d3">Una mail fotocopia, o il silenzio: è <span class="hl">l'ultima impressione</span> che il vostro brand lascia a chi aveva scelto di candidarsi.</p>
   </div>
 </section>
 
